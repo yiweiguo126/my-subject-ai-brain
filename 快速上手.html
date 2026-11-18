@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>解压之后，第一步做什么 · 我的学科AI大脑</title>
+<style>
+:root{
+  --blue:#143F6B; --blue2:#2A6FA8; --green:#1B7F5A; --yellow:#E9B824;
+  --bg:#EEF3F9; --card:#fff; --line:#C4D2E3; --ink:#152A3D; --mute:#5A6E82;
+  --font:"Helvetica Neue",Arial,"PingFang SC","Microsoft YaHei",sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"PingFang SC",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased;font-synthesis:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 32px}
+
+.mast{background:var(--blue);color:#fff;padding:14px 0}
+.mast .wrap{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.mast .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px}
+.mast .brand .m{width:28px;height:28px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px}
+.mast .meta{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:#B9CFE4}
+
+.hero{padding:46px 0 26px}
+.hero h1{font-size:clamp(34px,5vw,58px);line-height:1.08;letter-spacing:-.03em;font-weight:800}
+.hero .lead{margin-top:16px;max-width:46em;color:#33485C;font-size:17px}
+.hero .lead b{color:var(--blue)}
+
+/* 路径图 */
+.path{background:var(--card);border:1px solid var(--line);padding:24px 20px 18px;margin:8px 0 34px;position:relative}
+.path .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--mute);margin-bottom:18px}
+.path .rail{display:flex;align-items:flex-start;justify-content:space-between}
+.path .stop{flex:0 0 17%;text-align:center;position:relative;z-index:2}
+.path .stop a{text-decoration:none;color:inherit;display:block}
+.path .stop .ic{width:56px;height:56px;margin:0 auto 9px;border:2px solid var(--blue);border-radius:6px;background:var(--card);display:flex;align-items:center;justify-content:center;transition:background .15s,transform .15s}
+.path .stop a:hover .ic{background:#E4EEF7;transform:translateY(-2px)}
+.path .stop .ic svg{width:30px;height:30px;stroke:var(--blue);stroke-width:1.7;fill:none;stroke-linecap:square}
+.path .stop.on .ic{background:var(--green);border-color:var(--green)}
+.path .stop.on .ic svg{stroke:#fff}
+.path .stop .num{font-family:var(--mono);font-size:11px;color:var(--mute);display:block}
+.path .stop .nm{font-size:14px;font-weight:700;display:block;margin-top:2px}
+.path .stop .sm{font-size:11px;color:var(--mute);display:block;line-height:1.35}
+.path .link{height:2px;background:var(--blue2);flex:1;margin-top:27px;position:relative;z-index:1}
+.path .link::after{content:"";position:absolute;right:-1px;top:-4px;border-left:8px solid var(--blue2);border-top:5px solid transparent;border-bottom:5px solid transparent}
+
+.sechead{display:flex;align-items:baseline;gap:14px;margin:0 0 18px}
+.sechead h2{font-size:22px}
+.sechead span{font-family:var(--mono);font-size:11px;color:var(--mute);letter-spacing:.08em}
+
+.prep{margin-top:4px}
+.prep .card .hd .ic{border-color:var(--green)}
+.prep .card .hd .ic svg{stroke:var(--green)}
+.prep .card .check b{color:var(--green)}
+
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.card{background:var(--card);border:1px solid var(--line);padding:20px 22px;min-height:170px;position:relative}
+.card .hd{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.card .hd .ic{width:40px;height:40px;border:1.5px solid var(--blue);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.card .hd .ic svg{width:24px;height:24px;stroke:var(--blue);stroke-width:1.7;fill:none}
+.card .hd .n{font-family:var(--mono);font-size:12px;color:var(--mute);display:block}
+.card .hd h3{font-size:19px;line-height:1.3;letter-spacing:-.01em}
+.card p{font-size:14px;color:#33485C;margin-bottom:8px}
+.card ul{list-style:none;margin:6px 0 0}
+.card li{font-size:13px;padding-left:14px;position:relative;color:#33485C;margin-bottom:2px}
+.card li::before{content:"";position:absolute;left:0;top:.7em;width:6px;height:6px;background:var(--green)}
+.card .say{display:inline-block;background:var(--blue);color:#fff;font-family:var(--mono);font-size:13px;padding:6px 10px;margin:8px 0;word-break:break-all;max-width:100%}
+.card .check{margin-top:10px;padding-top:9px;border-top:1px dashed var(--line);font-size:12px;color:var(--mute)}
+.card .check b{color:var(--blue)}
+.card.primary{background:var(--green);border-color:var(--green)}
+.card.primary h3,.card.primary p,.card.primary li,.card.primary .check b{color:#fff}
+.card.primary .hd .ic{border-color:#fff}
+.card.primary .hd .ic svg{stroke:#fff}
+.card.primary .n,.card.primary .check{color:#D8F0E7}
+.card.primary li::before{background:#fff}
+
+.band{background:var(--blue);color:#fff;margin:38px 0 0;padding:28px 0}
+.band .wrap{display:grid;grid-template-columns:1fr 1fr;gap:44px}
+.band h2{font-size:19px;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.band h2 .ic{width:26px;height:26px;border:1.5px solid #fff;border-radius:4px;display:flex;align-items:center;justify-content:center}
+.band h2 .ic svg{width:16px;height:16px;stroke:#fff;stroke-width:1.8;fill:none}
+.band table{width:100%;border-collapse:collapse}
+.band th,.band td{border-bottom:1px solid rgba(255,255,255,.28);padding:8px 4px;text-align:left;font-size:13px;vertical-align:top}
+.band th{width:34%;color:#B9CFE4;font-weight:500}
+.band td code{font-family:var(--mono);font-size:12px;background:rgba(255,255,255,.14);padding:2px 5px}
+.band ul{list-style:none}
+.band li{font-size:13px;padding:9px 0 9px 22px;position:relative;border-bottom:1px solid rgba(255,255,255,.22)}
+.band li::before{content:"";position:absolute;left:0;top:1.05em;width:10px;height:1.5px;background:var(--yellow)}
+.band .warn li::before{background:#FF8A6B}
+
+footer{padding:22px 0 40px;font-size:12px;color:var(--mute);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer b{color:var(--ink)}
+
+@media(max-width:760px){
+  .wrap{padding:0 18px}
+  .hero{padding:32px 0 20px}
+  .path{padding:18px 12px}
+  .path .rail{flex-wrap:wrap;gap:14px 0}
+  .path .stop{flex:0 0 33%}
+  .path .link{display:none}
+  .path .stop .ic{width:48px;height:48px}
+  .path .stop .ic svg{width:26px;height:26px}
+  .grid{grid-template-columns:1fr}
+  .band .wrap{grid-template-columns:1fr;gap:28px}
+  .band th{width:36%}
+}
+@media print{.mast,.band{background:#143F6B!important;-webkit-print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<div class="mast"><div class="wrap"><div class="brand"><span class="m">五</span>我的学科AI大脑 · 快速上手</div><div class="meta">解压之后，第一步做什么 / 两样前提 · 五步路径</div></div></div>
+
+<header class="hero wrap">
+  <h1>解压之后，<br>第一步做什么</h1>
+  <p class="lead">开走前先备齐<b>两样前提</b>：一个能管整个文件夹的 AI 智能体 + Obsidian。然后记住这条路径：<b>打开 → 初始化 → 放课件 → 导入 → 看结果</b>。全程在 AI 对话里打字，不用命令行。看一遍路径知道方向，再照下面每张卡片一步步走。</p>
+
+  <nav class="path" aria-label="五步路径">
+    <div class="lbl">THE PATH / 五步路径（备齐前提后开走）</div>
+    <div class="rail">
+      <div class="stop on"><a href="#s1"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 6h7l2 2h9v11H3z"/></svg></div><span class="num">01</span><span class="nm">打开</span><span class="sm">工作空间</span></a></div>
+      <div class="link"></div>
+      <div class="stop"><a href="#s2"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z"/></svg></div><span class="num">02</span><span class="nm">初始化</span><span class="sm">答三问</span></a></div>
+      <div class="link"></div>
+      <div class="stop"><a href="#s3"><div class="ic"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4"/></svg></div><span class="num">03</span><span class="nm">放课件</span><span class="sm">转成 md</span></a></div>
+      <div class="link"></div>
+      <div class="stop"><a href="#s4"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 12h16M13 6l6 6-6 6"/></svg></div><span class="num">04</span><span class="nm">导入</span><span class="sm">你确认</span></a></div>
+      <div class="link"></div>
+      <div class="stop"><a href="#s5"><div class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16"/><path d="M4 10h16M10 4v16"/></svg></div><span class="num">05</span><span class="nm">看结果</span><span class="sm">Home.md</span></a></div>
+    </div>
+  </nav>
+</header>
+
+<section class="wrap prep">
+  <div class="sechead"><h2>开走之前，先备两样</h2><span>各花几分钟，一次搞定</span></div>
+  <div class="grid">
+    <section class="card" id="p1">
+      <div class="hd"><div class="ic"><svg viewBox="0 0 24 24"><rect x="6" y="8" width="12" height="10"/><path d="M12 8V4M9 13h2M13 13h2"/></svg></div><div><span class="n">PREP 01</span><h3>一个能管整个文件夹的 AI 智能体</h3></div></div>
+      <p>选一款 AI 工具（如 <strong>WorkBuddy</strong>），它能<strong>以对话方式读写你指定的文件夹</strong>。这类功能有的叫「空间」「工作空间」「项目」——说法不同，关键一样：它只操作你划给它的这一个文件夹。</p>
+      <ul><li>装好、注册好，先别急着打开项目</li><li>有「新建空间 / 选择文件夹」入口即可</li></ul>
+      <div class="check"><b>判断：</b>能新建一个「空间」，并把本地文件夹设为它的范围。</div>
+    </section>
+    <section class="card" id="p2">
+      <div class="hd"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 5c-2-1.5-5-2-8-2v16c3 0 6 .5 8 2 2-1.5 5-2 8-2V3c-3 0-6 .5-8 2z"/><path d="M12 5v16"/></svg></div><div><span class="n">PREP 02</span><h3>Obsidian —— 你的 md 阅览器</h3></div></div>
+      <p>AI 写的笔记全是 <code>.md</code> 文件。装一个 <strong>Obsidian</strong>（官网 <code>obsidian.md</code>，免费），把整个文件夹放进它的 <strong>Vault</strong>，就能像翻书一样随时浏览——AI 每写一页，你都能立刻翻到。</p>
+      <ul><li>解压后的文件夹直接放进 Vault 里</li><li>分工明确：AI 负责写，Obsidian 负责看</li></ul>
+      <div class="check"><b>判断：</b>在 Obsidian 里能打开 <code>Home.md</code>，左侧能看到整个文件夹结构。</div>
+    </section>
+  </div>
+</section>
+
+<main class="wrap">
+  <div class="sechead"><h2>五步，照着做</h2><span>每步一个判断标准</span></div>
+  <div class="grid">
+    <section class="card primary" id="s1">
+      <div class="hd"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 6h7l2 2h9v11H3z"/></svg></div><div><span class="n">STEP 01</span><h3>打开文件夹</h3></div></div>
+      <p>把 ZIP 解压到固定位置（建议就放在你的 Obsidian Vault 里），用 <strong>PREP 01</strong> 备好的 AI 智能体把这个文件夹作为<strong>工作空间</strong>打开。要打开的是含 <code>AGENTS.md</code> 的那一层。</p>
+      <ul><li>不用装 Git、IDE 或插件</li><li>不用敲命令行</li></ul>
+      <div class="check"><b>判断：</b>问 AI「你能看到 AGENTS.md 吗」，它答能，就对了。</div>
+    </section>
+
+    <section class="card" id="s2">
+      <div class="hd"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z"/></svg></div><div><span class="n">STEP 02</span><h3>说「初始化」</h3></div></div>
+      <div class="say">初始化</div>
+      <p>AI 会问三件事：课程名、中文/双语/英文、你这门课的目标（听懂 / 应试 / 做项目 / 写论文）。如实回答。</p>
+      <div class="check"><b>判断：</b>答案写进了 <code>config.md</code>，这个文件只有你能改。</div>
+    </section>
+
+    <section class="card" id="s3">
+      <div class="hd"><div class="ic"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4"/></svg></div><div><span class="n">STEP 03</span><h3>放课件 md</h3></div></div>
+      <p>PDF / PPT / doc 先在别处转成 <code>.md</code>、本人核对，按 <code>L1-主题.md</code> 命名，放进 <code>raw/你的课程名/</code>。原件留在项目外。</p>
+      <div class="check"><b>判断：</b>raw 里是 md，原件在外面。可问 AI「怎么把课件转成 md」。</div>
+    </section>
+
+    <section class="card" id="s4">
+      <div class="hd"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 12h16M13 6l6 6-6 6"/></svg></div><div><span class="n">STEP 04</span><h3>说「导入」</h3></div></div>
+      <div class="say">导入 raw/你的课程名/L1-主题.md</div>
+      <p>AI 给 3–5 个要点后会停住。回一句「确认」，笔记才生成；觉得不对就直接指出。</p>
+      <div class="check"><b>判断：</b>你确认后笔记才出现。AI 停住是在等你，不是卡住。</div>
+    </section>
+
+    <section class="card" id="s5">
+      <div class="hd"><div class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16"/><path d="M4 10h16M10 4v16"/></svg></div><div><span class="n">STEP 05</span><h3>看结果</h3></div></div>
+      <p>在 Obsidian 里打开 <code>Home.md</code>，你的第一页笔记、课程总览、薄弱概念都在这里。</p>
+      <div class="check"><b>判断：</b>能看到以你自己的话写成的概念页，不只是课件摘要。</div>
+    </section>
+
+    <section class="card">
+      <div class="hd"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v18M3 12h18"/></svg></div><div><span class="n">AFTER THAT</span><h3>之后这一学期</h3></div></div>
+      <ul><li>每周课后：导入本周课件，一次一份</li><li>想入门：预习 课程名</li><li>做操作 / 实验：实践 课程名，记下步骤与现象</li><li>平时：复习 课程名 第三章</li><li>期中期末：出题 课程名</li></ul>
+      <div class="check"><b>记住：</b>材料没写的，AI 不补、不猜、不联网；笔记留在本机，不收交。</div>
+    </section>
+  </div>
+</main>
+
+<section class="band"><div class="wrap">
+  <div>
+    <h2><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span>什么时候说什么</h2>
+    <table>
+      <tr><th>每周课后</th><td><code>导入</code> 本周课件 md，一次一份</td></tr>
+      <tr><th>想先入门</th><td><code>预习 课程名</code></td></tr>
+      <tr><th>做操作 / 实验时</th><td><code>实践 课程名</code>，记下步骤和现象；课件没写的报错会标注需课堂确认</td></tr>
+      <tr><th>平时</th><td><code>复习 课程名 第三章</code></td></tr>
+      <tr><th>期中 / 期末</th><td><code>出题 课程名</code></td></tr>
+      <tr><th>偶尔</th><td><code>体检</code></td></tr>
+      <tr><th>收到新版</th><td>新版先解压到项目外，再说 <code>升级</code></td></tr>
+    </table>
+  </div>
+  <div>
+    <h2><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 4l8 16H4z"/><path d="M12 10v4M12 17v.5"/></svg></span>两个容易踩的坑</h2>
+    <ul class="warn">
+      <li>一次只导入一份，别说「全部导入」</li>
+      <li>AI 停下来是在等你确认，不是卡住</li>
+    </ul>
+    <h2 style="margin-top:22px"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></span>记住三句话</h2>
+    <ul>
+      <li>材料没写的，AI 不补、不猜、不联网</li>
+      <li>掌握度是你自己的，不是成绩，不排名</li>
+      <li>笔记留在本机，不收交、不比较</li>
+    </ul>
+  </div>
+</div></section>
+
+<footer class="wrap"><span><b>我的学科AI大脑</b> · v1.00</span><span>同一间教室，长出不一样的学科AI大脑</span></footer>
+</body>
+</html>
