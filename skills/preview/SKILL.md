@@ -158,7 +158,7 @@ description: 预习（R-CSS 引导式入门）。当学生已导入学科原始�
 4. **标注来源**：日期 + 依据的来源页章节 + 关联预习页
 5. **不动掌握度**：`confidence` / `last_reviewed` **只由「复习」时学生的回答更新**；预习沉淀一律不改
 6. **不代填 `Open Questions`**：可提醒、不可代写
-7. **末尾一次性更新汇总**：`wiki/index.md`、`wiki/hot.md`、`wiki/log.md`；有新术语才动 `wiki/glossary.md`。**`raw/.manifest.json` 不属于预习的写入范围**（新材料的 manifest 由「导入」维护）。同时写 `驾驶舱.html` 数据块（只读投影）：更新 `counts.preview`、`recent`，据概念页与 index 刷新 `weak_concepts`/`decaying`；**不改 `confidence`/`last_reviewed`**，不把保留疑问或 AI 讲解写进数据块或任何结论区；`next_action` 按优先级重算。字段一律派生自真相源，契约见 `AGENTS.md`「驾驶舱（只读投影）」节
+7. **末尾一次性更新汇总**：`wiki/index.md`、`wiki/hot.md`、`wiki/log.md`；有新术语才动 `wiki/glossary.md`。**`raw/.manifest.json` 不属于预习的写入范围**（新材料的 manifest 由「导入」维护）。同时写 `驾驶舱.html` 数据块（只读投影）：更新 `counts.preview`、`recent`，据概念页与 index 刷新 `weak_concepts`/`decaying`；**不改 `confidence`/`last_reviewed`**，不把保留疑问或 AI 讲解写进数据块或任何结论区；`next_action` 按优先级重算。**生长数据（v2.10 增量追加）**：`timeline` 追加 `type: preview` 事件、`graph` 追加预习节点与 `derived` 边（依据该页 `sources` 字段，缺失则不画边、不推测）、`milestones` 判定「第一次预习」；不改 `coverage`，不登记 `connections-log.md`。字段一律派生自真相源，契约见 `AGENTS.md`「驾驶舱（只读投影）」节
 
 ### 逐步生长
 

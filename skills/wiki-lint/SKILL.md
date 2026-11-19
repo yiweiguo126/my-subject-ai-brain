@@ -19,7 +19,7 @@ description: 体检。当学生说「体检 / lint / 检查一下」或升级前
 | 6 | **配置合法性** | `config.md` 字段值是否在合法范围；`my_goal` 是否为四选一 |
 | 7 | **底座完整性** | `skills/` 8 个 SKILL.md、`commands/` **12** 个命令文件、`AGENTS.md`、`VERSION` 是否存在且未被篡改 |
 | 8 | **版本兼容性** | `config.md` 的 `version` 与 `VERSION` 是否一致；概念页 frontmatter 是否符合当前格式 |
-| 9 | **数据层未被污染** | `raw/` 中除 `.manifest.json` 外无 AI 写入痕迹；`config.md` 未被覆盖；`驾驶舱.html` 数据块各字段与 `config.md` + `wiki/` 真相源一致、未被当作独立录入源（若有漂移或手工录入痕迹，列出差异，不自动改写） |
+| 9 | **数据层未被污染** | `raw/` 中除 `.manifest.json` 外无 AI 写入痕迹；`config.md` 未被覆盖；`驾驶舱.html` 数据块各字段与 `config.md` + `wiki/` 真相源一致、未被当作独立录入源；内联渲染脚本只操作 DOM/SVG，无联网、无外链、无 `fetch` / `localStorage` / 文件写入；`wiki/connections-log.md` 每条连接都有 `from` / `to` / `source` / `basis` 且无推测补全痕迹（若有漂移或手工录入痕迹，列出差异，不自动改写） |
 | 10 | 术语表 | `wiki/glossary.md` 是否覆盖全部概念页 |
 | 11 | hot 缓存 | `wiki/hot.md` 是否 ≤500 词且与 `index.md` 一致 |
 | 12 | **预习材料边界** | `skills/preview/SKILL.md` 与 `commands/preview.md` 是否含「不生成答案 / 不推测补全 / 不联网 / 保留疑问 / 待用户形成结论后再入库」硬规则；`AGENTS.md` 硬规则第 9 条是否在位 |

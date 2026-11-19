@@ -21,13 +21,14 @@ description: 消化课件 md。当学生说「导入 / ingest」、把新的 .md
 6. **与学生确认**（若 `need_confirm: true`，**不可跳过**）：展示要点清单，等学生确认或修正
 7. **创建来源页** `wiki/sources/{name}.md`
 8. **创建/更新课程总览** `wiki/courses/{课程名}-overview.md`（不存在则建，已有则只在概念图谱追加新链接）
+   - 若本份课件 md **明确写出**与前序讲次的关联，或学生本人确认了连接，则在末尾更新时把它登记到 `wiki/connections-log.md`（格式见该文件头部）；`graph` 的 `kind: link` 边只从已登记记录派生，**AI 不推测补全连接**。登记细则见下方「概念间连接登记」节
 9. **创建/更新概念页**（最多 3–5 页）：
    - 新概念 → 新建，`confidence: low`，`created_at` 为今天
    - 已有概念 → 局部编辑补充，更新 `last_reviewed`（不改 `created_at`）
    - 按 `subject_hint` 调整写法；流程/框架类内容按 `wiki-diagram` 判断是否配 Mermaid 图
 10. **最后一次性更新 6 个末尾更新点**：真相源 `wiki/index.md`、`wiki/hot.md`、`wiki/glossary.md`、`wiki/log.md`、`raw/.manifest.json`，加只读投影 `驾驶舱.html` 的数据块（写入触发点与字段见本文件「驾驶舱数据块写入」节，契约见 `AGENTS.md`「驾驶舱（只读投影）」节）。**驾驶舱数据块字段全部派生自上述真相源与 config，不在其中独立录入或修正学生状态；它只在末尾更新时写，不在步骤中途写。**
 
-> 不自动更新 `overview.md` / `connections-log.md` / `contradictions.md`。
+> 不自动更新 `overview.md` / `contradictions.md`；`connections-log.md` 自 v2.10 起启用，登记规则见本文件「概念间连接登记」节。
 > 数量口径的唯一权威见 `AGENTS.md`「数量口径的唯一权威」节。
 
 ## Manifest 格式
@@ -96,6 +97,14 @@ updated: YYYY-MM-DD
 - `pending_confirm`：要点清单已展示且**学生已确认**后清空该条；确认前保留，不提前写入"已确认"。
 - `next_action` 按优先级重算；若本条刚确认、无其他待办，则据实际状态给出「预习 / 看结果」之一。
 - **不改 `confidence` / `last_reviewed`**，不把保留疑问写成结论，不把实践内容聚合为课程结论。字段一律从真相源派生，不在数据块里独立录入。
+- **生长数据（v2.10，增量追加不重建）**：`timeline` 追加 `type: ingest` 事件（`date` 取 manifest 的 `ingested_at`，`delta` 记本次新建来源页 / 概念页数，`ref` 指向来源页）；`graph` 追加来源节点、`concepts_created` 的概念节点与对应 `derived` 边；若 `connections-log.md` 本次有登记，追加 `kind: link` 边与 `type: connection` 事件；`coverage` 按 `index.md` 重算；`milestones` 据 `timeline` 判定「第一份课件 / 第一个概念 / 第一次连接」。时间字段口径：练习题页取 `created`，其余页取 `created_at`。契约见 `AGENTS.md`「驾驶舱（只读投影）」节。
+
+## 概念间连接登记
+
+- **可登记**：课件 md 里明确写出的跨讲次关联（写明讲次或概念名），或学生本人明确确认的连接。
+- **不可登记**：AI 觉得两个概念相似、主题接近、可类比等推测性关联；材料不足时按「不推测补全」处理，不生成连接、不补写 `note` 结论。
+- 每条按 `wiki/connections-log.md` 头部格式追加，须有 `from` / `to` / `source` / `basis`，未填齐不登记。
+- 登记与 `graph` 边写入同在「末尾一次性更新」完成，不在步骤中途写。
 
 ## 绝对禁止
 

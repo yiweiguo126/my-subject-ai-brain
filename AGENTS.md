@@ -70,18 +70,32 @@ config.md  ← 个体设置（数据层，永不覆盖）
 **真相源（写入 `wiki/` 与 `raw/`）**：`wiki/index.md`、`wiki/hot.md`、`wiki/glossary.md`、`wiki/log.md`、`raw/.manifest.json`
 **只读投影（写入项目根）**：`驾驶舱.html` 的 `<script id="dashboard-data">` 数据块——字段全部派生自上述真相源与 `config.md`，**不是第二个真相源**，禁止在其中独立录入或修正学生状态。
 
-> `overview.md` / `connections-log.md` / `contradictions.md` 保留占位，**默认关闭自动更新**。
+> `overview.md` / `contradictions.md` 保留占位，**默认关闭自动更新**；`connections-log.md` 自 v2.10 起**启用自动更新**，是概念间连接的唯一真相源（见下方「概念间连接」节）。
 > 驾驶舱数据契约见下方「驾驶舱（只读投影）」节；数据块 schema 与更新触发点以该节为准。
 
 ### 驾驶舱（只读投影）
 
-`驾驶舱.html` 是项目根的一个静态页，给人看「现在做什么 + 状态」，由浏览器/预览面板打开（不在 Obsidian 内渲染 `<script>`）。它**不是真相源、不是新命令、不是第 13 个触发词**：
+`驾驶舱.html` 是项目根的一个静态页，给人看「现在做什么 + 状态 + 知识体系生长」，由浏览器/预览面板打开（不在 Obsidian 内渲染 `<script>`）。它**不是真相源、不是新命令、不是第 13 个触发词**：
 
-- 数据块的全部字段派生自 `config.md` 与 `wiki/`（含概念页 frontmatter、index / hot / log），只在「批量操作末尾一次性更新」时由 AI 写入；禁止在驾驶舱里独立录入、修正学生状态。
-- schema 为 `dashboard-data/v1`，字段：`schema` / `generated_at` / `brain_version` / `config` / `counts` / `courses` / `weak_concepts` / `decaying` / `pending_confirm` / `recent` / `next_action`。
+- 数据块的全部字段派生自 `config.md` 与 `wiki/`（含概念页 frontmatter、index / hot / log / manifest / connections-log），只在「批量操作末尾一次性更新」时由 AI 写入；禁止在驾驶舱里独立录入、修正学生状态。
+- schema 为 `dashboard-data/v2`。v1 的 11 个字段（`schema` / `generated_at` / `brain_version` / `config` / `counts` / `courses` / `weak_concepts` / `decaying` / `pending_confirm` / `recent` / `next_action`）全部保留；新增四个只读字段：`timeline`（事件序列 `{date,type,label,ref,delta,note}`，派生自 `wiki/log.md` 日期标题与 `raw/.manifest.json`）、`graph`（`{nodes,edges}`，四层节点来自 manifest 与各页 frontmatter，边分 `derived` 四层边与 `link` 概念间连接）、`milestones`（八个「第一次」，由 `timeline` 判定）、`coverage`（掌握度档只读计数）。
+- `graph.edges` 中 `kind: link` **只**来自 `wiki/connections-log.md` 已登记的记录；没有登记就不画，不推测补全。`graph.nodes` 的 `confidence` 只镜像概念页 frontmatter，不推算、不排名、不判定「已掌握」。
+- `timeline` / `graph` 采用**增量追加**：末尾更新时只追加本次新增的事件、节点与边，不每次全量扫描全库；全量重建只在学生说「刷新看板」时按需执行（属读文件隐式行为，不新增命令）。「体检 / 升级 / 迁移 / 清空测试数据 / 强制重做」等维护命令不追加生长事件；「强制重做」只修正既有导入事件的 `delta`，不重复追加。
+- 页面允许内联**纯渲染脚本**：只读内嵌 `#dashboard-data` 的 JSON，只操作 DOM/SVG 呈现时间轴、生长图、里程碑与节点清单；禁止写入任何文件、禁止联网与外链、禁止 `fetch` / `XMLHttpRequest` / `localStorage`、禁止读取项目其他文件、禁止修改数据块。脚本属 HTML 骨架，升级时随骨架替换；数据块仍原样保留。「现在」视图（下一步、统计、四张卡片）仍由 AI 在末尾更新时同步改写可见区；「生长」视图由脚本从数据块渲染，不在可见区另写一份。
+- 渲染器遇 `schema: dashboard-data/v1`（旧副本升级）时，生长视图显示空态而不报错；下一次末尾更新时由 AI 从 `log.md` / `.manifest.json` / 各页 frontmatter / `connections-log.md` **重建** timeline 与 graph 并升为 v2。生长史存在持久真相源里，数据块清空不丢历史。
 - `next_action` 按 `pending_confirm` > `decaying` > 新导入未预习 > 无数据 的优先级算出唯一「下一步」，含一句 `prompt` 与一个可回答的 `question`。它只复述状态、给合规回应，不生成课件答案（预习三不在此同样适用）。涉及待确认时，`prompt` 用统一话术「AI 停下来是在等你确认，不是卡住」，避免学生误判。
 - 学生说「下一步 / 现在做什么 / 看板」时，AI 读取该数据块并复述 `next_action`，这是读文件的隐式行为，不加载新 skill、不新增命令。
 - 升级时只换 HTML 骨架、数据块原样保留（见 `commands/upgrade.md`）；各命令的写入触发点见对应 skill / command 的末尾更新步骤。
+
+### 概念间连接（connections-log）
+
+`wiki/connections-log.md` 自 v2.10 起启用自动更新，是概念间连接的**唯一真相源**：
+
+- 只登记**课件 md 中明确写出**的跨讲次关联，或**学生本人确认**的连接；AI 不得推测补全连接、不得把「看起来相似」写成结论。
+- 每条记录须可回溯到来源页（`source:`）与两端概念页（`from:` / `to:`），格式见该文件头部。
+- 由「导入」在末尾一次性更新时追加；「体检」核对每条连接都有据可查。「预习」只沉淀学生自己的理解，不登记连接；「实践」不与本页互相引用。
+- `overview.md` / `contradictions.md` 仍保留占位，默认关闭自动更新。
+- 老副本升级时，`wiki/connections-log.md` 的头部声明按 `commands/upgrade.md` 的**受控例外**迁移：只替换说明块，保留文件内全部已登记连接；`wiki/index.md` 的占位节由下一次「导入」局部刷新。这是升级流程中唯一允许触碰 `wiki/` 的格式迁移，不改动任何学生内容。
 
 ---
 
@@ -240,6 +254,8 @@ sources: ["{来源页}"]
 |---|---|
 | 命令触发词数量与触发词 | 本文件「命令映射」表 |
 | 末尾更新点（6 个 = 5 真相源 + 1 只读投影） | 本文件「Token 预算规则」下的更新点节 |
+| 占位页数量与启用状态（2 占位 + 1 启用） | 本文件「Token 预算规则」下的更新点节 |
+| 驾驶舱数据块 schema 版本 | 本文件「驾驶舱（只读投影）」节 |
 | 体检项数（19 项） | `skills/wiki-lint/SKILL.md` |
 | 可替换白名单 | `commands/upgrade.md`「白名单」节 |
 | 清理清单 | `docs/FAQ.md`「测试与清理」节 |

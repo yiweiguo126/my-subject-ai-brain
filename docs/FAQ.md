@@ -127,7 +127,7 @@ AI 按 `config.md` 的 `course_name` 工作，不会报错。发现范围不对�
 1. 删除 `raw/` 下开发期放入的测试课程文件夹（含 L1 / L2 / L3 三份测试材料；保留 `raw/把课件放这里/`）
 2. 删除 `wiki/` 下测试生成的页面：`concepts/*.md`、`courses/*.md`、`sources/*.md`、`exam-prep/*.md`、**`preview/*.md`**、**`practice/*.md`**；各目录的 `_README.md` **保留**
 3. 把 `wiki/index.md` / `hot.md` / `glossary.md` / `log.md` 复位为空白模板
-4. 把 `wiki/overview.md` / `connections-log.md` / `contradictions.md` 三个占位文件复位为中性占位文字，**不删除**
+4. 把 `wiki/overview.md` / `contradictions.md` 两个占位文件复位为中性占位文字，**不删除**；把 `wiki/connections-log.md` 的已登记连接清空，**保留**文件头部的启用声明与记录格式说明
 5. 把 `raw/.manifest.json` 复位为 `{"sources": {}}`
 6. 清空 `Home.md` **静态清单**（当前课程、当前状态、课程表、薄弱概念、即将衰减、孤岛、最近更新、入口）；**保留两对** `TEMPLATE:START/END` 标记及其区块
 7. 把 `config.md` 的 `course_name` / `subject_hint` 改为空值或目标课程；其余字段不动

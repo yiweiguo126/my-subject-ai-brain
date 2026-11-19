@@ -32,7 +32,7 @@
 2. 给出 3–5 个要点，**等学生确认**
 3. 局部补充来源页与概念页；保留「我的理解」、掌握度、开放问题
 4. 覆盖 `raw/.manifest.json` 中该路径的条目
-5. 末尾一次性更新 `wiki/index.md` `hot.md` `glossary.md` `log.md`
+5. 末尾一次性更新 `wiki/index.md` `hot.md` `glossary.md` `log.md`；`驾驶舱.html` 数据块只修正该次导入事件的 `delta` 与受影响的 `graph` 节点，**不重复追加生长事件**（维护口径见 `AGENTS.md`「驾驶舱（只读投影）」节）
 6. 输出报告：重做了哪份、补充了什么、保留了哪些学生内容
 
 ## 绝对禁止

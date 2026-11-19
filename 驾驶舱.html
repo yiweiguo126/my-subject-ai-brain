@@ -15,11 +15,15 @@
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased;font-synthesis:none}
 .wrap{max-width:1080px;margin:0 auto;padding:0 32px}
+a{color:inherit}
 
 .mast{background:var(--blue);color:#fff;padding:14px 0}
 .mast .wrap{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
 .mast .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px}
 .mast .brand .m{width:28px;height:28px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px}
+.mast .nav{display:flex;gap:6px;align-items:center}
+.mast .nav a{font-size:12px;text-decoration:none;padding:5px 12px;border:1px solid rgba(255,255,255,.35);border-radius:3px;color:#DCE9F5}
+.mast .nav a:hover{background:rgba(255,255,255,.14)}
 .mast .meta{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:#B9CFE4}
 
 .hero{padding:34px 0 16px}
@@ -60,6 +64,63 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16p
 .note{margin:26px 0 0;background:#F7F4EC;border:1px solid #E4D9BB;padding:16px 20px;font-size:13px;color:#5B5238}
 .note b{color:#3E3723}
 
+.growth{padding-top:46px;padding-bottom:8px}
+.growth .intro{max-width:52em;color:#33485C;font-size:14px;margin-bottom:20px}
+.gbox{background:var(--card);border:1px solid var(--line);padding:22px 24px;margin-bottom:16px}
+.ctrl{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+.ctrl button{font-family:var(--font);font-size:13px;padding:7px 16px;border:1px solid var(--blue2);background:var(--blue);color:#fff;border-radius:3px;cursor:pointer}
+.ctrl button:hover{background:var(--blue2)}
+.ctrl button.alt{background:#fff;color:var(--blue)}
+.ctrl button:disabled{opacity:.45;cursor:not-allowed}
+.ctrl input[type=range]{flex:1;min-width:180px;accent-color:var(--blue)}
+.ctrl .step{font-family:var(--mono);font-size:12px;color:var(--mute);white-space:nowrap}
+
+.evt{background:var(--bg);border-left:4px solid var(--yellow);padding:14px 18px;margin-bottom:18px}
+.evt .d{font-family:var(--mono);font-size:11px;color:var(--mute);letter-spacing:.06em}
+.evt .t{font-size:17px;font-weight:700;margin:3px 0}
+.evt .x{font-size:13px;color:#33485C;line-height:1.65}
+.evt .delta{font-family:var(--mono);font-size:11px;color:var(--blue2);margin-top:6px}
+
+.gmetrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+.gmetric{background:var(--bg);padding:12px 14px;border-radius:3px}
+.gmetric .l{font-size:12px;color:var(--mute);display:block}
+.gmetric .v{font-family:var(--mono);font-size:25px;font-weight:700;color:var(--blue);line-height:1.2;display:block}
+
+.graphbox{border:1px solid var(--line);background:#FBFDFF;padding:8px 10px;margin-bottom:18px;overflow-x:auto}
+.graphbox svg{display:block;width:100%;min-width:560px;height:auto}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--mute);padding:8px 2px 0}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:-1px;border:1px solid var(--line)}
+
+.tl{display:flex;gap:0;overflow-x:auto;padding:6px 0 12px;margin-bottom:8px}
+.tl .ti{flex:1;min-width:86px;text-align:center;position:relative}
+.tl .ti::after{content:"";position:absolute;left:0;right:0;top:5px;height:1px;background:var(--line)}
+.tl .ti:first-child::after{left:50%}
+.tl .ti:last-child::after{right:50%}
+.tl .dot{position:relative;z-index:1;width:11px;height:11px;margin:0 auto 7px;border-radius:50%;background:#fff;border:1.5px solid var(--line)}
+.tl .ti.on .dot{background:var(--blue2);border-color:var(--blue2)}
+.tl .ti.now .dot{background:var(--yellow);border-color:var(--amber);box-shadow:0 0 0 3px rgba(233,184,36,.25)}
+.tl .dt{font-family:var(--mono);font-size:11px;color:var(--mute);display:block}
+.tl .lb{font-size:11px;color:var(--ink);display:block;line-height:1.4;margin-top:2px}
+
+.mshead{font-size:14px;font-weight:700;margin:6px 0 10px}
+.badges{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+.badge{font-size:12px;padding:5px 11px;border-radius:20px;border:1px solid var(--line);color:var(--mute);background:#fff}
+.badge.on{background:#EAF6F0;border-color:var(--green);color:var(--green)}
+
+details.nodes{border-top:1px solid var(--line);padding-top:12px}
+details.nodes summary{cursor:pointer;font-size:13px;color:var(--blue2);padding:4px 0}
+.nlist{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 18px;margin-top:12px}
+.nlist .grp{font-family:var(--mono);font-size:11px;color:var(--mute);grid-column:1/-1;margin-top:8px;letter-spacing:.08em}
+.nlist .it{font-size:12px;color:var(--ink);border-bottom:1px solid #EDF2F8;padding:4px 0;display:flex;justify-content:space-between;gap:8px}
+.nlist .it span:last-child{font-family:var(--mono);font-size:11px;color:var(--mute);white-space:nowrap}
+.nlist .it a{text-decoration:none;border-bottom:1px dotted var(--blue2)}
+
+.emptystate{background:#F7F4EC;border:1px dashed #D8C9A6;padding:20px 22px;margin-bottom:16px}
+.emptystate h3{font-size:15px;margin-bottom:6px}
+.emptystate p{font-size:13px;color:#5B5238;margin-bottom:10px}
+.demonote{display:none;background:#FFF4D6;border:1px solid #E4C667;color:#6B5210;font-size:12px;padding:10px 14px;margin-bottom:14px}
+.cov{font-size:12px;color:var(--mute);margin-top:10px}
+
 footer{padding:22px 0 40px;font-size:12px;color:var(--mute);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 footer b{color:var(--ink)}
 
@@ -69,23 +130,30 @@ footer b{color:var(--ink)}
   .next{padding:22px 20px}
   .stats{grid-template-columns:repeat(2,1fr)}
   .grid{grid-template-columns:1fr}
+  .gmetrics{grid-template-columns:repeat(2,1fr)}
+  .nlist{grid-template-columns:1fr}
 }
 @media print{.mast,.next{background:#143F6B!important;-webkit-print-color-adjust:exact}}
 </style>
 </head>
 <body>
-<div class="mast"><div class="wrap"><div class="brand"><span class="m">驾</span>我的学科AI大脑 · 驾驶舱</div><div class="meta">只读看板 / 现在做什么</div></div></div>
+<div class="mast"><div class="wrap">
+  <div class="brand"><span class="m">驾</span>我的学科AI大脑 · 驾驶舱</div>
+  <div class="nav"><a href="#now">现在</a><a href="#growth">生长</a></div>
+  <div class="meta">只读看板 / 现在做什么 + 知识体系生长</div>
+</div></div>
 
-<header class="hero wrap">
+<header class="hero wrap" id="now">
   <h1>现在，做什么</h1>
-  <p class="lead">这一页只回答一个问题：<b>你下一步该做什么</b>。它是对 <code>wiki/</code> 与 <code>config.md</code> 的<b>只读投影</b>，不存放你的笔记，也不在这里编辑。状态由 AI 在每次操作末尾刷新。用浏览器或预览面板打开即可（不必在 Obsidian 里看）。</p>
+  <p class="lead">这一页只回答两个问题：<b>你下一步该做什么</b>，以及<b>你的知识体系是怎么长出来的</b>。它是对 <code>wiki/</code> 与 <code>config.md</code> 的<b>只读投影</b>，不存放你的笔记，也不在这里编辑。「现在」由 AI 在每次操作末尾刷新，「生长」由页面脚本从同一份数据块渲染。用浏览器或预览面板打开即可（不必在 Obsidian 里看）。</p>
 </header>
 
 <!-- ============ DASHBOARD-VISIBLE:START ============
-     以下可见区由 AI 在「批量操作末尾一次性更新」时同步改写。
+     「现在」视图可见区：由 AI 在「批量操作末尾一次性更新」时同步改写。
      每个区域对应下方 dashboard-data 数据块的同名字段。
      只呈现状态、不生成课件答案；预习三不在此同样适用。
-     本区块结束于紧随 main 之后的 DASHBOARD-VISIBLE:END 标记。 -->
+     「生长」视图不由 AI 改写可见区，改由内联纯渲染脚本从同一数据块生成。
+     本区块结束于紧随 main 之后的结束标记。 -->
 <main class="wrap">
   <section class="next">
     <span class="tag">NEXT ACTION / 下一步</span>
@@ -126,24 +194,81 @@ footer b{color:var(--ink)}
 
   <div class="note">
     <b>这是一份投影，不是第二个真相源。</b> 所有数字都来自 <code>config.md</code> 与 <code>wiki/</code>；掌握度只由你复习时的回答更新，这里从不替你判定「已掌握」。材料没写的，AI 不补、不猜、不联网。笔记留在本机，不收交、不比较。
-    多门课时，提问记得带课程名（见 <code>docs/多课程使用说明.md</code>）。
+    多门课时，提问记得带课程名（见 <code>docs/多课程使用说明.md</code>）。下方「生长」区同样只读，生长史存在 <code>wiki/</code> 自己的日志与页面里，本页清空也能重建。
   </div>
 </main>
 <!-- ============ DASHBOARD-VISIBLE:END ============ -->
 
-<footer class="wrap"><span><b>我的学科AI大脑</b> · v2.00 · 只读投影</span><span>同一间教室，长出不一样的学科AI大脑</span></footer>
+<!-- ============ GROWTH-VIEW:START ============
+     骨架区：由本页内联的纯渲染脚本从 #dashboard-data 生成，AI 不改写本区可见内容。
+     脚本只读内嵌 JSON、只操作 DOM/SVG；不写入任何文件、不访问网络、不读取其他文件。
+     schema 为 dashboard-data/v2；遇 v1 数据块显示空态，不报错。 -->
+<section class="wrap growth" id="growth">
+  <div class="sechead"><h2>知识体系怎么长出来的</h2><span>GROWTH / 只读</span></div>
+  <p class="intro">每一次初始化、导入、复习、预习、实践与出题，都会留下一个学习节点。拖动滑块或点播放，可以看到节点与连接按时间逐步点亮。概念之间的连线只来自 <code>wiki/connections-log.md</code> 里已登记的连接，没有登记就不画。</p>
+
+  <div class="demonote" id="gv-demonote">结构示意 · 零学科占位数据，<b>不是你的知识库</b>。点「回到我的看板」退出预演。</div>
+
+  <div class="emptystate" id="gv-empty" style="display:none">
+    <h3>还没有生长记录</h3>
+    <p>第一次「初始化」和「导入」之后，这里会出现你的进化路径时间轴与知识体系图。下方四层结构是示意图，说明它将来会长成什么形状。</p>
+    <button class="alt" id="gv-demo" style="font-family:var(--font);font-size:13px;padding:7px 16px;border:1px solid var(--blue2);background:#fff;color:var(--blue);border-radius:3px;cursor:pointer">预演一遍生长</button>
+  </div>
+
+  <div class="gbox">
+    <div class="ctrl">
+      <button id="gv-play">播放生长</button>
+      <button class="alt" id="gv-back" style="display:none">回到我的看板</button>
+      <input id="gv-range" type="range" min="0" max="0" value="0" step="1">
+      <span class="step" id="gv-step">阶段 0 / 0</span>
+    </div>
+    <div class="evt">
+      <span class="d" id="gv-date">—</span>
+      <div class="t" id="gv-title">还没有事件</div>
+      <div class="x" id="gv-note">导入第一份课件 md 后，时间轴从这里开始。</div>
+      <div class="delta" id="gv-delta"></div>
+    </div>
+    <div class="gmetrics">
+      <div class="gmetric"><span class="l">来源页</span><span class="v" id="gv-m0">0</span></div>
+      <div class="gmetric"><span class="l">概念页</span><span class="v" id="gv-m1">0</span></div>
+      <div class="gmetric"><span class="l">连接</span><span class="v" id="gv-m2">0</span></div>
+      <div class="gmetric"><span class="l">衍生页</span><span class="v" id="gv-m3">0</span></div>
+    </div>
+    <div class="graphbox"><svg id="gv-graph" viewBox="0 0 680 240" role="img"><title>知识体系生长图</title><desc>课程、来源、概念与衍生页四层节点按时间逐步点亮</desc></svg></div>
+    <div class="legend">
+      <span><i style="background:#B5D4F4;border-color:#143F6B"></i>课程 / 来源</span>
+      <span><i style="background:#FAEEDA;border-color:#BA7517"></i>概念 low</span>
+      <span><i style="background:#FAC775;border-color:#BA7517"></i>概念 medium</span>
+      <span><i style="background:#9FE1CB;border-color:#1B7F5A"></i>概念 high</span>
+      <span><i style="background:#E6F1FB;border-color:#2A6FA8"></i>衍生页</span>
+      <span><i style="background:#fff;border-color:#C4D2E3"></i>尚未长出</span>
+      <span>虚线弧 = 已登记的概念间连接</span>
+    </div>
+    <div class="tl" id="gv-timeline"></div>
+    <div class="mshead">里程碑</div>
+    <div class="badges" id="gv-badges"></div>
+    <details class="nodes">
+      <summary>展开学习节点清单（只读，链接回 wiki/ 原页）</summary>
+      <div class="nlist" id="gv-nodes"></div>
+      <div class="cov" id="gv-cov"></div>
+    </details>
+  </div>
+</section>
+<!-- ============ GROWTH-VIEW:END ============ -->
+
+<footer class="wrap"><span><b>我的学科AI大脑</b> · v2.10 · 只读投影</span><span>同一间教室，长出不一样的学科AI大脑</span></footer>
 
 <!-- ============ DASHBOARD-DATA:START ============
-     数据块：给 AI 读取与写入的机器可读镜像，非执行脚本（type=application/json）。
+     数据块：给 AI 读取与写入、给页面脚本只读渲染的机器可读镜像（type=application/json）。
      更新规则：只在批量操作末尾一次性更新时写；字段全部从 config.md + wiki/ 派生；
      升级换骨架时原样保留本块内容，只更新 brain_version；不在本块独立录入学生状态。
-     schema: dashboard-data/v1
-     本区块结束于紧随 script 之后的 DASHBOARD-DATA:END 标记。 -->
+     schema: dashboard-data/v2（v1 的 11 个字段全部保留，新增 timeline / graph / milestones / coverage）
+     本区块结束于紧随 script 之后的结束标记。 -->
 <script id="dashboard-data" type="application/json">
 {
-  "schema": "dashboard-data/v1",
+  "schema": "dashboard-data/v2",
   "generated_at": "2026-11-19",
-  "brain_version": "2.00",
+  "brain_version": "2.10",
   "config": {
     "course_name": "",
     "my_goal": "听懂",
@@ -167,9 +292,253 @@ footer b{color:var(--ink)}
     "prompt": "还没有任何课件。先把这门课的基本信息告诉我。",
     "question": "现在说「初始化」，回答课程名、语言和目标三件事。",
     "source": "no_data"
-  }
+  },
+  "timeline": [],
+  "graph": {
+    "nodes": [],
+    "edges": []
+  },
+  "milestones": [
+    {"key":"init","label":"立项","achieved":false,"at":""},
+    {"key":"first_source","label":"第一份课件","achieved":false,"at":""},
+    {"key":"first_concept","label":"第一个概念","achieved":false,"at":""},
+    {"key":"first_review","label":"第一次复习","achieved":false,"at":""},
+    {"key":"first_connection","label":"第一次连接","achieved":false,"at":""},
+    {"key":"first_preview","label":"第一次预习","achieved":false,"at":""},
+    {"key":"first_practice","label":"第一次实践","achieved":false,"at":""},
+    {"key":"first_exam","label":"第一套题","achieved":false,"at":""}
+  ],
+  "coverage": {"low":0,"medium":0,"high":0,"unreviewed":0}
 }
 </script>
 <!-- ============ DASHBOARD-DATA:END ============ -->
+
+<script>
+(function(){
+  var MS=[
+    {key:'init',label:'立项'},{key:'first_source',label:'第一份课件'},
+    {key:'first_concept',label:'第一个概念'},{key:'first_review',label:'第一次复习'},
+    {key:'first_connection',label:'第一次连接'},{key:'first_preview',label:'第一次预习'},
+    {key:'first_practice',label:'第一次实践'},{key:'first_exam',label:'第一套题'}
+  ];
+  var LAYER={course:0,source:1,concept:2,preview:3,practice:3,exam:3};
+  var LNAME=['主干','来源','概念','衍生'];
+  var XPOS=[70,215,385,550];
+  var GRP=[{k:'course',n:'课程'},{k:'source',n:'来源页'},{k:'concept',n:'概念页'},
+           {k:'preview',n:'预习轨迹'},{k:'practice',n:'实践记录'},{k:'exam',n:'练习题'}];
+  var real=null,demo=null,active=null,stages=[],cur=0,timer=null,demoMode=false;
+
+  function E(id){return document.getElementById(id)}
+  function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+  function clone(o){var r={},k;for(k in o){if(Object.prototype.hasOwnProperty.call(o,k))r[k]=o[k]}return r}
+  function normalize(d){
+    if(!d)d={};
+    var g=d.graph||{};
+    return {
+      schema:d.schema||'dashboard-data/v1',
+      timeline:Array.isArray(d.timeline)?d.timeline:[],
+      nodes:Array.isArray(g.nodes)?g.nodes:[],
+      edges:Array.isArray(g.edges)?g.edges:[],
+      milestones:Array.isArray(d.milestones)?d.milestones:[],
+      coverage:d.coverage||null
+    };
+  }
+  function readReal(){
+    try{return normalize(JSON.parse(E('dashboard-data').textContent))}catch(err){return normalize(null)}
+  }
+  function buildStages(n){
+    var out=[{date:'起点',label:'开始',note:'还没有任何操作。',nodes:[],edges:[],achieved:{},delta:null}];
+    var an=[],ae=[],ach={},i;
+    for(i=0;i<n.timeline.length;i++){
+      var ev=n.timeline[i]||{},dt=ev.date||'';
+      n.nodes.forEach(function(nd){if(nd.at&&dt&&nd.at<=dt&&an.indexOf(nd)<0)an.push(nd)});
+      n.edges.forEach(function(ed){if(ed.at&&dt&&ed.at<=dt&&ae.indexOf(ed)<0)ae.push(ed)});
+      n.milestones.forEach(function(m){if(m.achieved&&m.at&&dt&&m.at<=dt)ach[m.key]=true});
+      out.push({date:dt||'—',label:ev.label||ev.type||'操作',note:ev.note||'',
+                nodes:an.slice(),edges:ae.slice(),achieved:clone(ach),delta:ev.delta||null});
+    }
+    return out;
+  }
+  function layout(all){
+    var g=[[],[],[],[]],pos={},maxLen=1,i,j,H;
+    all.forEach(function(nd){var L=LAYER[nd.type];if(L==null)L=2;g[L].push(nd)});
+    for(i=0;i<4;i++){if(g[i].length>maxLen)maxLen=g[i].length}
+    H=Math.max(220,maxLen*46+76);
+    for(i=0;i<4;i++){
+      for(j=0;j<g[i].length;j++){
+        pos[g[i][j].id]={x:XPOS[i],y:56+(j+.5)*((H-84)/g[i].length)};
+      }
+    }
+    return {pos:pos,H:H};
+  }
+  function nodeColor(nd,on){
+    if(!on)return {f:'#FFFFFF',s:'#C4D2E3',dash:true};
+    if(nd.type==='concept'){
+      if(nd.confidence==='high')return {f:'#9FE1CB',s:'#1B7F5A'};
+      if(nd.confidence==='medium')return {f:'#FAC775',s:'#BA7517'};
+      return {f:'#FAEEDA',s:'#BA7517'};
+    }
+    if(nd.type==='preview'||nd.type==='practice'||nd.type==='exam')return {f:'#E6F1FB',s:'#2A6FA8'};
+    return {f:'#B5D4F4',s:'#143F6B'};
+  }
+  function drawGraph(st){
+    var L=layout(active.nodes),p=L.pos,h='',i;
+    var vis={};st.nodes.forEach(function(nd){vis[nd.id]=true});
+    h+='<rect x="24" y="14" width="632" height="'+(L.H-28)+'" rx="8" fill="#FFFFFF" stroke="#E4ECF5" stroke-width="1"/>';
+    for(i=0;i<4;i++)h+='<text x="'+XPOS[i]+'" y="38" font-size="12" fill="#5A6E82" text-anchor="middle">'+LNAME[i]+'</text>';
+    st.edges.forEach(function(ed){
+      var a=p[ed.from],b=p[ed.to];if(!a||!b)return;
+      if(ed.kind==='link'){
+        var cx=(a.x+b.x)/2+58,cy=(a.y+b.y)/2;
+        h+='<path d="M'+a.x+' '+a.y+' Q'+cx+' '+cy+' '+b.x+' '+b.y+'" fill="none" stroke="#1B7F5A" stroke-width="1.6" stroke-dasharray="5 3" opacity=".85"/>';
+      }else{
+        h+='<line x1="'+a.x+'" y1="'+a.y+'" x2="'+b.x+'" y2="'+b.y+'" stroke="#85A9CE" stroke-width="1.3"/>';
+      }
+    });
+    active.nodes.forEach(function(nd){
+      var q=p[nd.id];if(!q)return;
+      var on=!!vis[nd.id],c=nodeColor(nd,on),r=nd.type==='course'?15:(nd.type==='source'?12:11);
+      var dash=c.dash?' stroke-dasharray="3 2"':'';
+      if(nd.type==='preview'||nd.type==='practice'||nd.type==='exam'){
+        h+='<rect x="'+(q.x-r)+'" y="'+(q.y-r)+'" width="'+(r*2)+'" height="'+(r*2)+'" rx="3" fill="'+c.f+'" stroke="'+c.s+'" stroke-width="'+(on?1.4:1)+'"'+dash+'/>';
+      }else{
+        h+='<circle cx="'+q.x+'" cy="'+q.y+'" r="'+r+'" fill="'+c.f+'" stroke="'+c.s+'" stroke-width="'+(on?1.4:1)+'"'+dash+'/>';
+      }
+      h+='<text x="'+(q.x+r+7)+'" y="'+(q.y+4)+'" font-size="12" fill="'+(on?'#152A3D':'#8A9BAE')+'">'+esc(nd.label||nd.id)+'</text>';
+    });
+    if(active.nodes.length===0){
+      for(i=0;i<4;i++){
+        h+='<circle cx="'+XPOS[i]+'" cy="'+(L.H/2)+'" r="13" fill="#FFFFFF" stroke="#C4D2E3" stroke-width="1" stroke-dasharray="3 2"/>';
+        h+='<text x="'+XPOS[i]+'" y="'+(L.H/2+34)+'" font-size="11" fill="#8A9BAE" text-anchor="middle">待长出</text>';
+      }
+    }
+    var svg=E('gv-graph');
+    svg.setAttribute('viewBox','0 0 680 '+L.H);
+    svg.innerHTML='<title>知识体系生长图</title><desc>四层节点按时间逐步点亮</desc>'+h;
+  }
+  function metrics(st){
+    var c={source:0,concept:0,derived:0,link:0};
+    st.nodes.forEach(function(nd){
+      if(nd.type==='source')c.source++;
+      else if(nd.type==='concept')c.concept++;
+      else if(nd.type==='preview'||nd.type==='practice'||nd.type==='exam')c.derived++;
+    });
+    st.edges.forEach(function(ed){if(ed.kind==='link')c.link++});
+    return c;
+  }
+  function renderTimeline(){
+    var h='';
+    stages.forEach(function(s,i){
+      var cls='ti'+(i<=cur?' on':'')+(i===cur?' now':'');
+      h+='<div class="'+cls+'"><div class="dot"></div><span class="dt">'+esc(s.date)+'</span><span class="lb">'+esc(s.label)+'</span></div>';
+    });
+    E('gv-timeline').innerHTML=h;
+  }
+  function renderBadges(st){
+    var h='';
+    MS.forEach(function(m){
+      var on=!!st.achieved[m.key];
+      h+='<span class="badge'+(on?' on':'')+'">'+esc(m.label)+'</span>';
+    });
+    E('gv-badges').innerHTML=h;
+  }
+  function renderNodes(){
+    var h='',groups={};
+    active.nodes.forEach(function(nd){(groups[nd.type]=groups[nd.type]||[]).push(nd)});
+    GRP.forEach(function(g){
+      var list=groups[g.k]||[];if(!list.length)return;
+      h+='<div class="grp">'+esc(g.n)+'</div>';
+      list.forEach(function(nd){
+        var left=demoMode?esc(nd.label||nd.id):('<a href="'+esc(nd.ref||'#')+'">'+esc(nd.label||nd.id)+'</a>');
+        h+='<div class="it"><span>'+left+'</span><span>'+esc(nd.at||'')+'</span></div>';
+      });
+    });
+    if(!h)h='<div class="it"><span>暂无节点</span><span></span></div>';
+    E('gv-nodes').innerHTML=h;
+    var c=active.coverage;
+    E('gv-cov').textContent=c?('当前掌握度分布（只统计你自己确认过的值）：low '+(+c.low||0)+' / medium '+(+c.medium||0)+' / high '+(+c.high||0)+' / 未复习 '+(+c.unreviewed||0)):'';
+  }
+  function render(i){
+    cur=i;var st=stages[i],m=metrics(st),d=st.delta,parts=[];
+    E('gv-range').value=i;
+    E('gv-step').textContent='阶段 '+i+' / '+Math.max(0,stages.length-1);
+    E('gv-date').textContent=st.date;
+    E('gv-title').textContent=st.label;
+    E('gv-note').textContent=st.note||'—';
+    if(d){if(d.sources)parts.push('+'+d.sources+' 来源');if(d.concepts)parts.push('+'+d.concepts+' 概念');if(d.edges)parts.push('+'+d.edges+' 连接');if(d.pages)parts.push('+'+d.pages+' 页面')}
+    E('gv-delta').textContent=parts.join('  ·  ');
+    E('gv-m0').textContent=m.source;E('gv-m1').textContent=m.concept;
+    E('gv-m2').textContent=m.link;E('gv-m3').textContent=m.derived;
+    drawGraph(st);renderTimeline();renderBadges(st);
+  }
+  function stop(){if(timer){clearInterval(timer);timer=null}E('gv-play').textContent='播放生长'}
+  function setup(){
+    stages=buildStages(active);
+    var max=Math.max(0,stages.length-1);
+    E('gv-range').max=max;E('gv-range').min=0;
+    E('gv-empty').style.display=(demoMode||active.timeline.length)?'none':'block';
+    E('gv-demonote').style.display=demoMode?'block':'none';
+    E('gv-back').style.display=demoMode?'inline-block':'none';
+    E('gv-play').disabled=(max===0);
+    renderNodes();
+    render(max);
+  }
+  function useReal(){stop();demoMode=false;active=real;setup()}
+  function useDemo(){stop();demoMode=true;active=demo;setup();render(0)}
+
+  function makeDemo(){
+    var t=[
+      {date:'2026-01-05',type:'init',label:'初始化',note:'填课程名、语言与目标。大脑有了一根主干。',delta:{}},
+      {date:'2026-01-12',type:'ingest',label:'导入第 1 份课件',note:'来源 1 落地，长出概念 A 与概念 B。',delta:{sources:1,concepts:2}},
+      {date:'2026-01-26',type:'ingest',label:'导入第 2 份课件',note:'来源 2 落地，新增概念 C、D。',delta:{sources:1,concepts:2}},
+      {date:'2026-02-09',type:'review',label:'复习 概念 A',note:'学生自己作答并确认后，概念 A 的掌握度才变化。',delta:{}},
+      {date:'2026-02-23',type:'preview',label:'预习 第 1 轮',note:'长出一条预习轨迹，只沉淀学生本人的理解。',delta:{pages:1}},
+      {date:'2026-03-02',type:'practice',label:'实践 第 1 轮',note:'长出一条实践记录；课件外的排查思路仍只留在实践页。',delta:{pages:1}},
+      {date:'2026-03-09',type:'connection',label:'登记跨讲次连接',note:'课件明确写出两讲之间的关联，登记到 connections-log。',delta:{edges:1}},
+      {date:'2026-03-16',type:'exam',label:'出题 第 1 组',note:'按个人薄弱概念生成练习题，不附答案。',delta:{pages:1}}
+    ];
+    var n=[
+      {id:'course',type:'course',label:'课程',at:'2026-01-05',ref:'config.md'},
+      {id:'s1',type:'source',label:'来源 1',at:'2026-01-12',ref:'wiki/sources/'},
+      {id:'s2',type:'source',label:'来源 2',at:'2026-01-26',ref:'wiki/sources/'},
+      {id:'cA',type:'concept',label:'概念 A',at:'2026-01-12',confidence:'high',ref:'wiki/concepts/'},
+      {id:'cB',type:'concept',label:'概念 B',at:'2026-01-12',confidence:'low',ref:'wiki/concepts/'},
+      {id:'cC',type:'concept',label:'概念 C',at:'2026-01-26',confidence:'medium',ref:'wiki/concepts/'},
+      {id:'cD',type:'concept',label:'概念 D',at:'2026-01-26',confidence:'low',ref:'wiki/concepts/'},
+      {id:'p1',type:'preview',label:'预习轨迹 1',at:'2026-02-23',ref:'wiki/preview/'},
+      {id:'p2',type:'practice',label:'实践记录 1',at:'2026-03-02',ref:'wiki/practice/'},
+      {id:'p3',type:'exam',label:'练习题 1',at:'2026-03-16',ref:'wiki/exam-prep/'}
+    ];
+    var e=[
+      {from:'course',to:'s1',at:'2026-01-12',kind:'derived'},
+      {from:'course',to:'s2',at:'2026-01-26',kind:'derived'},
+      {from:'s1',to:'cA',at:'2026-01-12',kind:'derived'},
+      {from:'s1',to:'cB',at:'2026-01-12',kind:'derived'},
+      {from:'s2',to:'cC',at:'2026-01-26',kind:'derived'},
+      {from:'s2',to:'cD',at:'2026-01-26',kind:'derived'},
+      {from:'cA',to:'p1',at:'2026-02-23',kind:'derived'},
+      {from:'cC',to:'p2',at:'2026-03-02',kind:'derived'},
+      {from:'cB',to:'p3',at:'2026-03-16',kind:'derived'},
+      {from:'cA',to:'cC',at:'2026-03-09',kind:'link'}
+    ];
+    var md=['2026-01-05','2026-01-12','2026-01-12','2026-02-09','2026-03-09','2026-02-23','2026-03-02','2026-03-16'];
+    var m=MS.map(function(x,i){return {key:x.key,label:x.label,achieved:true,at:md[i]}});
+    return normalize({schema:'dashboard-data/v2',timeline:t,graph:{nodes:n,edges:e},milestones:m,
+                      coverage:{low:2,medium:1,high:1,unreviewed:0}});
+  }
+
+  real=readReal();demo=makeDemo();
+  E('gv-range').addEventListener('input',function(ev){stop();render(Number(ev.target.value))});
+  E('gv-play').addEventListener('click',function(){
+    if(timer){stop();return}
+    if(cur>=stages.length-1)render(0);
+    E('gv-play').textContent='暂停';
+    timer=setInterval(function(){if(cur>=stages.length-1){stop();return}render(cur+1)},1100);
+  });
+  E('gv-demo').addEventListener('click',useDemo);
+  E('gv-back').addEventListener('click',useReal);
+  useReal();
+})();
+</script>
 </body>
 </html>

@@ -24,7 +24,9 @@
 - [ ] 5 条原始域规则已删除
 - [ ] 学科差异唯一来源是 `config.md` 的 `subject_hint`
 - [ ] 每次导入只维护 6 个末尾更新点（5 个真相源 + `驾驶舱.html` 只读数据块）
-- [ ] `overview/connections-log/contradictions` 保留占位且默认不自动更新
+- [ ] `overview` / `contradictions` 保留占位且默认不自动更新；`connections-log.md` 已启用，只登记课件明写或学生本人确认的连接
+- [ ] 驾驶舱 `驾驶舱.html` 的生长视图为只读渲染：脚本只读内嵌数据块、只操作 DOM/SVG，无联网、无外链、无写入、无 `localStorage`
+- [ ] `dashboard-data/v2` 的 `timeline` / `graph` / `milestones` / `coverage` 全部派生自既有真相源，v1 数据块可容错显示空态并在下次末尾更新时重建
 
 ## C. 零安装与可跑通（P2 / P3）
 
@@ -150,3 +152,17 @@
 - [ ] **三不原词逐字未变**：`skills/preview/SKILL.md`、`commands/preview.md` 三不三行与硬规则第 9 条未被改写，受控例外未放宽到概念结论类（体检第 19 项按 🔴 守护）
 - [ ] 边界统一口径在 `AGENTS.md`、实践技能 / 命令、说明层各处逐字一致
 - [ ] 真人验证（⚠️ 本轮未做）：实践技能真人触发、受控例外真触发与标注话术课堂确认
+
+## N. 知识体系生长视图（v2.10 新增）
+
+- [ ] `驾驶舱.html` 顶部有「现在 / 生长」锚点；「现在」区保持 v2.00 的下一步、统计、四张卡片不变
+- [ ] 「生长」区含时间轴、四层生长图、8 个里程碑、节点清单；滑块与播放可逐步点亮节点与边
+- [ ] 数据块为 `dashboard-data/v2`，v1 十一字段全部保留，新增 `timeline` / `graph` / `milestones` / `coverage`
+- [ ] 生长数据全部派生自既有真相源；数据块清空后可由 `log.md` / `.manifest.json` / 各页 frontmatter / `connections-log.md` 重建
+- [ ] 渲染脚本只读内嵌 JSON、只操作 DOM/SVG；无联网、外链、本地存储、文件写入；全页零外部请求
+- [ ] v1 数据块降级为空态不报错；升级换骨架时数据块原样保留，只更新 `brain_version`
+- [ ] `connections-log.md` 已启用且为连接唯一真相源；只登记课件明写或学生确认的连接，AI 不推测补全；`graph` 的 `link` 边只来自已登记记录
+- [ ] `overview.md` / `contradictions.md` 仍为占位且默认关闭自动更新；升级流程的 `wiki/` 受控例外只换头部声明、保留记录
+- [ ] 八个末尾写入点增量追加生长数据；维护命令不追加事件；「清空测试数据」同步复位生长字段
+- [ ] 12 命令 / 8 技能 / 19 体检 / 6 末尾更新点 / 11 条硬规则 / 预习三不 / 实践标注话术零改动
+- [ ] 真人验证（⚠️ 本轮未做）：真实一学期使用后的生长曲线、`connections-log.md` 真实连接登记、Dataview 实渲染

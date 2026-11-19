@@ -28,8 +28,11 @@
 
 （导入材料后说「预习」，轨迹存 `wiki/preview/`）
 
-## 占位（v0.1 默认关闭自动更新）
+## 已启用
+
+- `connections-log.md` 连接发现记录（v2.10 起启用自动更新，概念间连接的唯一真相源）
+
+## 占位（默认关闭自动更新）
 
 - `overview.md` 跨讲次综述
-- `connections-log.md` 连接发现记录
 - `contradictions.md` 矛盾追踪
