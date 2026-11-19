@@ -20,7 +20,7 @@ description: 费曼复习。当学生说「复习 / review / 考考我」时加�
 5. 学生回答后：给出简短反馈，指出哪里没说清，**不替他补答案**
 6. 询问学生自评，结合 AI 的简短反馈，由**学生确认**结论后更新该概念页的 `confidence` 与 `last_reviewed`（局部编辑）；AI 不单方判定
 7. 把学生答不上来的点**只提示学生自己填写**到 `Open Questions`；AI 不写入、不代填
-8. 最后更新 `wiki/hot.md`（可并入下次批量更新）
+8. 最后更新 `wiki/hot.md`（可并入下次批量更新）；同时写 `驾驶舱.html` 数据块（只读投影）：据刚更新的概念页 frontmatter 刷新 `weak_concepts`/`decaying`、追加 `recent`、`generated_at` 设为今天，`next_action` 按优先级重算。**数据块的 `confidence`/`last_reviewed` 派生自概念页，复习只通过「先改概念页、再镜像到数据块」这一路径更新，绝不直接在数据块判定掌握度**；契约见 `AGENTS.md`「驾驶舱（只读投影）」节
 
 ## 更新规则
 

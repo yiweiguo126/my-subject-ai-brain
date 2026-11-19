@@ -26,7 +26,7 @@
 1. 读 `docs/FAQ.md`「测试与清理」节清单，生成本次要执行的文件列表
 2. 回显列表 + 备份提醒，等学生确认
 3. 按清单逐项删除或复位；`Home.md` 保留模板区
-4. 把 `raw/.manifest.json` 复位为 `{"sources": {}}`
+4. 把 `raw/.manifest.json` 复位为 `{"sources": {}}`；同时把 `驾驶舱.html` 数据块复位为空白状态（`counts` 全 0、`weak_concepts`/`decaying`/`recent`/`pending_confirm` 空、`next_action` 回到「说『初始化』」、`brain_version` 保持当前版本），可见区同步清空
 5. 跑一次「**体检**」：确认模板层完整、数据层已空、命令表 12 个触发词可用
 6. 输出报告：删了哪些、复位了哪些、没碰哪些、下一步说「初始化」
 

@@ -25,9 +25,10 @@ description: 消化课件 md。当学生说「导入 / ingest」、把新的 .md
    - 新概念 → 新建，`confidence: low`，`created_at` 为今天
    - 已有概念 → 局部编辑补充，更新 `last_reviewed`（不改 `created_at`）
    - 按 `subject_hint` 调整写法；流程/框架类内容按 `wiki-diagram` 判断是否配 Mermaid 图
-10. **最后一次性更新 5 个汇总文件**：`wiki/index.md`、`wiki/hot.md`、`wiki/glossary.md`、`wiki/log.md`、`raw/.manifest.json`
+10. **最后一次性更新 6 个末尾更新点**：真相源 `wiki/index.md`、`wiki/hot.md`、`wiki/glossary.md`、`wiki/log.md`、`raw/.manifest.json`，加只读投影 `驾驶舱.html` 的数据块（写入触发点与字段见本文件「驾驶舱数据块写入」节，契约见 `AGENTS.md`「驾驶舱（只读投影）」节）。**驾驶舱数据块字段全部派生自上述真相源与 config，不在其中独立录入或修正学生状态；它只在末尾更新时写，不在步骤中途写。**
 
-> v0.1 不自动更新 `overview.md` / `connections-log.md` / `contradictions.md`。
+> 不自动更新 `overview.md` / `connections-log.md` / `contradictions.md`。
+> 数量口径的唯一权威见 `AGENTS.md`「数量口径的唯一权威」节。
 
 ## Manifest 格式
 
@@ -82,7 +83,19 @@ updated: YYYY-MM-DD
 ## 完成报告
 
 > 处理 1 个来源。创建 X 页，更新 Y 页。按你的目标「{my_goal}」调整了笔记写法。
-> 请在 Obsidian 打开 `Home.md` 查看。有疑问的地方我留在了各概念页的 Open Questions，等你来填。
+> 请在 Obsidian 打开 `Home.md` 查看，或打开项目根的 `驾驶舱.html` 看「下一步」。有疑问的地方我留在了各概念页的 Open Questions，等你来填。
+
+## 驾驶舱数据块写入（末尾更新点）
+
+在第 10 步末尾一次性更新时，同步改写 `驾驶舱.html` 的 `<script id="dashboard-data" type="application/json">` 数据块（契约见 `AGENTS.md`「驾驶舱（只读投影）」节）：
+
+- `generated_at` = 今天；`brain_version` = 当前 `VERSION`。
+- `config` 取 `config.md` 的 `course_name` / `my_goal` / `need_confirm`。
+- `counts` / `courses` / `weak_concepts` / `decaying` / `islands` 从概念页 frontmatter 与 `wiki/index.md`、`wiki/hot.md` 派生。
+- `recent` 追加本次导入记录（与 `wiki/log.md` 一致）。
+- `pending_confirm`：要点清单已展示且**学生已确认**后清空该条；确认前保留，不提前写入"已确认"。
+- `next_action` 按优先级重算；若本条刚确认、无其他待办，则据实际状态给出「预习 / 看结果」之一。
+- **不改 `confidence` / `last_reviewed`**，不把保留疑问写成结论，不把实践内容聚合为课程结论。字段一律从真相源派生，不在数据块里独立录入。
 
 ## 绝对禁止
 

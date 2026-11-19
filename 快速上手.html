@@ -87,6 +87,9 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16p
 .band li{font-size:13px;padding:9px 0 9px 22px;position:relative;border-bottom:1px solid rgba(255,255,255,.22)}
 .band li::before{content:"";position:absolute;left:0;top:1.05em;width:10px;height:1.5px;background:var(--yellow)}
 .band .warn li::before{background:#FF8A6B}
+.band li b{color:#fff}
+.band li code{font-family:var(--mono);font-size:12px;background:rgba(255,255,255,.14);padding:2px 5px}
+.band .say3 li{font-size:13px;line-height:1.6}
 
 footer{padding:22px 0 40px;font-size:12px;color:var(--mute);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 footer b{color:var(--ink)}
@@ -194,16 +197,12 @@ footer b{color:var(--ink)}
 
 <section class="band"><div class="wrap">
   <div>
-    <h2><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span>什么时候说什么</h2>
-    <table>
-      <tr><th>每周课后</th><td><code>导入</code> 本周课件 md，一次一份</td></tr>
-      <tr><th>想先入门</th><td><code>预习 课程名</code></td></tr>
-      <tr><th>做操作 / 实验时</th><td><code>实践 课程名</code>，记下步骤和现象；课件没写的报错会标注需课堂确认</td></tr>
-      <tr><th>平时</th><td><code>复习 课程名 第三章</code></td></tr>
-      <tr><th>期中 / 期末</th><td><code>出题 课程名</code></td></tr>
-      <tr><th>偶尔</th><td><code>体检</code></td></tr>
-      <tr><th>收到新版</th><td>新版先解压到项目外，再说 <code>升级</code></td></tr>
-    </table>
+    <h2><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v18M3 12h18"/></svg></span>日常怎么用</h2>
+    <ul>
+      <li><b>不用背命令</b>：AI 每步会告诉你下一步，并问一个能直接回答的问题（例如「现在生成笔记吗」回「确认」）。</li>
+      <li>完整命令表以 <code>AGENTS.md</code> 为准；一时想不起来，就说「下一步」。</li>
+      <li><b>不知道现在做什么？</b> 打开项目根的 <code>驾驶舱.html</code>（只读看板，告诉你下一步）。</li>
+    </ul>
   </div>
   <div>
     <h2><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 4l8 16H4z"/><path d="M12 10v4M12 17v.5"/></svg></span>两个容易踩的坑</h2>
@@ -212,14 +211,14 @@ footer b{color:var(--ink)}
       <li>AI 停下来是在等你确认，不是卡住</li>
     </ul>
     <h2 style="margin-top:22px"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></span>记住三句话</h2>
-    <ul>
-      <li>材料没写的，AI 不补、不猜、不联网</li>
-      <li>掌握度是你自己的，不是成绩，不排名</li>
-      <li>笔记留在本机，不收交、不比较</li>
+    <ul class="say3">
+      <li><b>同一份课件，每个人长出的都不一样</b> —— 因为差异来自你导入什么、你怎么答、你哪里卡住。</li>
+      <li><b>AI 负责编译，理解仍由你自己完成</b> —— 概念页末尾的 <code>Open Questions</code> 是留给你填的，AI 不会代劳。</li>
+      <li><b>预习只沉淀你自己的话</b> —— AI 带你把新知接到已有概念上，但写进知识库的，是你确认的理解、你的总结、你后来想通的结论；材料没写的，它不补、不猜、不联网。</li>
     </ul>
   </div>
 </div></section>
 
-<footer class="wrap"><span><b>我的学科AI大脑</b> · v1.00</span><span>同一间教室，长出不一样的学科AI大脑</span></footer>
+<footer class="wrap"><span><b>我的学科AI大脑</b> · v2.00</span><span>同一间教室，长出不一样的学科AI大脑</span></footer>
 </body>
 </html>

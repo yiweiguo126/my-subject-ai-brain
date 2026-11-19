@@ -29,7 +29,7 @@ config.md      ← 个体设置（数据层，永不覆盖）
 6. 批量操作时 `index/hot/glossary/log/manifest` **最后一次性更新**
 7. 导入前查 `raw/.manifest.json`，hash 相同则跳过
 
-> v0.1 每次导入只维护 5 个汇总文件。`overview.md` / `connections-log.md` / `contradictions.md` 保留占位，默认不自动更新。
+> 每次导入只维护 6 个末尾更新点：5 个真相源（`index/hot/glossary/log/manifest`）+ 1 个只读投影（`驾驶舱.html` 数据块，字段派生自真相源与 config，不是第二个真相源）。`overview.md` / `connections-log.md` / `contradictions.md` 保留占位，默认不自动更新。数量口径的唯一权威见 `AGENTS.md`「数量口径的唯一权威」节。
 
 ## 个体性：先读 config.md
 

@@ -62,13 +62,26 @@ config.md  ← 个体设置（数据层，永不覆盖）
 3. 每次导入最多读 3–5 个已有页面
 4. **局部编辑，不全文重写**
 5. 概念页 100–300 行为宜，超过则拆分
-6. 批量操作时 `index.md` / `hot.md` / `log.md` / `.manifest.json` **最后一次性更新**
+6. 批量操作时 `index.md` / `hot.md` / `log.md` / `.manifest.json` **最后一次性更新**（6 个末尾更新点，见下节）
 7. 导入前查 `raw/.manifest.json`，hash 相同则跳过；强制重做按 `commands/force.md` 执行
 
-### v0.1 精简：每次导入只维护 5 个汇总文件
+### 精简：每次导入只维护 6 个末尾更新点（5 个真相源 + 1 个只读投影）
 
-`wiki/index.md`、`wiki/hot.md`、`wiki/glossary.md`、`wiki/log.md`、`raw/.manifest.json`
-> `overview.md` / `connections-log.md` / `contradictions.md` 保留占位，**v0.1 默认关闭自动更新**。
+**真相源（写入 `wiki/` 与 `raw/`）**：`wiki/index.md`、`wiki/hot.md`、`wiki/glossary.md`、`wiki/log.md`、`raw/.manifest.json`
+**只读投影（写入项目根）**：`驾驶舱.html` 的 `<script id="dashboard-data">` 数据块——字段全部派生自上述真相源与 `config.md`，**不是第二个真相源**，禁止在其中独立录入或修正学生状态。
+
+> `overview.md` / `connections-log.md` / `contradictions.md` 保留占位，**默认关闭自动更新**。
+> 驾驶舱数据契约见下方「驾驶舱（只读投影）」节；数据块 schema 与更新触发点以该节为准。
+
+### 驾驶舱（只读投影）
+
+`驾驶舱.html` 是项目根的一个静态页，给人看「现在做什么 + 状态」，由浏览器/预览面板打开（不在 Obsidian 内渲染 `<script>`）。它**不是真相源、不是新命令、不是第 13 个触发词**：
+
+- 数据块的全部字段派生自 `config.md` 与 `wiki/`（含概念页 frontmatter、index / hot / log），只在「批量操作末尾一次性更新」时由 AI 写入；禁止在驾驶舱里独立录入、修正学生状态。
+- schema 为 `dashboard-data/v1`，字段：`schema` / `generated_at` / `brain_version` / `config` / `counts` / `courses` / `weak_concepts` / `decaying` / `pending_confirm` / `recent` / `next_action`。
+- `next_action` 按 `pending_confirm` > `decaying` > 新导入未预习 > 无数据 的优先级算出唯一「下一步」，含一句 `prompt` 与一个可回答的 `question`。它只复述状态、给合规回应，不生成课件答案（预习三不在此同样适用）。涉及待确认时，`prompt` 用统一话术「AI 停下来是在等你确认，不是卡住」，避免学生误判。
+- 学生说「下一步 / 现在做什么 / 看板」时，AI 读取该数据块并复述 `next_action`，这是读文件的隐式行为，不加载新 skill、不新增命令。
+- 升级时只换 HTML 骨架、数据块原样保留（见 `commands/upgrade.md`）；各命令的写入触发点见对应 skill / command 的末尾更新步骤。
 
 ---
 
@@ -218,3 +231,15 @@ sources: ["{来源页}"]
 - 模板变量与示例链接写成纯代码文本，例如 `{概念页}`；不要写成可被 Obsidian 解析的 `[[示例]]`。
 - 命令触发词以「命令映射」表为准，首次出现给中文词 + 英文兼容名。
 - 历史测试记录标注为「历史快照」，不用当前数字覆盖当时的数字。
+
+### 数量口径的唯一权威
+
+> 以下数字只在唯一权威处定义，其余文件只引用、不写死；改动须先改权威处再同步引用处。
+
+| 口径 | 唯一权威 |
+|---|---|
+| 命令触发词数量与触发词 | 本文件「命令映射」表 |
+| 末尾更新点（6 个 = 5 真相源 + 1 只读投影） | 本文件「Token 预算规则」下的更新点节 |
+| 体检项数（19 项） | `skills/wiki-lint/SKILL.md` |
+| 可替换白名单 | `commands/upgrade.md`「白名单」节 |
+| 清理清单 | `docs/FAQ.md`「测试与清理」节 |

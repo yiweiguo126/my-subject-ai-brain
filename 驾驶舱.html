@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>驾驶舱 · 我的学科AI大脑</title>
+<style>
+:root{
+  --blue:#143F6B; --blue2:#2A6FA8; --green:#1B7F5A; --yellow:#E9B824; --amber:#BA7517;
+  --bg:#EEF3F9; --card:#fff; --line:#C4D2E3; --ink:#152A3D; --mute:#5A6E82;
+  --font:"Helvetica Neue",Arial,"PingFang SC","Microsoft YaHei",sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"PingFang SC",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased;font-synthesis:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 32px}
+
+.mast{background:var(--blue);color:#fff;padding:14px 0}
+.mast .wrap{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.mast .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px}
+.mast .brand .m{width:28px;height:28px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px}
+.mast .meta{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:#B9CFE4}
+
+.hero{padding:34px 0 16px}
+.hero h1{font-size:clamp(28px,4vw,42px);line-height:1.15;letter-spacing:-.02em;font-weight:800}
+.hero .lead{margin-top:10px;max-width:52em;color:#33485C;font-size:15px}
+.hero .lead b{color:var(--blue)}
+
+.next{background:var(--green);color:#fff;margin:16px 0 30px;padding:30px 32px;position:relative}
+.next .tag{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:#D8F0E7;display:block;margin-bottom:12px}
+.next .prompt{font-size:clamp(20px,3vw,28px);font-weight:700;line-height:1.35;letter-spacing:-.01em;max-width:34em}
+.next .qbox{margin-top:18px;background:rgba(255,255,255,.12);border-left:4px solid var(--yellow);padding:14px 18px;max-width:40em}
+.next .qbox .ql{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:#D8F0E7;display:block;margin-bottom:4px}
+.next .qbox .q{font-size:16px;font-weight:500}
+.next .src{margin-top:14px;font-family:var(--mono);font-size:11px;color:#D8F0E7}
+
+.sechead{display:flex;align-items:baseline;gap:14px;margin:0 0 16px}
+.sechead h2{font-size:20px}
+.sechead span{font-family:var(--mono);font-size:11px;color:var(--mute);letter-spacing:.08em}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:26px}
+.stat{background:var(--card);border:1px solid var(--line);padding:18px 20px;position:relative}
+.stat .n{font-family:var(--mono);font-size:34px;font-weight:700;color:var(--blue);line-height:1.1;display:block}
+.stat .l{font-size:13px;color:var(--mute);margin-top:4px;display:block}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.card{background:var(--card);border:1px solid var(--line);padding:20px 22px;min-height:150px}
+.card h3{font-size:15px;display:flex;align-items:center;gap:9px;margin-bottom:12px}
+.card h3 .ic{width:24px;height:24px;border:1.5px solid var(--blue);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.card h3 .ic svg{width:15px;height:15px;stroke:var(--blue);stroke-width:1.8;fill:none}
+.card table{width:100%;border-collapse:collapse}
+.card th,.card td{border-bottom:1px solid var(--line);padding:7px 4px;text-align:left;font-size:13px;vertical-align:top}
+.card th{color:var(--mute);font-weight:500;width:30%}
+.card td code{font-family:var(--mono);font-size:12px;background:var(--bg);padding:2px 5px}
+.low{color:#A32D2D;font-family:var(--mono);font-size:12px}
+.mid{color:var(--amber);font-family:var(--mono);font-size:12px}
+.empty{color:var(--mute);font-size:13px;font-style:normal}
+
+.note{margin:26px 0 0;background:#F7F4EC;border:1px solid #E4D9BB;padding:16px 20px;font-size:13px;color:#5B5238}
+.note b{color:#3E3723}
+
+footer{padding:22px 0 40px;font-size:12px;color:var(--mute);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer b{color:var(--ink)}
+
+@media(max-width:760px){
+  .wrap{padding:0 18px}
+  .hero{padding:26px 0 12px}
+  .next{padding:22px 20px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .grid{grid-template-columns:1fr}
+}
+@media print{.mast,.next{background:#143F6B!important;-webkit-print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<div class="mast"><div class="wrap"><div class="brand"><span class="m">驾</span>我的学科AI大脑 · 驾驶舱</div><div class="meta">只读看板 / 现在做什么</div></div></div>
+
+<header class="hero wrap">
+  <h1>现在，做什么</h1>
+  <p class="lead">这一页只回答一个问题：<b>你下一步该做什么</b>。它是对 <code>wiki/</code> 与 <code>config.md</code> 的<b>只读投影</b>，不存放你的笔记，也不在这里编辑。状态由 AI 在每次操作末尾刷新。用浏览器或预览面板打开即可（不必在 Obsidian 里看）。</p>
+</header>
+
+<!-- ============ DASHBOARD-VISIBLE:START ============
+     以下可见区由 AI 在「批量操作末尾一次性更新」时同步改写。
+     每个区域对应下方 dashboard-data 数据块的同名字段。
+     只呈现状态、不生成课件答案；预习三不在此同样适用。
+     本区块结束于紧随 main 之后的 DASHBOARD-VISIBLE:END 标记。 -->
+<main class="wrap">
+  <section class="next">
+    <span class="tag">NEXT ACTION / 下一步</span>
+    <div class="prompt" id="va-prompt">还没有任何课件。先把这门课的基本信息告诉我。</div>
+    <div class="qbox">
+      <span class="ql">你的回答</span>
+      <div class="q" id="va-question">现在说「初始化」，回答课程名、语言和目标三件事。</div>
+    </div>
+    <span class="src" id="va-source">依据：no_data ｜ 生成于 <span id="va-date">2026-11-19</span></span>
+  </section>
+
+  <div class="sechead"><h2>一眼看状态</h2><span>AT A GLANCE</span></div>
+  <div class="stats">
+    <div class="stat"><span class="n" id="va-courses">0</span><span class="l">课程</span></div>
+    <div class="stat"><span class="n" id="va-concepts">0</span><span class="l">概念页</span></div>
+    <div class="stat"><span class="n" id="va-sources">0</span><span class="l">来源页</span></div>
+    <div class="stat"><span class="n" id="va-pending">0</span><span class="l">待确认</span></div>
+  </div>
+
+  <div class="grid">
+    <section class="card">
+      <h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 4l8 16H4z"/><path d="M12 10v4M12 17v.5"/></svg></span>我的薄弱概念</h3>
+      <div id="va-weak"><p class="empty">暂无。复习后，你自己确认的薄弱项会出现在这里。</p></div>
+    </section>
+    <section class="card">
+      <h3><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></span>即将衰减（超期未复习）</h3>
+      <div id="va-decaying"><p class="empty">暂无。</p></div>
+    </section>
+    <section class="card">
+      <h3><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg></span>最近更新</h3>
+      <div id="va-recent"><p class="empty">暂无。首次导入或复习后显示。</p></div>
+    </section>
+    <section class="card">
+      <h3><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M9 12h6"/></svg></span>孤岛（无入链）</h3>
+      <div id="va-islands"><p class="empty">暂无。</p></div>
+    </section>
+  </div>
+
+  <div class="note">
+    <b>这是一份投影，不是第二个真相源。</b> 所有数字都来自 <code>config.md</code> 与 <code>wiki/</code>；掌握度只由你复习时的回答更新，这里从不替你判定「已掌握」。材料没写的，AI 不补、不猜、不联网。笔记留在本机，不收交、不比较。
+    多门课时，提问记得带课程名（见 <code>docs/多课程使用说明.md</code>）。
+  </div>
+</main>
+<!-- ============ DASHBOARD-VISIBLE:END ============ -->
+
+<footer class="wrap"><span><b>我的学科AI大脑</b> · v2.00 · 只读投影</span><span>同一间教室，长出不一样的学科AI大脑</span></footer>
+
+<!-- ============ DASHBOARD-DATA:START ============
+     数据块：给 AI 读取与写入的机器可读镜像，非执行脚本（type=application/json）。
+     更新规则：只在批量操作末尾一次性更新时写；字段全部从 config.md + wiki/ 派生；
+     升级换骨架时原样保留本块内容，只更新 brain_version；不在本块独立录入学生状态。
+     schema: dashboard-data/v1
+     本区块结束于紧随 script 之后的 DASHBOARD-DATA:END 标记。 -->
+<script id="dashboard-data" type="application/json">
+{
+  "schema": "dashboard-data/v1",
+  "generated_at": "2026-11-19",
+  "brain_version": "2.00",
+  "config": {
+    "course_name": "",
+    "my_goal": "听懂",
+    "need_confirm": true
+  },
+  "counts": {
+    "sources": 0,
+    "concepts": 0,
+    "courses": 0,
+    "preview": 0,
+    "practice": 0,
+    "exam_prep": 0,
+    "islands": 0
+  },
+  "courses": [],
+  "weak_concepts": [],
+  "decaying": [],
+  "pending_confirm": [],
+  "recent": [],
+  "next_action": {
+    "prompt": "还没有任何课件。先把这门课的基本信息告诉我。",
+    "question": "现在说「初始化」，回答课程名、语言和目标三件事。",
+    "source": "no_data"
+  }
+}
+</script>
+<!-- ============ DASHBOARD-DATA:END ============ -->
+</body>
+</html>
