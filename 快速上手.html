@@ -6,117 +6,167 @@
 <title>解压之后，第一步做什么 · 我的学科AI大脑</title>
 <style>
 :root{
-  --blue:#143F6B; --blue2:#2A6FA8; --green:#1B7F5A; --yellow:#E9B824;
-  --bg:#EEF3F9; --card:#fff; --line:#C4D2E3; --ink:#152A3D; --mute:#5A6E82;
+  --teal:#2F5D57; --teal2:#3E7C74; --sage:#9DBBAA; --sagedeep:#5E8B7C;
+  --purple:#B7A8D8; --coral:#E89A6F; --gold:#E9B45B; --lakeblue:#5E8CA7;
+  --paper:#FAF1E1; --cream:#FFFDF8; --line:#E8DCC4; --ink:#2C4442; --mute:#7C8C85;
+  --shadow-soft:0 1px 2px rgba(76,60,34,.06),0 10px 28px -14px rgba(76,60,34,.22);
+  --shadow-raise:0 2px 4px rgba(76,60,34,.08),0 14px 34px -14px rgba(76,60,34,.28);
   --font:"Helvetica Neue",Arial,"PingFang SC","Microsoft YaHei",sans-serif;
+  --serif:"Noto Serif SC","Songti SC",Georgia,serif;
   --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"PingFang SC",monospace;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased;font-synthesis:none}
-.wrap{max-width:1080px;margin:0 auto;padding:0 32px}
+body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.75;-webkit-font-smoothing:antialiased;font-synthesis:none}
+a{color:inherit}
 
-.mast{background:var(--blue);color:#fff;padding:14px 0}
-.mast .wrap{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
-.mast .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px}
-.mast .brand .m{width:28px;height:28px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px}
-.mast .meta{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:#B9CFE4}
+/* ===== 布局骨架：左侧山色栏 + 右侧主内容 ===== */
+.shell{display:flex;align-items:stretch;min-height:100vh}
+.side{flex:0 0 232px;background:linear-gradient(178deg,#2F5D57 0%,#38726A 58%,#44857B 100%);color:#F3EFE2;border-radius:0 30px 30px 0;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;padding:30px 22px 26px;box-shadow:6px 0 30px -18px rgba(35,52,48,.5)}
+.side .brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:14px;line-height:1.45}
+.side .brand .m{width:44px;height:44px;flex:none;background:radial-gradient(circle at 32% 28%,#F6D998,#E9B45B 68%);color:#4A3A16;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:19px;font-family:var(--serif);box-shadow:0 4px 12px -4px rgba(0,0,0,.35)}
+.side .brand small{display:block;font-size:11px;font-weight:400;color:#CFE3D9;letter-spacing:.08em;margin-top:2px}
+.side-nav{margin-top:30px;display:flex;flex-direction:column;gap:8px}
+.side-nav a{display:flex;align-items:center;gap:10px;text-decoration:none;font-size:13px;color:#DCEBE2;padding:10px 14px;border-radius:14px;transition:background .15s}
+.side-nav a:hover{background:rgba(255,255,255,.12)}
+.side-nav a .ni{width:8px;height:8px;border-radius:50%;background:#DCEBE2;flex:none;opacity:.7}
+.side-nav a.hot{background:#F6D998;color:#3E3419;font-weight:700;box-shadow:0 4px 14px -6px rgba(0,0,0,.4)}
+.side-nav a.hot .ni{background:#3E3419;opacity:1}
+.side .top-btn{margin-top:auto;align-self:flex-start;font-family:var(--font);font-size:12px;font-weight:600;color:#DCEBE2;background:transparent;border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:8px 18px;cursor:pointer;transition:background .15s,transform .12s}
+.side .top-btn:hover{background:rgba(255,255,255,.14);transform:translateY(-1px)}
+.side-quote{margin-top:16px;padding-top:18px;border-top:1px solid rgba(255,255,255,.22);font-family:var(--serif);font-style:italic;font-size:14px;line-height:1.9;color:#E8F2EA}
+.side-quote svg{width:26px;height:26px;display:block;margin-top:10px}
+.side-quote svg path{stroke:#F6D998;fill:none;stroke-width:1.6;stroke-linecap:round}
+.maincol{flex:1;min-width:0}
 
-.hero{padding:46px 0 26px}
-.hero h1{font-size:clamp(34px,5vw,58px);line-height:1.08;letter-spacing:-.03em;font-weight:800}
-.hero .lead{margin-top:16px;max-width:46em;color:#33485C;font-size:17px}
-.hero .lead b{color:var(--blue)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 34px}
 
-/* 路径图 */
-.path{background:var(--card);border:1px solid var(--line);padding:24px 20px 18px;margin:8px 0 34px;position:relative}
-.path .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--mute);margin-bottom:18px}
+/* ===== 山景横幅 ===== */
+.hero{position:relative;overflow:hidden;background:linear-gradient(180deg,#F9E3C0 0%,#F3D6C4 34%,#E3C9D8 66%,#C9D8CF 100%);padding:52px 0 118px}
+.hero .scene{position:absolute;left:0;right:0;bottom:-2px;height:130px;width:100%;display:block}
+.hero .wrap{position:relative;z-index:2}
+.hero .name{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:#4A6B60;background:rgba(255,253,248,.72);display:inline-block;padding:5px 14px;border-radius:999px;margin-bottom:14px;box-shadow:0 2px 8px -4px rgba(76,60,34,.3)}
+.hero h1{font-family:var(--serif);font-size:clamp(30px,4vw,46px);line-height:1.18;letter-spacing:.01em;font-weight:700;color:#274A44;text-shadow:0 1px 0 rgba(255,253,248,.6)}
+.hero .lead{margin-top:14px;max-width:54em;color:#3D554E;font-size:15px;background:rgba(255,253,248,.66);padding:14px 18px;border-radius:16px;box-shadow:var(--shadow-soft)}
+.hero .lead b{color:#274A44}
+
+/* ===== 分区标题（金色胶囊） ===== */
+.sechead{display:flex;align-items:center;gap:16px;margin:0 0 18px}
+.sechead h2{font-family:var(--serif);font-size:18px;font-weight:700;letter-spacing:.02em;color:#3E3419;background:#F6D998;display:inline-flex;align-items:center;gap:12px;padding:11px 26px;border-radius:999px;box-shadow:0 4px 14px -6px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.5)}
+.sechead h2::before{content:'';width:9px;height:9px;flex:none;border-radius:50%;background:#3E3419}
+.sechead span{font-family:var(--mono);font-size:11px;color:var(--mute);letter-spacing:.08em}
+
+/* ===== 路径图 ===== */
+.path{background:var(--cream);border:1px solid var(--line);border-radius:22px;padding:24px 26px 18px;margin:38px 0 34px;box-shadow:var(--shadow-soft)}
+.path .lbl{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--mute);margin-bottom:18px}
 .path .rail{display:flex;align-items:flex-start;justify-content:space-between}
 .path .stop{flex:0 0 17%;text-align:center;position:relative;z-index:2}
 .path .stop a{text-decoration:none;color:inherit;display:block}
-.path .stop .ic{width:56px;height:56px;margin:0 auto 9px;border:2px solid var(--blue);border-radius:6px;background:var(--card);display:flex;align-items:center;justify-content:center;transition:background .15s,transform .15s}
-.path .stop a:hover .ic{background:#E4EEF7;transform:translateY(-2px)}
-.path .stop .ic svg{width:30px;height:30px;stroke:var(--blue);stroke-width:1.7;fill:none;stroke-linecap:square}
-.path .stop.on .ic{background:var(--green);border-color:var(--green)}
-.path .stop.on .ic svg{stroke:#fff}
+.path .stop .ic{width:56px;height:56px;margin:0 auto 9px;border:2px solid var(--sagedeep);border-radius:16px;background:var(--cream);display:flex;align-items:center;justify-content:center;transition:background .15s,transform .15s;box-shadow:var(--shadow-soft)}
+.path .stop a:hover .ic{background:#EAF2EC;transform:translateY(-2px)}
+.path .stop .ic svg{width:28px;height:28px;stroke:var(--sagedeep);stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.path .stop.on .ic{background:linear-gradient(160deg,#F6D998,#E9B45B);border-color:#C98F2B}
+.path .stop.on .ic svg{stroke:#3E3419}
 .path .stop .num{font-family:var(--mono);font-size:11px;color:var(--mute);display:block}
-.path .stop .nm{font-size:14px;font-weight:700;display:block;margin-top:2px}
+.path .stop .nm{font-size:14px;font-weight:700;display:block;margin-top:2px;color:#274A44}
 .path .stop .sm{font-size:11px;color:var(--mute);display:block;line-height:1.35}
-.path .link{height:2px;background:var(--blue2);flex:1;margin-top:27px;position:relative;z-index:1}
-.path .link::after{content:"";position:absolute;right:-1px;top:-4px;border-left:8px solid var(--blue2);border-top:5px solid transparent;border-bottom:5px solid transparent}
+.path .link{height:2px;background:#A9C0B2;flex:1;margin-top:27px;position:relative;z-index:1;border-radius:999px}
+.path .link::after{content:"";position:absolute;right:-1px;top:-4px;border-left:8px solid #A9C0B2;border-top:5px solid transparent;border-bottom:5px solid transparent}
 
-.sechead{display:flex;align-items:baseline;gap:14px;margin:0 0 18px}
-.sechead h2{font-size:22px}
-.sechead span{font-family:var(--mono);font-size:11px;color:var(--mute);letter-spacing:.08em}
-
-.prep{margin-top:4px}
-.prep .card .hd .ic{border-color:var(--green)}
-.prep .card .hd .ic svg{stroke:var(--green)}
-.prep .card .check b{color:var(--green)}
-
-.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-.card{background:var(--card);border:1px solid var(--line);padding:20px 22px;min-height:170px;position:relative}
+/* ===== 卡片 ===== */
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.card{background:var(--cream);border:1px solid var(--line);border-radius:18px;padding:22px 24px;min-height:170px;position:relative;box-shadow:var(--shadow-soft)}
 .card .hd{display:flex;align-items:center;gap:12px;margin-bottom:10px}
-.card .hd .ic{width:40px;height:40px;border:1.5px solid var(--blue);border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.card .hd .ic svg{width:24px;height:24px;stroke:var(--blue);stroke-width:1.7;fill:none}
+.card .hd .ic{width:40px;height:40px;border:1.5px solid var(--sagedeep);border-radius:12px;background:#EAF2EC;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.card .hd .ic svg{width:22px;height:22px;stroke:var(--teal2);stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
 .card .hd .n{font-family:var(--mono);font-size:12px;color:var(--mute);display:block}
-.card .hd h3{font-size:19px;line-height:1.3;letter-spacing:-.01em}
-.card p{font-size:14px;color:#33485C;margin-bottom:8px}
+.card .hd h3{font-size:18px;line-height:1.3;letter-spacing:.01em;color:#274A44}
+.card p{font-size:14px;color:#4E635B;margin-bottom:8px}
 .card ul{list-style:none;margin:6px 0 0}
-.card li{font-size:13px;padding-left:14px;position:relative;color:#33485C;margin-bottom:2px}
-.card li::before{content:"";position:absolute;left:0;top:.7em;width:6px;height:6px;background:var(--green)}
-.card .say{display:inline-block;background:var(--blue);color:#fff;font-family:var(--mono);font-size:13px;padding:6px 10px;margin:8px 0;word-break:break-all;max-width:100%}
-.card .check{margin-top:10px;padding-top:9px;border-top:1px dashed var(--line);font-size:12px;color:var(--mute)}
-.card .check b{color:var(--blue)}
-.card.primary{background:var(--green);border-color:var(--green)}
-.card.primary h3,.card.primary p,.card.primary li,.card.primary .check b{color:#fff}
-.card.primary .hd .ic{border-color:#fff}
-.card.primary .hd .ic svg{stroke:#fff}
-.card.primary .n,.card.primary .check{color:#D8F0E7}
-.card.primary li::before{background:#fff}
+.card li{font-size:13px;padding-left:16px;position:relative;color:#4E635B;margin-bottom:3px}
+.card li::before{content:"";position:absolute;left:0;top:.72em;width:6px;height:6px;border-radius:50%;background:var(--sagedeep)}
+.card code{font-family:var(--mono);font-size:12.5px;background:#F4EFE3;padding:2px 8px;border-radius:6px}
+.card .say{display:inline-block;background:#F6D998;color:#3E3419;font-family:var(--mono);font-size:13px;font-weight:600;padding:7px 16px;margin:8px 0;border-radius:999px;word-break:break-all;max-width:100%;box-shadow:0 3px 10px -4px rgba(76,60,34,.3),inset 0 1px 0 rgba(255,255,255,.5)}
+.card .check{margin-top:10px;padding-top:9px;border-top:1px dashed #DCD2BC;font-size:12px;color:var(--mute)}
+.card .check b{color:var(--teal2)}
 
-.band{background:var(--blue);color:#fff;margin:38px 0 0;padding:28px 0}
-.band .wrap{display:grid;grid-template-columns:1fr 1fr;gap:44px}
-.band h2{font-size:19px;margin-bottom:14px;display:flex;align-items:center;gap:10px}
-.band h2 .ic{width:26px;height:26px;border:1.5px solid #fff;border-radius:4px;display:flex;align-items:center;justify-content:center}
-.band h2 .ic svg{width:16px;height:16px;stroke:#fff;stroke-width:1.8;fill:none}
+/* ===== 日常用法（深青大卡） ===== */
+.band{margin:38px 0 0}
+.band .box{background:linear-gradient(160deg,#3E7C74 0%,#2F5D57 72%);color:#fff;border-radius:24px;padding:30px 34px;box-shadow:var(--shadow-raise);position:relative;overflow:hidden}
+.band .box::before{content:'';position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:rgba(246,217,152,.12)}
+.band .box::after{content:'';position:absolute;right:-20px;bottom:-70px;width:180px;height:180px;border-radius:50%;background:rgba(183,168,216,.14)}
+.band .cols{display:grid;grid-template-columns:1fr 1fr;gap:44px;position:relative;z-index:1}
+.band h2{font-family:var(--serif);font-size:18px;margin-bottom:14px;display:flex;align-items:center;gap:10px;color:#F6D998}
+.band h2 .ic{width:26px;height:26px;border:1.5px solid #F6D998;border-radius:9px;display:flex;align-items:center;justify-content:center;flex:none}
+.band h2 .ic svg{width:15px;height:15px;stroke:#F6D998;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
 .band table{width:100%;border-collapse:collapse}
 .band th,.band td{border-bottom:1px solid rgba(255,255,255,.28);padding:8px 4px;text-align:left;font-size:13px;vertical-align:top}
-.band th{width:34%;color:#B9CFE4;font-weight:500}
-.band td code{font-family:var(--mono);font-size:12px;background:rgba(255,255,255,.14);padding:2px 5px}
+.band th{width:34%;color:#CDE7DB;font-weight:500}
+.band td code,.band li code{font-family:var(--mono);font-size:12px;background:rgba(255,255,255,.14);padding:2px 6px;border-radius:6px}
 .band ul{list-style:none}
 .band li{font-size:13px;padding:9px 0 9px 22px;position:relative;border-bottom:1px solid rgba(255,255,255,.22)}
-.band li::before{content:"";position:absolute;left:0;top:1.05em;width:10px;height:1.5px;background:var(--yellow)}
-.band .warn li::before{background:#FF8A6B}
+.band li::before{content:"";position:absolute;left:0;top:1.05em;width:10px;height:2px;border-radius:999px;background:#F6D998}
+.band .warn li::before{background:#F2A085}
 .band li b{color:#fff}
-.band li code{font-family:var(--mono);font-size:12px;background:rgba(255,255,255,.14);padding:2px 5px}
-.band .say3 li{font-size:13px;line-height:1.6}
 
-footer{padding:22px 0 40px;font-size:12px;color:var(--mute);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer{padding:26px 0 40px;font-size:12px;color:var(--mute);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 footer b{color:var(--ink)}
 
+@media(max-width:960px){
+  .shell{flex-direction:column}
+  .side{position:relative;height:auto;flex:none;border-radius:0 0 26px 26px;flex-direction:row;align-items:center;gap:16px;padding:16px 20px;flex-wrap:wrap}
+  .side .brand{font-size:13px}
+  .side .brand .m{width:36px;height:36px;font-size:15px}
+  .side-nav{margin-top:0;flex-direction:row;margin-left:auto}
+  .side-nav a{padding:7px 13px}
+  .side .top-btn{margin-top:0;margin-left:0}
+  .side-quote{display:none}
+  .wrap{padding:0 20px}
+  .hero{padding:34px 0 96px}
+  .grid{grid-template-columns:1fr}
+  .band .cols{grid-template-columns:1fr;gap:28px}
+}
 @media(max-width:760px){
-  .wrap{padding:0 18px}
-  .hero{padding:32px 0 20px}
   .path{padding:18px 12px}
   .path .rail{flex-wrap:wrap;gap:14px 0}
   .path .stop{flex:0 0 33%}
   .path .link{display:none}
   .path .stop .ic{width:48px;height:48px}
-  .path .stop .ic svg{width:26px;height:26px}
-  .grid{grid-template-columns:1fr}
-  .band .wrap{grid-template-columns:1fr;gap:28px}
-  .band th{width:36%}
+  .path .stop .ic svg{width:24px;height:24px}
 }
-@media print{.mast,.band{background:#143F6B!important;-webkit-print-color-adjust:exact}}
+@media print{.side{display:none}.shell{display:block}.band .box{background:#2F5D57!important;-webkit-print-color-adjust:exact}}
 </style>
 </head>
 <body>
-<div class="mast"><div class="wrap"><div class="brand"><span class="m">五</span>我的学科AI大脑 · 快速上手</div><div class="meta">解压之后，第一步做什么 / 两样前提 · 五步路径</div></div></div>
+<div class="shell">
+  <aside class="side">
+    <div class="brand"><span class="m">脑</span><span>我的学科AI大脑<small>快速上手</small></span></div>
+    <nav class="side-nav" id="side-nav">
+      <a href="#prep"><span class="ni"></span>备好工具</a>
+      <a href="#steps"><span class="ni"></span>五步路径</a>
+      <a href="#daily"><span class="ni"></span>日常怎么用</a>
+    </nav>
+    <button class="top-btn" id="back-top" type="button">↑ 回到页首</button>
+    <div class="side-quote">Keep learning,<br>keep growing.
+      <svg viewBox="0 0 24 24"><path d="M12 20c0-5 2-9 6-12"/><path d="M12 20c0-5-2-9-6-12"/><path d="M12 20c-1-3-1-6 0-9 1 3 1 6 0 9z"/></svg>
+    </div>
+  </aside>
+  <div class="maincol">
 
-<header class="hero wrap">
-  <h1>解压之后，<br>第一步做什么</h1>
-  <p class="lead">开走前先备齐<b>两样前提</b>：一个能管整个文件夹的 AI 智能体 + Obsidian。然后记住这条路径：<b>打开 → 初始化 → 放课件 → 导入 → 看结果</b>。全程在 AI 对话里打字，不用命令行。看一遍路径知道方向，再照下面每张卡片一步步走。</p>
+<header class="hero">
+  <svg class="scene" viewBox="0 0 1200 130" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 130 L0 84 Q120 30 260 62 Q420 96 560 58 Q700 22 860 60 Q1020 96 1200 52 L1200 130 Z" fill="#C3B4DC" opacity=".8"/>
+    <path d="M0 130 L0 98 Q160 58 340 88 Q520 116 700 82 Q900 46 1080 86 Q1140 98 1200 92 L1200 130 Z" fill="#9FB8AC" opacity=".9"/>
+    <path d="M0 130 L0 112 Q200 84 420 108 Q640 130 860 104 Q1040 84 1200 108 L1200 130 Z" fill="#5E8B7C"/>
+  </svg>
+  <div class="wrap">
+    <span class="name">快速上手 · 5 步走完</span>
+    <h1>解压之后，第一步做什么</h1>
+    <p class="lead">只需要准备一样东西：<b>一个能管整个文件夹的 AI 智能体</b>。Obsidian 建议装，不装也能用。<br>五步路径：<b>打开 → 初始化 → 放课件 → 导入 → 看结果</b>。全程在对话里打字，不用命令行。每张卡片附一个判断标准，做到了就是走对了。<br>本页只做图文讲解；完整清单与每周用法见 <code>START-HERE.md</code>。</p>
+  </div>
+</header>
 
+<main class="wrap">
   <nav class="path" aria-label="五步路径">
     <div class="lbl">THE PATH / 五步路径（备齐前提后开走）</div>
     <div class="rail">
@@ -131,32 +181,28 @@ footer b{color:var(--ink)}
       <div class="stop"><a href="#s5"><div class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16"/><path d="M4 10h16M10 4v16"/></svg></div><span class="num">05</span><span class="nm">看结果</span><span class="sm">Home.md</span></a></div>
     </div>
   </nav>
-</header>
 
-<section class="wrap prep">
-  <div class="sechead"><h2>开走之前，先备两样</h2><span>各花几分钟，一次搞定</span></div>
+  <div class="sechead" id="prep"><h2>开走之前，先备工具</h2><span>必须 1 样，可选 1 样</span></div>
   <div class="grid">
     <section class="card" id="p1">
       <div class="hd"><div class="ic"><svg viewBox="0 0 24 24"><rect x="6" y="8" width="12" height="10"/><path d="M12 8V4M9 13h2M13 13h2"/></svg></div><div><span class="n">PREP 01</span><h3>一个能管整个文件夹的 AI 智能体</h3></div></div>
-      <p>选一款 AI 工具（如 <strong>WorkBuddy</strong>），它能<strong>以对话方式读写你指定的文件夹</strong>。这类功能有的叫「空间」「工作空间」「项目」——说法不同，关键一样：它只操作你划给它的这一个文件夹。</p>
+      <p>选一款 AI 工具（如 <strong>WorkBuddy</strong>），它能<strong>以对话方式读写你指定的文件夹</strong>。这类功能有的叫「空间」「工作空间」「项目」，说法不同，关键一样：它只操作你划给它的这一个文件夹。</p>
       <ul><li>装好、注册好，先别急着打开项目</li><li>有「新建空间 / 选择文件夹」入口即可</li></ul>
       <div class="check"><b>判断：</b>能新建一个「空间」，并把本地文件夹设为它的范围。</div>
     </section>
     <section class="card" id="p2">
-      <div class="hd"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 5c-2-1.5-5-2-8-2v16c3 0 6 .5 8 2 2-1.5 5-2 8-2V3c-3 0-6 .5-8 2z"/><path d="M12 5v16"/></svg></div><div><span class="n">PREP 02</span><h3>Obsidian —— 你的 md 阅览器</h3></div></div>
-      <p>AI 写的笔记全是 <code>.md</code> 文件。装一个 <strong>Obsidian</strong>（官网 <code>obsidian.md</code>，免费），把整个文件夹放进它的 <strong>Vault</strong>，就能像翻书一样随时浏览——AI 每写一页，你都能立刻翻到。</p>
-      <ul><li>解压后的文件夹直接放进 Vault 里</li><li>分工明确：AI 负责写，Obsidian 负责看</li></ul>
-      <div class="check"><b>判断：</b>在 Obsidian 里能打开 <code>Home.md</code>，左侧能看到整个文件夹结构。</div>
+      <div class="hd"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 5c-2-1.5-5-2-8-2v16c3 0 6 .5 8 2 2-1.5 5-2 8-2V3c-3 0-6 .5-8 2z"/><path d="M12 5v16"/></svg></div><div><span class="n">PREP 02 · 可选</span><h3>Obsidian，看笔记更顺</h3></div></div>
+      <p>AI 写的笔记全是 <code>.md</code> 文件。装一个 <strong>Obsidian</strong>（官网 <code>obsidian.md</code>，免费），把文件夹放进它的 <strong>Vault</strong>，就能像翻书一样浏览、搜索、跳链接。<b>不装也能用</b>：任何编辑器都能打开，<code>Home.md</code> 与 <code>wiki/</code> 都是纯文本。</p>
+      <ul><li>装：文件夹直接放进 Vault，当独立库或子文件夹都行</li><li>不装：用系统自带编辑器看，功能不受影响</li></ul>
+      <div class="check"><b>判断（装了才查）：</b>在 Obsidian 里能打开 <code>Home.md</code>，左侧能看到整个文件夹结构。</div>
     </section>
   </div>
-</section>
 
-<main class="wrap">
-  <div class="sechead"><h2>五步，照着做</h2><span>每步一个判断标准</span></div>
+  <div class="sechead" id="steps" style="margin-top:38px"><h2>五步路径</h2><span>每步一个判断标准</span></div>
   <div class="grid">
-    <section class="card primary" id="s1">
+    <section class="card" id="s1">
       <div class="hd"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 6h7l2 2h9v11H3z"/></svg></div><div><span class="n">STEP 01</span><h3>打开文件夹</h3></div></div>
-      <p>把 ZIP 解压到固定位置（建议就放在你的 Obsidian Vault 里），用 <strong>PREP 01</strong> 备好的 AI 智能体把这个文件夹作为<strong>工作空间</strong>打开。要打开的是含 <code>AGENTS.md</code> 的那一层。</p>
+      <p>把 ZIP 解压到固定位置（建议就放在你的 Obsidian Vault 里），用 PREP 01 备好的 AI 智能体把这个文件夹作为<strong>工作空间</strong>打开。要打开的是含 <code>AGENTS.md</code> 的那一层。</p>
       <ul><li>不用装 Git、IDE 或插件</li><li>不用敲命令行</li></ul>
       <div class="check"><b>判断：</b>问 AI「你能看到 AGENTS.md 吗」，它答能，就对了。</div>
     </section>
@@ -164,61 +210,98 @@ footer b{color:var(--ink)}
     <section class="card" id="s2">
       <div class="hd"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z"/></svg></div><div><span class="n">STEP 02</span><h3>说「初始化」</h3></div></div>
       <div class="say">初始化</div>
-      <p>AI 会问三件事：课程名、中文/双语/英文、你这门课的目标（听懂 / 应试 / 做项目 / 写论文）。如实回答。</p>
-      <div class="check"><b>判断：</b>答案写进了 <code>config.md</code>，这个文件只有你能改。</div>
+      <p>AI 先问三件事：课程名、中文 / 双语 / 英文、这门课的目标（听懂 / 应试 / 做项目 / 写论文）。其余字段用默认值，不用你填；学科写作偏好可留空。</p>
+      <div class="check"><b>判断：</b>答案写进了 <code>config.md</code>。初始化时 AI 按你的回答写入，之后只有你能改。</div>
     </section>
 
     <section class="card" id="s3">
       <div class="hd"><div class="ic"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4"/></svg></div><div><span class="n">STEP 03</span><h3>放课件 md</h3></div></div>
-      <p>PDF / PPT / doc 先在别处转成 <code>.md</code>、本人核对，按 <code>L1-主题.md</code> 命名，放进 <code>raw/你的课程名/</code>。原件留在项目外。</p>
-      <div class="check"><b>判断：</b>raw 里是 md，原件在外面。可问 AI「怎么把课件转成 md」。</div>
+      <p>PDF / PPT / doc 先在项目外转成 <code>.md</code>、本人核对，文件名写成 <code>L{讲次}-主题.md</code>（讲次必有，主题随意），放进 <code>raw/你的课程名/</code>（没有这个文件夹就说一声，AI 会建）。原件留在项目外。</p>
+      <ul><li>AI 不代转格式，也不代核对转换是否完整</li><li>多门课就建多个课程文件夹，一次放一份</li></ul>
+      <div class="check"><b>判断：</b>raw 里是 md，原件在外面。转 md 的做法见 <code>docs/材料准备指南.md</code>。</div>
     </section>
 
     <section class="card" id="s4">
       <div class="hd"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 12h16M13 6l6 6-6 6"/></svg></div><div><span class="n">STEP 04</span><h3>说「导入」</h3></div></div>
       <div class="say">导入 raw/你的课程名/L1-主题.md</div>
-      <p>AI 给 3–5 个要点后会停住。回一句「确认」，笔记才生成；觉得不对就直接指出。</p>
+      <p>说文件名，或只说「导入」，AI 会列出 <code>raw/</code> 里还没导入的 md 让你选一份。AI 给出 3–5 个提炼要点后会停住，回「确认」笔记才生成；觉得不对就直接指出。</p>
       <div class="check"><b>判断：</b>你确认后笔记才出现。AI 停住是在等你，不是卡住。</div>
     </section>
 
     <section class="card" id="s5">
       <div class="hd"><div class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16"/><path d="M4 10h16M10 4v16"/></svg></div><div><span class="n">STEP 05</span><h3>看结果</h3></div></div>
-      <p>在 Obsidian 里打开 <code>Home.md</code>，你的第一页笔记、课程总览、薄弱概念都在这里。</p>
-      <div class="check"><b>判断：</b>能看到以你自己的话写成的概念页，不只是课件摘要。</div>
+      <p>打开 <code>Home.md</code>：入口、课程、薄弱概念都在这里。也可以打开项目根的 <code>脑回路生长图.html</code>，看「一眼看状态」与生长路线。</p>
+      <div class="check"><b>判断：</b>能看到新生成的概念页，每页末尾都有留给你填的 <code>Open Questions</code>。</div>
     </section>
 
     <section class="card">
-      <div class="hd"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v18M3 12h18"/></svg></div><div><span class="n">AFTER THAT</span><h3>之后这一学期</h3></div></div>
-      <ul><li>每周课后：导入本周课件，一次一份</li><li>想入门：预习 课程名</li><li>做操作 / 实验：实践 课程名，记下步骤与现象</li><li>平时：复习 课程名 第三章</li><li>期中期末：出题 课程名</li></ul>
-      <div class="check"><b>记住：</b>材料没写的，AI 不补、不猜、不联网；笔记留在本机，不收交。</div>
+      <div class="hd"><div class="ic"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M9 12h6M9 16h4"/></svg></div><div><span class="n">接着往下</span><h3>清单在 START-HERE</h3></div></div>
+      <p>本页只讲前五步怎么做。完整清单与每周用法不在这里重复，按需查：</p>
+      <ul><li>每周课后怎么用 → <code>START-HERE.md</code>「之后这一学期」</li><li>三句话是什么 → <code>START-HERE.md</code>「记住三句话」</li><li>卡住了、报错、想清空 → <code>docs/FAQ.md</code></li></ul>
+      <div class="check"><b>判断：</b>五步都走通，且知道下一步该查哪份文件。</div>
     </section>
   </div>
+
+  <section class="band" id="daily"><div class="box"><div class="cols">
+    <div>
+      <h2><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v18M3 12h18"/></svg></span>日常怎么用</h2>
+      <ul>
+        <li><b>不用背命令</b>：AI 每步会告诉你下一步，并问一个能直接回答的问题（例如「现在生成笔记吗」，回「确认」）。</li>
+        <li>完整命令表以 <code>AGENTS.md</code> 为准；一时想不起来，就说「下一步」。</li>
+        <li><b>不知道现在做什么？</b> 用浏览器打开项目根的 <code>脑回路生长图.html</code>：「下一步做什么」给出当前该做的事，「一眼看状态」汇总课程与掌握情况，「脑回路生成路线」可播放知识体系怎么长出来，「学习节点清单」能跳回每条记录。</li>
+      </ul>
+    </div>
+    <div>
+      <h2><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 4l8 16H4z"/><path d="M12 10v4M12 17v.5"/></svg></span>两个容易踩的坑</h2>
+      <ul class="warn">
+        <li>一次只导入一份课件，别说「全部导入」</li>
+        <li>AI 停下来是在等你确认，不是卡住</li>
+      </ul>
+    </div>
+  </div></div></section>
 </main>
 
-<section class="band"><div class="wrap">
-  <div>
-    <h2><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v18M3 12h18"/></svg></span>日常怎么用</h2>
-    <ul>
-      <li><b>不用背命令</b>：AI 每步会告诉你下一步，并问一个能直接回答的问题（例如「现在生成笔记吗」回「确认」）。</li>
-      <li>完整命令表以 <code>AGENTS.md</code> 为准；一时想不起来，就说「下一步」。</li>
-      <li><b>不知道现在做什么？</b> 打开项目根的 <code>驾驶舱.html</code>：「现在」告诉你下一步，「生长」可播放知识体系怎么长出来。</li>
-    </ul>
-  </div>
-  <div>
-    <h2><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 4l8 16H4z"/><path d="M12 10v4M12 17v.5"/></svg></span>两个容易踩的坑</h2>
-    <ul class="warn">
-      <li>一次只导入一份，别说「全部导入」</li>
-      <li>AI 停下来是在等你确认，不是卡住</li>
-    </ul>
-    <h2 style="margin-top:22px"><span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></span>记住三句话</h2>
-    <ul class="say3">
-      <li><b>同一份课件，每个人长出的都不一样</b> —— 因为差异来自你导入什么、你怎么答、你哪里卡住。</li>
-      <li><b>AI 负责编译，理解仍由你自己完成</b> —— 概念页末尾的 <code>Open Questions</code> 是留给你填的，AI 不会代劳。</li>
-      <li><b>预习只沉淀你自己的话</b> —— AI 带你把新知接到已有概念上，但写进知识库的，是你确认的理解、你的总结、你后来想通的结论；材料没写的，它不补、不猜、不联网。</li>
-    </ul>
-  </div>
-</div></section>
+<footer class="wrap"><span><b>我的学科AI大脑</b> · v2.00 · 快速上手</span><span>同一间教室，长出不一样的学科AI大脑</span></footer>
 
-<footer class="wrap"><span><b>我的学科AI大脑</b> · v2.10</span><span>同一间教室，长出不一样的学科AI大脑</span></footer>
+  </div>
+</div>
+
+<script>
+(function(){
+  /* 侧栏：默认无高亮；点击变金色并滚到对应标题顶端；滚动跟随点亮；回到页首 */
+  var navLinks=Array.prototype.slice.call(document.querySelectorAll('#side-nav a'));
+  function setActive(link){navLinks.forEach(function(a){a.classList.toggle('hot',a===link)})}
+  function pill(t){return t.querySelector('h2')||t}
+  navLinks.forEach(function(a){
+    a.addEventListener('click',function(ev){
+      var t=document.querySelector(a.getAttribute('href'));
+      if(!t)return;
+      ev.preventDefault();
+      setActive(a);
+      var top=window.scrollY+pill(t).getBoundingClientRect().top-36;
+      window.scrollTo({top:Math.max(0,top),behavior:'smooth'});
+    });
+  });
+  document.getElementById('back-top').addEventListener('click',function(){
+    setActive(null);
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+  var spyTick=false;
+  function syncSpy(){
+    spyTick=false;
+    var best=-1;
+    navLinks.forEach(function(a,i){
+      var t=document.querySelector(a.getAttribute('href'));
+      if(t&&pill(t).getBoundingClientRect().top<=37)best=i;
+    });
+    setActive(best>=0?navLinks[best]:null);
+  }
+  window.addEventListener('scroll',function(){
+    if(!spyTick){spyTick=true;requestAnimationFrame(syncSpy)}
+  },{passive:true});
+  if('scrollRestoration' in history)history.scrollRestoration='manual';
+  window.scrollTo(0,0);
+})();
+</script>
 </body>
 </html>

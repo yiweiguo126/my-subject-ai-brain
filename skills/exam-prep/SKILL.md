@@ -9,14 +9,14 @@ description: 出题。当学生说「出题 / exam-prep / 考前练一练」时�
 
 ## 流程
 
-1. 读 `config.md` 的 `my_goal` 与 `exam_prep`；若为 `false`，提示可在 `config.md` 开启
+1. 读 `config.md` 的 `my_goal` 与 `exam_prep`；若为 `false`，只提示「在 `config.md` 把 `exam_prep` 改为 `true`」并停下，不生成题目
 2. 读 `wiki/hot.md` 取当前薄弱概念；不足时读 `wiki/index.md` 扫 frontmatter
-3. 按 confidence 排序：`low` 优先，其次 `medium`；`high` 不出题
+3. 按 confidence 排序：`low` 优先，其次 `medium`；`high` 不出题。没有 `low` / `medium` 概念时停下，提示先说「复习」或「导入」，不凭空出题
 4. 生成 5–8 题，写入 `wiki/exam-prep/{课程名}-练习题-NN.md`
 5. **只给题目与答题提示，不附标准答案**（答案由学生自己写，避免 AI 代答）
-6. 更新 `wiki/index.md` 与 `wiki/log.md`；同时写 `驾驶舱.html` 数据块（只读投影）：更新 `counts.exam_prep`、追加 `recent`、`timeline` 追加一条 `type: exam` 事件、`graph` 追加练习题节点与 `derived` 边（时间取练习题页 `created` 字段）、`milestones` 判定「第一套题」，`next_action` 按优先级重算。**练习题不附答案，数据块也不展示任何答案或答案线索**；字段派生自真相源，契约见 `AGENTS.md`「驾驶舱（只读投影）」节
+6. 更新 `wiki/index.md` 与 `wiki/log.md`；同时写 `脑回路生长图.html` 数据块（只读投影）：更新 `counts.exam_prep`、追加 `recent`、`timeline` 追加一条 `type: exam` 事件、`graph` 追加练习题节点与 `derived` 边（时间取练习题页 `created` 字段）、`milestones` 判定「第一套题」，`next_action` 按优先级重算。**练习题不附答案，数据块也不展示任何答案或答案线索**；字段派生自真相源，契约见 `AGENTS.md`「脑回路生长图（只读投影）」节
 
-**日志** 追加到 `wiki/log.md`（v2.10 补齐固定标题，供时间轴解析）：
+**日志** 追加到 `wiki/log.md`（v2.00 补齐固定标题，供时间轴解析）：
 
 ```markdown
 ## YYYY-MM-DD — 出题: {课程名}-练习题-{NN}

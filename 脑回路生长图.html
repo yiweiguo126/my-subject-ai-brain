@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html data-page-node-id="TS3QXN62cof3qFamLwhxm7" lang="zh-CN"><head data-page-node-id="DJMinCMXkdqmMCHWt88HqO">
+<meta data-page-node-id="AolmSeBraw7p718PiycHPN" charset="UTF-8">
+<meta data-page-node-id="COCMuerDpH82koYTF36QtC" name="viewport" content="width=device-width, initial-scale=1">
+<title data-page-node-id="CinUznhkGlfaScFhL7W29A" data-pnid-children="UeK4nbBBvbGtQTOjmHt7Cs">脑回路生长图：知识是怎么一根根长出来的 · 我的学科AI大脑</title>
+<style data-page-node-id="U8fgcRAz6H33wdgpRlChtE" data-pnid-children="eJU7Rsl2ECzDWCddbWrjQ5">
+:root{
+  --teal:#2F5D57; --teal2:#3E7C74; --sage:#9DBBAA; --sagedeep:#5E8B7C;
+  --purple:#B7A8D8; --coral:#E89A6F; --gold:#E9B45B; --lakeblue:#5E8CA7;
+  --paper:#FAF1E1; --cream:#FFFDF8; --line:#E8DCc4; --ink:#2C4442; --mute:#7C8C85;
+  --shadow-soft:0 1px 2px rgba(76,60,34,.06),0 10px 28px -14px rgba(76,60,34,.22);
+  --shadow-raise:0 2px 4px rgba(76,60,34,.08),0 14px 34px -14px rgba(76,60,34,.28);
+  --font:"Helvetica Neue",Arial,"PingFang SC","Microsoft YaHei",sans-serif;
+  --serif:"Noto Serif SC","Songti SC",Georgia,serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"PingFang SC",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased;font-synthesis:none}
+a{color:inherit}
+
+/* ===== 布局骨架：左侧山色栏 + 右侧主内容 ===== */
+.shell{display:flex;align-items:stretch;min-height:100vh}
+.side{flex:0 0 232px;background:linear-gradient(178deg,#2F5D57 0%,#38726A 58%,#44857B 100%);color:#F3EFE2;border-radius:0 30px 30px 0;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;padding:30px 22px 26px;box-shadow:6px 0 30px -18px rgba(35,52,48,.5)}
+.side .brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:14px;line-height:1.45}
+.side .brand .m{width:44px;height:44px;flex:none;background:radial-gradient(circle at 32% 28%,#F6D998,#E9B45B 68%);color:#4A3A16;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:19px;font-family:var(--serif);box-shadow:0 4px 12px -4px rgba(0,0,0,.35)}
+.side .brand small{display:block;font-size:11px;font-weight:400;color:#CFE3D9;letter-spacing:.08em;margin-top:2px}
+.side-nav{margin-top:30px;display:flex;flex-direction:column;gap:8px}
+.side-nav a{display:flex;align-items:center;gap:10px;text-decoration:none;font-size:13px;color:#DCEBE2;padding:10px 14px;border-radius:14px;transition:background .15s}
+.side-nav a:hover{background:rgba(255,255,255,.12)}
+.side-nav a .ni{width:8px;height:8px;border-radius:50%;background:#DCEBE2;flex:none;opacity:.7}
+.side-nav a.hot{background:#F6D998;color:#3E3419;font-weight:700;box-shadow:0 4px 14px -6px rgba(0,0,0,.4)}
+.side-nav a.hot .ni{background:#3E3419;opacity:1}
+.side .top-btn{margin-top:auto;align-self:flex-start;font-family:var(--font);font-size:12px;font-weight:600;color:#DCEBE2;background:transparent;border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:8px 18px;cursor:pointer;transition:background .15s,transform .12s}
+.side .top-btn:hover{background:rgba(255,255,255,.14);transform:translateY(-1px)}
+.side .top-btn:active{transform:translateY(0)}
+#next,#glance,#growth,#nodes{scroll-margin-top:24px}
+.side-quote{margin-top:16px;padding-top:18px;border-top:1px solid rgba(255,255,255,.22);font-family:var(--serif);font-style:italic;font-size:14px;line-height:1.9;color:#E8F2EA}
+.side-quote svg{width:26px;height:26px;display:block;margin-top:10px}
+.side-quote svg path{stroke:#F6D998;fill:none;stroke-width:1.6;stroke-linecap:round}
+.maincol{flex:1;min-width:0}
+
+.wrap{max-width:1080px;margin:0 auto;padding:0 34px}
+
+/* ===== 山景横幅 ===== */
+.hero{position:relative;overflow:hidden;background:linear-gradient(180deg,#F9E3C0 0%,#F3D6C4 34%,#E3C9D8 66%,#C9D8CF 100%);padding:52px 0 118px}
+.hero .scene{position:absolute;left:0;right:0;bottom:-2px;height:130px;width:100%;display:block}
+.hero .wrap{position:relative;z-index:2}
+.hero .name{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:#4A6B60;background:rgba(255,253,248,.72);display:inline-block;padding:5px 14px;border-radius:999px;margin-bottom:14px;box-shadow:0 2px 8px -4px rgba(76,60,34,.3)}
+.hero h1{font-family:var(--serif);font-size:clamp(30px,4vw,46px);line-height:1.18;letter-spacing:.01em;font-weight:700;color:#274A44;text-shadow:0 1px 0 rgba(255,253,248,.6)}
+.hero .lead{margin-top:14px;max-width:52em;color:#3D554E;font-size:15px;background:rgba(255,253,248,.66);padding:14px 18px;border-radius:16px;box-shadow:var(--shadow-soft)}
+.hero .lead b{color:#274A44}
+
+/* ===== 下一步大卡 ===== */
+.next{background:linear-gradient(160deg,#3E7C74 0%,#2F5D57 72%);color:#fff;margin:0 0 34px;padding:30px 36px;position:relative;border-radius:24px;box-shadow:var(--shadow-raise);overflow:hidden}
+.next::before{content:'';position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:rgba(246,217,152,.14)}
+.next::after{content:'';position:absolute;right:-20px;bottom:-70px;width:180px;height:180px;border-radius:50%;background:rgba(183,168,216,.16)}
+.next-head{display:flex;align-items:center;margin:38px 0 18px}
+.next-head .title-pill{display:inline-flex;align-items:center;gap:12px;background:#F6D998;color:#3E3419;font-family:var(--serif);font-size:18px;font-weight:700;letter-spacing:.02em;padding:11px 26px;border-radius:999px;box-shadow:0 4px 14px -6px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.5)}
+.next-head .title-pill .ni{width:9px;height:9px;flex:none;border-radius:50%;background:#3E3419}
+.next .prompt{font-family:var(--serif);font-size:clamp(21px,3vw,29px);font-weight:700;line-height:1.4;letter-spacing:.01em;max-width:34em}
+.next .qbox{margin-top:20px;background:rgba(255,255,255,.13);border-left:4px solid var(--gold);border-radius:0 16px 16px 0;padding:16px 20px;max-width:42em;position:relative;z-index:1}
+.next .qbox .ql{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:#CDE7DB;display:block;margin-bottom:5px}
+.next .qbox .q{font-size:16px;font-weight:500;line-height:1.8}
+.next .qbox .hint{margin:9px 0 0;font-size:12px;line-height:1.65;color:#DDF0E6}
+.next .src{margin-top:16px;font-family:var(--mono);font-size:11px;color:#C6E2D4}
+.pick{display:flex;align-items:center;gap:10px;margin-top:16px;flex-wrap:wrap;position:relative;z-index:1}
+.pick label{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:#CDE7DB;white-space:nowrap}
+.pick select{font-family:var(--font);font-size:13px;padding:8px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.55);background:var(--cream);color:var(--ink);cursor:pointer;max-width:24em;box-shadow:0 3px 10px -4px rgba(0,0,0,.3)}
+.pick .pickref{font-family:var(--mono);font-size:11px;color:#C6E2D4;word-break:break-all}
+
+/* ===== 分区标题 ===== */
+.sechead{display:flex;align-items:center;gap:16px;margin:0 0 18px}
+.sechead h2{font-family:var(--serif);font-size:18px;font-weight:700;letter-spacing:.02em;color:#3E3419;background:#F6D998;display:inline-flex;align-items:center;gap:12px;padding:11px 26px;border-radius:999px;box-shadow:0 4px 14px -6px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.5)}
+.sechead h2::before{content:'';width:9px;height:9px;flex:none;border-radius:50%;background:#3E3419}
+.sechead span{font-family:var(--mono);font-size:11px;color:var(--mute);letter-spacing:.08em}
+
+/* ===== 一眼看状态：四张彩笺卡 ===== */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:30px}
+.stat{position:relative;overflow:hidden;border-radius:18px;padding:18px 20px 26px;min-height:118px;box-shadow:var(--shadow-soft);border:1px solid rgba(255,255,255,.7)}
+.stat .n{font-family:var(--mono);font-size:36px;font-weight:700;color:#274A44;line-height:1.1;display:block;position:relative;z-index:1}
+.stat .l{font-size:13px;color:#51655E;margin-top:4px;display:block;position:relative;z-index:1}
+.stat::before{content:'';position:absolute;inset:0;background:var(--wash)}
+.stat::after{content:'';position:absolute;left:0;right:0;bottom:0;height:44px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 40' preserveAspectRatio='none'%3E%3Cpath d='M0 40 L0 24 Q30 6 62 20 T120 12 L120 40 Z' fill='rgba(255,255,255,0.55)'/%3E%3C/svg%3E") center/cover no-repeat}
+.stat.s-purple{--wash:linear-gradient(165deg,#EFE9F8 0%,#D9CFF0 100%)}
+.stat.s-peach{--wash:linear-gradient(165deg,#FDEFE0 0%,#F6C6A8 100%)}
+.stat.s-sage{--wash:linear-gradient(165deg,#EEF5EF 0%,#BFDBC9 100%)}
+.stat.s-blue{--wash:linear-gradient(165deg,#EDF4F9 0%,#BCD6E8 100%)}
+
+/* ===== 内容卡片 ===== */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.card{background:var(--cream);border:1px solid var(--line);border-radius:18px;padding:22px 24px;min-height:150px;box-shadow:var(--shadow-soft)}
+.card h3{font-size:15px;display:flex;align-items:center;gap:10px;margin-bottom:14px;color:#274A44}
+.card h3 .ic{width:30px;height:30px;border-radius:11px;background:#EAF2EC;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:inset 0 1px 2px rgba(46,93,87,.12)}
+.card h3 .ic svg{width:16px;height:16px;stroke:#3E7C74;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.card table{width:100%;border-collapse:collapse}
+.card th,.card td{border-bottom:1px solid #F0E9D8;padding:8px 4px;text-align:left;font-size:13px;vertical-align:top}
+.card th{color:var(--mute);font-weight:500;width:30%}
+.card tr:last-child th,.card tr:last-child td{border-bottom:0}
+.card td code{font-family:var(--mono);font-size:12px;background:#F4EFE3;padding:2px 8px;border-radius:6px}
+.low{color:#B4553E;font-family:var(--mono);font-size:12px}
+.mid{color:#A8752B;font-family:var(--mono);font-size:12px}
+.empty{color:var(--mute);font-size:13px;font-style:normal}
+
+.note{margin:30px 0 0;background:#FBF4E2;border:1px solid #E7D9B4;border-radius:18px;padding:18px 22px;font-size:13px;color:#5B5238;box-shadow:var(--shadow-soft)}
+.note b{color:#3E3723}
+
+/* ===== 生长视图 ===== */
+.growth{padding-top:52px;padding-bottom:10px}
+.growth .intro{max-width:52em;color:#3D554E;font-size:14px;margin-bottom:22px}
+.gbox{background:var(--cream);border:1px solid var(--line);border-radius:22px;padding:24px 26px;margin-bottom:18px;box-shadow:var(--shadow-soft)}
+.ctrl{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:20px}
+.ctrl button{font-family:var(--font);font-size:13px;font-weight:600;padding:9px 22px;border:0;background:linear-gradient(160deg,#3E7C74,#2F5D57);color:#fff;border-radius:999px;cursor:pointer;box-shadow:0 4px 12px -4px rgba(46,93,87,.55);transition:transform .12s,box-shadow .12s}
+.ctrl button:hover{transform:translateY(-1px);box-shadow:0 6px 16px -5px rgba(46,93,87,.6)}
+.ctrl button.alt{background:var(--cream);color:#2F5D57;border:1px solid #D8CFC0;box-shadow:0 3px 10px -4px rgba(76,60,34,.28)}
+.ctrl button.alt:hover{background:#F6F1E6}
+.ctrl button:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+.ctrl input[type=range]{flex:1;min-width:180px;accent-color:#3E7C74}
+.ctrl .step{font-family:var(--mono);font-size:12px;color:var(--mute);white-space:nowrap}
+
+.stagetrack{display:flex;align-items:flex-start;margin:0 0 20px;padding:2px 0 10px;border-bottom:1px dashed #DCD2BC;overflow-x:auto}
+.stagetrack .st{position:relative;flex:1 1 0;min-width:104px;padding:0 2px 10px;border:0;background:none;cursor:pointer;font-family:var(--font);display:flex;flex-direction:column;align-items:center;justify-content:flex-start}
+.stagetrack .st::before{content:'';position:absolute;top:6px;left:0;right:0;height:2px;background:#E2D8C2;z-index:0;border-radius:999px}
+.stagetrack .st:first-child::before{left:50%}
+.stagetrack .st:last-child::before{right:50%}
+.stagetrack .st .dot{position:relative;z-index:1;display:block;width:14px;height:14px;margin:0 auto 7px;border-radius:50%;background:var(--cream);border:2.5px solid #D5CBB4;box-sizing:border-box;box-shadow:0 1px 3px rgba(76,60,34,.2);transition:transform .12s}
+.stagetrack .st.done .dot{background:#7FAE9C;border-color:#5E8B7C}
+.stagetrack .st.cur .dot{background:#F2C968;border-color:#C98F2B;transform:scale(1.25);box-shadow:0 0 0 4px rgba(242,201,104,.32)}
+.stagetrack .st:hover .dot{transform:scale(1.35)}
+.stagetrack .st .d{display:block;flex:none;max-width:none;font-family:var(--mono);font-size:10px;color:var(--mute);white-space:nowrap}
+.stagetrack .st .lb{display:block;max-width:100%;font-size:11px;line-height:1.35;color:#41564F;margin-top:2px;overflow-wrap:anywhere}
+.stagetrack .st.cur .d{color:#9A6E18;font-weight:700}
+.stagetrack .st.cur .lb{color:#274A44;font-weight:700}
+.stagetrack .st:focus-visible{outline:2px solid var(--lakeblue);outline-offset:2px;border-radius:6px}
+
+.evt{background:linear-gradient(160deg,#FBF4E2,#F7EDD4);border-left:4px solid var(--gold);border-radius:0 16px 16px 0;padding:16px 20px;margin-bottom:20px;box-shadow:var(--shadow-soft)}
+.evt .d{font-family:var(--mono);font-size:11px;color:#9A8C68;letter-spacing:.06em}
+.evt .t{font-family:var(--serif);font-size:18px;font-weight:700;margin:4px 0;color:#274A44}
+.evt .x{font-size:13px;color:#4E635B;line-height:1.65}
+.evt .delta{font-family:var(--mono);font-size:11px;color:#3E7C74;margin-top:7px}
+
+.gmetrics{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px}
+.gmetric{background:#F4EFE3;border-radius:14px;padding:13px 16px;box-shadow:inset 0 1px 3px rgba(76,60,34,.08),0 1px 0 rgba(255,255,255,.8)}
+.gmetric .l{font-size:12px;color:#7C8C85;display:block}
+.gmetric .v{font-family:var(--mono);font-size:26px;font-weight:700;color:#274A44;line-height:1.2;display:block}
+
+.graphbox{border:1px solid var(--line);background:#FDFBF4;border-radius:16px;padding:10px 12px;margin-bottom:18px;overflow-x:auto;box-shadow:inset 0 1px 4px rgba(76,60,34,.06)}
+.graphbox svg{display:block;width:100%;min-width:560px;height:auto}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--mute);padding:8px 2px 0}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:5px;vertical-align:-1px;border:1px solid var(--line)}
+
+.mshead{font-size:14px;font-weight:700;margin:8px 0 12px;color:#274A44}
+.badges{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:18px}
+.badge{font-family:var(--font);font-size:12px;line-height:1.4;padding:6px 15px;border-radius:999px;border:1px solid #DCD2BC;color:#7C8C85;background:var(--cream);cursor:pointer;box-shadow:0 2px 6px -3px rgba(76,60,34,.22);transition:transform .12s}
+.badge:hover{transform:translateY(-1px)}
+.badge.on{background:#DFEDE4;border-color:#5E8B7C;color:#2F5D57}
+.badge.on:hover{background:#D2E5D8;box-shadow:0 4px 10px -4px rgba(46,93,87,.35)}
+.badge.picked{box-shadow:0 0 0 2.5px rgba(94,139,124,.4);font-weight:700}
+.badge:disabled,.badge.off{opacity:.45;cursor:not-allowed;background:#F4EFE3;box-shadow:none;transform:none}
+.badge:focus-visible{outline:2px solid var(--lakeblue);outline-offset:2px}
+.mshead .mstip{font-size:11px;font-weight:400;color:var(--mute);margin-left:8px}
+
+.nlist{display:grid;grid-template-columns:repeat(2,1fr);gap:6px 20px;margin-top:2px}
+.nlist .grp{font-family:var(--mono);font-size:11px;color:#9A8C68;grid-column:1/-1;margin-top:8px;letter-spacing:.08em}
+.nlist .it{font-size:12px;color:var(--ink);border-bottom:1px solid #F0E9D8;padding:4px 0;display:flex;justify-content:space-between;gap:8px}
+.nlist .it span:last-child{font-family:var(--mono);font-size:11px;color:var(--mute);white-space:nowrap}
+.nlist .it a{text-decoration:none;border-bottom:1px dotted #5E8CA7}
+
+.emptystate{background:#FBF4E2;border:1.5px dashed #D8C9A6;border-radius:18px;padding:22px 24px;margin-bottom:16px}
+.emptystate h3{font-size:15px;margin-bottom:6px;color:#274A44}
+.emptystate p{font-size:13px;color:#5B5238;margin-bottom:12px}
+.demonote{display:none;background:#FDF3D5;border:1px solid #E4C667;border-radius:14px;color:#6B5210;font-size:12px;padding:11px 16px;margin-bottom:14px}
+.cov{font-size:12px;color:var(--mute);margin-top:10px}
+
+footer{padding:26px 0 130px;font-size:12px;color:var(--mute);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer b{color:var(--ink)}
+
+@media(max-width:960px){
+  .shell{flex-direction:column}
+  .side{position:relative;height:auto;flex:none;border-radius:0 0 26px 26px;flex-direction:row;align-items:center;gap:16px;padding:16px 20px;flex-wrap:wrap}
+  .side .brand{font-size:13px}
+  .side .brand .m{width:36px;height:36px;font-size:15px}
+  .side-nav{margin-top:0;flex-direction:row;margin-left:auto}
+  .side-nav a{padding:7px 13px}
+  .side-quote{display:none}
+  .wrap{padding:0 20px}
+  .hero{padding:34px 0 96px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .grid{grid-template-columns:1fr}
+  .gmetrics{grid-template-columns:repeat(2,1fr)}
+  .nlist{grid-template-columns:1fr}
+}
+@media(max-width:560px){.stats{grid-template-columns:repeat(2,1fr)}}
+@media print{.side{display:none}.shell{display:block}.next{background:#2F5D57!important;-webkit-print-color-adjust:exact}}
+</style>
+</head>
+<body data-page-node-id="uhBp64ODmJL4SYUldqJzZ2">
+<div data-page-node-id="arvv1Ktx8wiYYBwyDQr0Fx" class="shell">
+  <aside data-page-node-id="2lpX6TTfh5MkI18vZBTIA8" class="side">
+    <div data-page-node-id="2QLm6RsBtFlouN8VuIvrkR" class="brand"><span data-page-node-id="lt5MnCDFDr3sprS3KDWB8M" class="m">脑</span><span data-page-node-id="tqU1eoqjPxaOTQzg8n8gdi">我的学科AI大脑<small data-page-node-id="SFE7px2jBuuWaI9Zb3cS45">脑回路生长图</small></span></div>
+    <nav data-page-node-id="QGTheQ2i7hD7x9CsVb6n4r" class="side-nav" id="side-nav">
+      <a data-page-node-id="WX9Y7mcHzzfJlWfmCBd1Ir" href="#next"><span data-page-node-id="fN6wmS4uCTOGKMlLuGBIrb" class="ni"></span>下一步做什么</a>
+      <a data-page-node-id="wEFXRYCWVfNzNvQZ0MCrXG" href="#glance"><span data-page-node-id="JWnWwH90D3WXHiZvWgTEvF" class="ni"></span>一眼看状态</a>
+      <a data-page-node-id="WHECf13RGtPKL8lhwnznb2" href="#growth"><span data-page-node-id="AwuNE6PhElmm1nXSnElJGl" class="ni"></span>脑回路生成路线</a>
+      <a data-page-node-id="gZKz5AJNJPu4hkyIRzWnp4" href="#nodes"><span data-page-node-id="pEDXm8ECbmvGYwvinD7aKV" class="ni"></span>学习节点清单</a>
+    </nav>
+    <button class="top-btn" id="back-top" type="button">↑ 回到页首</button>
+    <div data-page-node-id="XlIFbgq4pMNQlvlavECsoa" class="side-quote">Keep learning,<br data-page-node-id="7tLInZvxbydmKlOBoqRGSs">keep growing.
+      <svg data-page-node-id="uCXSiap6AnLqEboHOtHp2R" viewBox="0 0 24 24"><path data-page-node-id="S4mXUNpUDsRJMHipEKKZPb" d="M12 20c0-5 2-9 6-12"></path><path data-page-node-id="suR4IDpmWDQUeHjxSBrG77" d="M12 20c0-5-2-9-6-12"></path><path data-page-node-id="dT6Ph3aE6FiEuubtHUA1Q9" d="M12 20c-1-3-1-6 0-9 1 3 1 6 0 9z"></path></svg>
+    </div>
+  </aside>
+  <div data-page-node-id="kCiyi4JpE6yVYJO31x3aI9" class="maincol">
+
+<header data-page-node-id="NzarhYfANoA4PNmGBftyvV" class="hero" id="now">
+  <svg data-page-node-id="vG7CmSdDBRLn3CyWiDOS0L" class="scene" viewBox="0 0 1200 130" preserveAspectRatio="none" aria-hidden="true">
+    <path data-page-node-id="VajXulcMHDTVEW2QrNF5Yh" d="M0 130 L0 84 Q120 30 260 62 Q420 96 560 58 Q700 22 860 60 Q1020 96 1200 52 L1200 130 Z" fill="#C3B4DC" opacity=".8"></path>
+    <path data-page-node-id="FvLk1hRdraFVQUigGgxBHd" d="M0 130 L0 98 Q160 58 340 88 Q520 116 700 82 Q900 46 1080 86 Q1140 98 1200 92 L1200 130 Z" fill="#9FB8AC" opacity=".9"></path>
+    <path data-page-node-id="uRb2sMIdCCiGiNuEA4mzyg" d="M0 130 L0 112 Q200 84 420 108 Q640 130 860 104 Q1040 84 1200 108 L1200 130 Z" fill="#5E8B7C"></path>
+  </svg>
+  <div data-page-node-id="gCrU1EXFV93AWnctuhFofq" class="wrap">
+    <h1 data-page-node-id="Y547DfB2DKeC6AreHBSb2X">脑回路生长图</h1>
+    <p data-page-node-id="Bp6LtRIPyrMIXaK5Bd9fJr" class="lead">本页用来查看个人学科AI大脑的「脑回路」状况，内容为只读，不在这里编辑笔记。页面分为四个部分：<b data-page-node-id="l7CDv4rA5HTlBBSQJPtN6v">下一步做什么</b>，给出当前最该执行的一条操作；<b data-page-node-id="SONccJc78jtI6Iq7hK9v2r">一眼看状态</b>，汇总课程、概念页、来源页与待确认等数量；<b data-page-node-id="lahGdeXHqRLauNw8cIYC1y">脑回路生成路线</b>，按时间回放知识体系从初始化到现在的生长过程；<b data-page-node-id="Cm5YUli9UKWtpzc5M3fkBl">学习节点清单</b>，列出全部学习节点，可跳回 <code data-page-node-id="IaGLvoRSBR6pfttB1QUy8n" data-pnid-children="7SsstbUmM7r56aHTW8yhmd">wiki/</code> 原页查看。</p>
+  </div>
+</header>
+
+<!-- ============ DASHBOARD-VISIBLE:START ============
+     「现在」视图可见区：由 AI 在「批量操作末尾一次性更新」时同步改写。
+     每个区域对应下方 dashboard-data 数据块的同名字段。
+     只呈现状态、不生成课件答案；预习三不在此同样适用。
+     qbox 的「接着这样做」是三步操作指令（打开 AI → 打开项目 → 说出对应命令），不是让学生在本页回答的问题；
+     其下 hint「这一页只读，不用在这里回答」属骨架固定说明，不写进数据块。
+     「生长」视图不由 AI 改写可见区，改由内联纯渲染脚本从同一数据块生成。
+     例外：#va-pick（多门课程选课程的下拉菜单）由渲染脚本在页面加载时从数据块的
+     courses[]（课程名与 raw/ 课程文件夹同名）派生生成，仅在课程 ≥ 2 时显示；
+     选中后只改写 #va-question / #va-source 文案中的课程名，并在 #va-pick-ref 显示该课程概况。
+     同时，多课程选中态下，渲染脚本按所选课程从数据块重渲染「一眼看状态」：
+     四个统计数字（#va-courses/#va-concepts/#va-sources/#va-pending）与四张卡片
+     （#va-weak/#va-decaying/#va-recent/#va-islands）按课程过滤；单课程时不动 AI 写的原文案。
+     以上均为纯渲染：只读数据块、只操作 DOM，不写入数据块、不记录学生状态。
+     AI 在末尾更新时改写 #va-question / #va-source 文案即可，不填写、不删除 #va-pick。
+     本区块结束于紧随 main 之后的结束标记。 -->
+<main data-page-node-id="g3tnJmSdWCb7op9t7QOUDl" class="wrap">
+  <div data-page-node-id="F3SrqM1F07JQwHkjKiLDu8" class="next-head" id="next"><div data-page-node-id="gRVL2L9YAcpjIWlaMKBnkB" class="title-pill"><span data-page-node-id="TIoRJT7RbNva3WoWHR4EPc" class="ni"></span>下一步做什么</div></div>
+  <section data-page-node-id="Mk9OTA22p2mdNKUYyjCmva" class="next">
+    <div data-page-node-id="5ZiFGDcSobPOVujGzFCFiE" class="prompt" id="va-prompt">还没有任何课件。先说「初始化」，把课程名、语言和目标告诉我。</div>
+    <div data-page-node-id="DP0pWH4l3XON6B2W49TdtR" class="qbox">
+      <span data-page-node-id="DJH4Yqsu2a2fQLx0gPzPJm" class="ql">接着这样做</span>
+      <div data-page-node-id="HxetJ4HAtgEDdjFDFoMSRz" class="q" id="va-question">打开 WorkBuddy（或其他 AI 智能体）→ 打开「我的学科AI大脑」项目 → 对 AI 说：「初始化」。</div>
+      <p data-page-node-id="GYKIqqQPXqM2JkMA6UW0kU" class="hint">这一页只读，不用在这里回答；回到 AI 对话里说上面那句话，AI 会接着带你往下做。</p>
+    </div>
+    <div data-page-node-id="eYaPDTNfuwmYtwuZRkDSeZ" class="pick" id="va-pick" style="display:none">
+      <label data-page-node-id="K9FPeBUJkNvtcpoy5iMrZ8" for="va-pick-sel">多门课程 · 选择课程</label>
+      <select data-page-node-id="htMDxH7EtCp3G7TwSXzAtU" id="va-pick-sel"></select>
+      <span data-page-node-id="43zBREtJcbXVfTkd5YRjLN" class="pickref" id="va-pick-ref"></span>
+    </div>
+    <span data-page-node-id="0WT3ZArUbSzSLtfm0bI2fr" class="src" id="va-source">依据：no_data ｜ 课程：尚未初始化 ｜ 生成于 <span id="va-date">2026-11-20</span></span></span>
+  </section>
+
+  <div class="sechead" id="glance"><h2>一眼看状态</h2></div>
+  <div data-page-node-id="dpVlyzIVmf89IsGPnMnuKa" class="stats">
+    <div data-page-node-id="Y2fclA6O4sJZxS4yD3BmO5" class="stat s-purple"><span data-page-node-id="XntMw7Jb8J0BnaCURP95Wf" class="n" id="va-courses">0</span><span data-page-node-id="Uiadj9leeIGX6lioo5RwXD" class="l">课程</span></div>
+    <div data-page-node-id="DBAKC7GWNsJ2HmBKsAI64g" class="stat s-peach"><span data-page-node-id="Qh6mvvwu4eIR8LJBcWoARt" class="n" id="va-concepts">0</span><span data-page-node-id="wNAYsIllpJnN9g1SjCeq0C" class="l">概念页</span></div>
+    <div data-page-node-id="4AcG48OwPL7Tp4yOVvp8Uv" class="stat s-sage"><span data-page-node-id="ShqHEtIvRoKIIIXYbEERFB" class="n" id="va-sources">0</span><span data-page-node-id="8lAUmH2RbyYlDs11rocY9U" class="l">来源页</span></div>
+    <div data-page-node-id="jh5T4h7Go7jimxzLEivH5b" class="stat s-blue"><span data-page-node-id="rIQLx9fILEwss8EVNgCOri" class="n" id="va-pending">0</span><span data-page-node-id="fgHgHDHEm7nA53Bee7h8v6" class="l">待确认</span></div>
+  </div>
+
+  <div data-page-node-id="mFrN4TzpSmtavkHJTljDUk" class="grid">
+    <section data-page-node-id="DUKceABzOFTT2KMBrjvu77" class="card">
+      <h3 data-page-node-id="dDvwEo0cAC2CppegllGwmT"><span data-page-node-id="WEdfcsaZMYjG8OzvEPnfQB" class="ic"><svg data-page-node-id="pTVph57ZACQCzgCu8ggpAa" viewBox="0 0 24 24"><path data-page-node-id="SSJhdllLZ7T0eipapnrx15" d="M12 4l8 16H4z"></path><path data-page-node-id="alU8WZGSNZd9J4EHkKRXzq" d="M12 10v4M12 17v.5"></path></svg></span>我的薄弱概念</h3>
+      <div data-page-node-id="oKyT7mbmcs4HHTLaTmBKP6" id="va-weak"><p class="empty">还没有概念页。导入课件并复习后，这里显示你自己的掌握度。</p></div>
+    </section>
+    <section data-page-node-id="9TV0bQe0C5hp3CwBLn2uwN" class="card">
+      <h3 data-page-node-id="2xZ1iRu0EL4uBINXAnekBz"><span data-page-node-id="Q1bFCzQJW6sJM9oDIgaAoH" class="ic"><svg data-page-node-id="CjS2ti6jnwh6mD21ooYzdX" viewBox="0 0 24 24"><circle data-page-node-id="oxoL3txQqpdwlGCExtCxgq" cx="12" cy="12" r="8"></circle><path data-page-node-id="VfNCwiiaByQ9dpc3iWSA4M" d="M12 8v4l3 2"></path></svg></span>即将衰减（超期未复习）</h3>
+      <div data-page-node-id="chfVUqeHzkPYaUBB9FEO9K" id="va-decaying"><p class="empty">暂无。</p></div>
+    </section>
+    <section data-page-node-id="hIbmbqE9lB8J5umY71CiCx" class="card">
+      <h3 data-page-node-id="69nywJB08CvqnUrpS76sf7"><span data-page-node-id="6PRRT93gmrpSxKL9eyP7WQ" class="ic"><svg data-page-node-id="UayRZbTWHak32P6XZniVEM" viewBox="0 0 24 24"><path data-page-node-id="64DUmHHCvOMi16xyXE07EX" d="M4 6h16M4 12h16M4 18h16"></path></svg></span>最近更新</h3>
+      <div data-page-node-id="S1euLmc71AFNfzQlM8A58Y" id="va-recent"><p class="empty">还没有操作记录。</p></div>
+    </section>
+    <section data-page-node-id="yYvZQVyeXD9TWzzdz05rkE" class="card">
+      <h3 data-page-node-id="DQMQqJsG0asaTMewFDjjq9"><span data-page-node-id="Wl99sJSWKblNgpdtY2Xyli" class="ic"><svg data-page-node-id="tc2DtzfExFEfPlqQMC4pcg" viewBox="0 0 24 24"><circle data-page-node-id="F9oPWGpUUSi6qCenm1gB7y" cx="12" cy="12" r="8"></circle><path data-page-node-id="vc9OWAmq3uCKNmnASOHGqN" d="M9 12h6"></path></svg></span>孤岛（无入链）</h3>
+      <div data-page-node-id="PJiiSgTBpbvhDLmAdGhowp" id="va-islands"><p class="empty">暂无。</p></div>
+    </section>
+  </div>
+
+  <div data-page-node-id="9kGHJcSoalgGDUWt1zZU9k" class="note">
+    <b data-page-node-id="zHnd7zXLs88HKLkwHHREli">这是一份投影，不是第二个真相源。</b> 所有数字都来自 <code data-page-node-id="U1P3LHPcFToavXMSx0HXbk" data-pnid-children="GAKgoJAsfG45yb6WCHNUyI">config.md</code> 与 <code data-page-node-id="ic7latvvKbBZKOAB2PhBoD" data-pnid-children="jWtlXX4mFFMS31hcNQbDWv">wiki/</code>；掌握度只由你复习时的回答更新，这里从不替你判定「已掌握」。材料没写的，AI 不补、不猜、不联网。笔记留在本机，不收交、不比较。
+    多门课时，提问记得带课程名（见 <code data-page-node-id="alxb0sB6rraE8ofyIk6iNE" data-pnid-children="a9JVrXgVvBNr5MZeBkLFyb">docs/多课程使用说明.md</code>）。下方「脑回路生成路线」区同样只读，生长史存在 <code data-page-node-id="oHvfTemU42uDN1Ib4juezB" data-pnid-children="y759WAVk1bO9mttNhVOuAC">wiki/</code> 自己的日志与页面里，本页清空也能重建。
+  </div>
+</main>
+<!-- ============ DASHBOARD-VISIBLE:END ============ -->
+
+<!-- ============ GROWTH-VIEW:START ============
+     骨架区：由本页内联的纯渲染脚本从 #dashboard-data 生成，AI 不改写本区可见内容。
+     脚本只读内嵌 JSON、只操作 DOM/SVG；不写入任何文件、不访问网络、不读取其他文件。
+     schema 为 dashboard-data/v2；遇 v1 数据块显示空态，不报错。 -->
+<section data-page-node-id="W76e1wV3LedIYwaEqGdwxp" class="wrap growth" id="growth">
+  <div class="sechead"><h2>脑回路生成路线</h2></div>
+  <p data-page-node-id="t0WgmjeohfS32dyDdBfLOH" class="intro">每一次初始化、导入、复习、预习、实践与出题，都会留下一个学习节点。拖动滑块或点播放，可以看到节点与连接按时间逐步点亮。概念之间的连线只来自 <code data-page-node-id="ODyZYDmDrqFKgl7oohAqMy" data-pnid-children="ARy6kKtEg6L26agIIiDgvF">wiki/connections-log.md</code> 里已登记的连接，没有登记就不画。</p>
+
+  <div data-page-node-id="Mhhl0GsKmcjDq1Equv7rSF" class="demonote" id="gv-demonote">结构示意 · 零学科占位数据，<b data-page-node-id="DS4X167KDAnpq60xNErfnI">不是你的知识库</b>。点「回到我的看板」退出预演。</div>
+
+  <div data-page-node-id="ykFAqt8Sl7GxyV5KtoHY91" class="emptystate" id="gv-empty" style="display:none">
+    <h3 data-page-node-id="oz7j1BclYeSuzjfX2J8IQg">还没有生长记录</h3>
+    <p data-page-node-id="prYRVYkHSnrkkBPwNslDt6">第一次「初始化」和「导入」之后，这里会出现你的进化路径时间轴与知识体系图。下方四层结构是示意图，说明它将来会长成什么形状。</p>
+    <button data-page-node-id="7I3qIevUwXA1Buu6PsHXyb" class="alt" id="gv-demo" style="font-family:var(--font);font-size:13px;font-weight:600;padding:9px 22px;border:1px solid #D8CFC0;background:var(--cream);color:#2F5D57;border-radius:999px;cursor:pointer">预演一遍生长</button>
+  </div>
+
+  <div data-page-node-id="QYFfrxkXfg4EdWiFrOtRMD" class="gbox">
+    <div data-page-node-id="8ne38eVuHHqbbOa1emEkeg" class="ctrl">
+      <button data-page-node-id="fNaHX96zNIAgDS9oMdVFg2" id="gv-play">播放生长</button>
+      <button data-page-node-id="P2e12yvO72QRlA4pLYP2LR" class="alt" id="gv-back" style="display:none">回到我的看板</button>
+      <input data-page-node-id="NcXWWxEibbbHWspEnFrlkj" id="gv-range" type="range" min="0" max="0" value="0" step="1">
+      <span data-page-node-id="HjP4XrL2yfR31FwY6blHlO" class="step" id="gv-step">阶段 0 / 0</span>
+    </div>
+    <div data-page-node-id="t6UH1SW5mwUPZgDepiM9wJ" class="stagetrack" id="gv-stages"></div>
+    <div data-page-node-id="xFu46b2SzbNE4fFUDiVtEp" class="evt">
+      <span data-page-node-id="7EkPecRhugUQqjFTpGiBGM" class="d" id="gv-date">—</span>
+      <div data-page-node-id="K9jXmG6q9T1hUJpC06SYf5" class="t" id="gv-title">还没有事件</div>
+      <div data-page-node-id="AsbUABxzNMHtcaAE0gPoaw" class="x" id="gv-note">导入第一份课件 md 后，时间轴从这里开始。</div>
+      <div data-page-node-id="XfQLBD2qRCx0AN2fQaGBpm" class="delta" id="gv-delta"></div>
+    </div>
+    <div data-page-node-id="D6Sq3BgffWg1LzgdAfHB9w" class="gmetrics">
+      <div data-page-node-id="GVnTY2FEf4xkM9XWY6oZ4R" class="gmetric"><span data-page-node-id="FjmCLOSeahvO7SMdKbO4D2" class="l">来源页</span><span data-page-node-id="3JzErUNUAhQpzOhRP5utN0" class="v" id="gv-m0">0</span></div>
+      <div data-page-node-id="K70DrlbagneZbre19mEUDK" class="gmetric"><span data-page-node-id="lFzejKdHiSMtx7ZCOEBcrq" class="l">概念页</span><span data-page-node-id="B2roeNlfvTIGmFeVIBgOKq" class="v" id="gv-m1">0</span></div>
+      <div data-page-node-id="n5EObrz3BdQT2Kzh5zAdSV" class="gmetric"><span data-page-node-id="h1BaXuIIP1trE4fHFTQzuK" class="l">连接</span><span data-page-node-id="l1WL05eRl1BdcQN05os8hI" class="v" id="gv-m2">0</span></div>
+      <div data-page-node-id="6vaM6KlnEUNaac4flDZNcF" class="gmetric"><span data-page-node-id="pUNl2HjOfzo0LPCMGmAW6s" class="l">衍生页</span><span data-page-node-id="0WyIiur3Xnlqrm1ymBOuqI" class="v" id="gv-m3">0</span></div>
+    </div>
+    <div data-page-node-id="S97ZNheAeWkUqSF2kdYrgG" class="graphbox"><svg data-page-node-id="96huAtVdvkcCgohCJRqFzc" id="gv-graph" viewBox="0 0 680 240" role="img"><title data-page-node-id="yIFZf42WKSEABcPCwBdyES" data-pnid-children="KPByOLJKvwn4moLWG3P135">知识体系生长图</title><desc data-page-node-id="M4VstvhhpRWdLi57tLtr7F">课程、来源、概念与衍生页四层节点按时间逐步点亮</desc></svg></div>
+    <div data-page-node-id="oGk3HmS5QFdEGdWjpnaqgD" class="legend">
+      <span data-page-node-id="JsBjdDjAwL8EZbzksnQAFf"><i data-page-node-id="2E9bULoB7I5LsVyzVNCJ4q" style="background:#BFDCF2;border-color:#2C5568"></i>课程 / 来源</span>
+      <span data-page-node-id="sMSZLf6CyNhFlIYEqNWXjM"><i data-page-node-id="BZL491jLpblWllLIVlLTCE" style="background:#FBEEDB;border-color:#A8752B"></i>概念 low</span>
+      <span data-page-node-id="Xk79DsHwbY3HnQ0rwzECBm"><i data-page-node-id="91kdsHQUggXMjPV2Lvo7e3" style="background:#F6D89A;border-color:#A8752B"></i>概念 medium</span>
+      <span data-page-node-id="8iQGGbo5BHqkXXEEOojP5L"><i data-page-node-id="iGvfiTXkNuyhxYYNhE1AXS" style="background:#BFE6D4;border-color:#2F6B5E"></i>概念 high</span>
+      <span data-page-node-id="I7I4aQd2iRKZlq9zuvYgi1"><i data-page-node-id="EU4hg09LvM6kvCEld21lsu" style="background:#DCE9F5;border-color:#4A7BA0"></i>衍生页</span>
+      <span data-page-node-id="nyaTyvBgsjgGLkRk8h8eNa"><i data-page-node-id="mx31ViZ6iFsK30OjhgcXzG" style="background:#FFFDF8;border-color:#DCD2BC"></i>尚未长出</span>
+      <span data-page-node-id="hbAHXyGaCKDWkeHrgJW9g2">虚线弧 = 已登记的概念间连接</span>
+    </div>
+    <div data-page-node-id="c91zBMocc83oC7e7sctMJU" class="mshead">里程碑 <span data-page-node-id="jyA1PvRU3JHlzXWbFoag9u" class="mstip">点标签回看它刚达成时的图示</span></div>
+    <div data-page-node-id="vFk6KcB6skjwdNZhhDwx9m" class="badges" id="gv-badges"></div>
+  </div>
+  <div data-page-node-id="3SwCQgyTkv1G29iIM0ckb4" class="sechead" id="nodes"><h2 data-page-node-id="INZg55Qj9IGzcMaZqjU9DQ">学习节点清单</h2><span data-page-node-id="H3tnDDwCXzXZYBfTferhue">只读 · 链接回 wiki/ 原页</span></div>
+  <div data-page-node-id="3G1bSkDYmp8gjAHqr30Xnz" class="gbox">
+    <div data-page-node-id="FdYH6GnRrEw375aulKpZfA" class="nlist" id="gv-nodes"></div>
+    <div data-page-node-id="FW8xg4q5stPTgNGyMBaZSi" class="cov" id="gv-cov"></div>
+  </div>
+</section>
+<!-- ============ GROWTH-VIEW:END ============ -->
+
+<footer data-page-node-id="NpqhfhF1Phcm55lLSYvPXV" class="wrap"><span data-page-node-id="DhCYhDtotDWbLXRFd3Pxgv"><b data-page-node-id="Evar8eTO9HDKzx2jq1Lovj">我的学科AI大脑</b> · v2.00 · 只读投影</span><span data-page-node-id="9sdftDcE3RPCTRYdx29UAW">同一间教室，长出不一样的学科AI大脑</span></footer>
+
+  </div>
+</div>
+
+<!-- ============ DASHBOARD-DATA:START ============
+     数据块：给 AI 读取与写入、给页面脚本只读渲染的机器可读镜像（type=application/json）。
+     更新规则：只在批量操作末尾一次性更新时写；字段全部从 config.md + wiki/ 派生；
+     升级换骨架时原样保留本块内容，只更新 brain_version；不在本块独立录入学生状态。
+     schema: dashboard-data/v2（v1 的 11 个字段全部保留，新增 timeline / graph / milestones / coverage）
+     本区块结束于紧随 script 之后的结束标记。 -->
+<script data-page-node-id="90xheMWPtILwVAKkHrcAPu" data-pnid-children="v7nJCHqLEV81lq9FHlbg7W" id="dashboard-data" type="application/json">
+{
+  "schema": "dashboard-data/v2",
+  "generated_at": "2026-11-20",
+  "brain_version": "2.00",
+  "config": {
+    "course_name": "",
+    "my_goal": "听懂",
+    "need_confirm": true
+  },
+  "counts": {
+    "sources": 0,
+    "concepts": 0,
+    "courses": 0,
+    "preview": 0,
+    "practice": 0,
+    "exam_prep": 0,
+    "islands": 0
+  },
+  "courses": [],
+  "weak_concepts": [],
+  "decaying": [],
+  "pending_confirm": [],
+  "recent": [],
+  "next_action": {
+    "prompt": "还没有任何课件。先说「初始化」，把课程名、语言和目标告诉我。",
+    "question": "打开 WorkBuddy（或其他 AI 智能体）→ 打开「我的学科AI大脑」项目 → 对 AI 说：「初始化」。",
+    "source": "no_data"
+  },
+  "timeline": [],
+  "graph": {
+    "nodes": [],
+    "edges": []
+  },
+  "milestones": [
+    {
+      "key": "init",
+      "label": "立项",
+      "achieved": false,
+      "at": ""
+    },
+    {
+      "key": "first_source",
+      "label": "第一份课件",
+      "achieved": false,
+      "at": ""
+    },
+    {
+      "key": "first_concept",
+      "label": "第一个概念",
+      "achieved": false,
+      "at": ""
+    },
+    {
+      "key": "first_review",
+      "label": "第一次复习",
+      "achieved": false,
+      "at": ""
+    },
+    {
+      "key": "first_connection",
+      "label": "第一次连接",
+      "achieved": false,
+      "at": ""
+    },
+    {
+      "key": "first_preview",
+      "label": "第一次预习",
+      "achieved": false,
+      "at": ""
+    },
+    {
+      "key": "first_practice",
+      "label": "第一次实践",
+      "achieved": false,
+      "at": ""
+    },
+    {
+      "key": "first_exam",
+      "label": "第一套题",
+      "achieved": false,
+      "at": ""
+    }
+  ],
+  "coverage": {
+    "low": 0,
+    "medium": 0,
+    "high": 0,
+    "unreviewed": 0
+  }
+}
+</script>
+<!-- ============ DASHBOARD-DATA:END ============ -->
+
+<script data-page-node-id="ygAyODKCDjxyDqM2kj1XXZ" data-pnid-children="miQDgLzt7HySwWpYipWkoO">
+(function(){
+  var MS=[
+    {key:'init',label:'立项'},{key:'first_source',label:'第一份课件'},
+    {key:'first_concept',label:'第一个概念'},{key:'first_review',label:'第一次复习'},
+    {key:'first_connection',label:'第一次连接'},{key:'first_preview',label:'第一次预习'},
+    {key:'first_practice',label:'第一次实践'},{key:'first_exam',label:'第一套题'}
+  ];
+  var LAYER={course:0,source:1,concept:2,preview:3,practice:3,exam:3};
+  var LNAME=['主干','来源','概念','衍生'];
+  var XPOS=[70,215,385,550];
+  var GRP=[{k:'course',n:'课程'},{k:'source',n:'来源页'},{k:'concept',n:'概念页'},
+           {k:'preview',n:'预习轨迹'},{k:'practice',n:'实践记录'},{k:'exam',n:'练习题'}];
+  var real=null,demo=null,realRaw=null,active=null,stages=[],cur=0,timer=null,demoMode=false,selCourse=null;
+
+  function E(id){return document.getElementById(id)}
+  function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+  function clone(o){var r={},k;for(k in o){if(Object.prototype.hasOwnProperty.call(o,k))r[k]=o[k]}return r}
+  function normalize(d){
+    if(!d)d={};
+    var g=d.graph||{};
+    return {
+      schema:d.schema||'dashboard-data/v1',
+      timeline:Array.isArray(d.timeline)?d.timeline:[],
+      nodes:Array.isArray(g.nodes)?g.nodes:[],
+      edges:Array.isArray(g.edges)?g.edges:[],
+      milestones:Array.isArray(d.milestones)?d.milestones:[],
+      coverage:d.coverage||null
+    };
+  }
+  function readReal(){
+    try{return normalize(JSON.parse(E('dashboard-data').textContent))}catch(err){return normalize(null)}
+  }
+  function readRaw(){
+    try{return JSON.parse(E('dashboard-data').textContent)}catch(err){return null}
+  }
+  function courseNames(d){
+    var names=[];
+    if(d&&Array.isArray(d.courses))d.courses.forEach(function(c){if(c&&c.name&&names.indexOf(c.name)<0)names.push(c.name)});
+    if(d&&d.graph&&Array.isArray(d.graph.nodes))d.graph.nodes.forEach(function(n){
+      if(n.type==='course'&&n.label&&names.indexOf(n.label)<0)names.push(n.label);
+    });
+    return names;
+  }
+  function buildPick(){
+    var d=realRaw,box=E('va-pick'),sel=E('va-pick-sel'),list=[];
+    if(d&&Array.isArray(d.courses)){
+      d.courses.forEach(function(c){if(c&&c.name&&list.indexOf(c.name)<0)list.push(c.name)});
+    }
+    if(!list.length&&d&&d.graph&&Array.isArray(d.graph.nodes)){
+      d.graph.nodes.forEach(function(n){if(n.type==='course'&&n.label&&list.indexOf(n.label)<0)list.push(n.label)});
+    }
+    if(list.length<2){box.style.display='none';return}
+    sel.innerHTML='';
+    list.forEach(function(c){
+      var o=document.createElement('option');
+      o.value=c;o.setAttribute('data-course',c);
+      o.textContent=c;
+      sel.appendChild(o);
+    });
+    var q=E('va-question').textContent,found=-1,i;
+    for(i=0;i<sel.options.length;i++){
+      if(q.indexOf(sel.options[i].getAttribute('data-course'))>=0){found=i;break}
+    }
+    sel.selectedIndex=found>=0?found:0;
+    box.style.display='flex';
+    sel.onchange=applyPick;
+    applyPick();
+  }
+  function renderNow(course){
+    var d=realRaw;
+    if(!d||!course)return;
+    var i,x,h,meta=null;
+    (d.courses||[]).forEach(function(c){if(c.name===course)meta=c});
+    E('va-courses').textContent='1';
+    E('va-concepts').textContent=(meta&&meta.concepts!=null)?String(+meta.concepts):'—';
+    E('va-sources').textContent=(meta&&meta.sources!=null)?String(+meta.sources):'—';
+    var pc=0;
+    (d.pending_confirm||[]).forEach(function(p){if(!p||!p.course||p.course===course)pc++});
+    E('va-pending').textContent=String(pc);
+    var w=(d.weak_concepts||[]).filter(function(x){return !x.course||x.course===course});
+    if(w.length){
+      h='<table>';
+      for(i=0;i<w.length;i++){x=w[i];
+        h+='<tr><th>'+esc(x.name)+'</th><td><code>'+esc(x.confidence||'—')+'</code> · '+
+           (x.last_reviewed?esc(x.last_reviewed):'从未复习')+'</td></tr>';
+      }
+      h+='</table><p class="empty">只显示你自己确认过的值，不排名。</p>';
+    }else h='<p class="empty">该课程暂无薄弱概念记录。</p>';
+    E('va-weak').innerHTML=h;
+    var dec=(d.decaying||[]).filter(function(x){return !x.course||x.course===course});
+    if(dec.length){
+      h='<table>';
+      for(i=0;i<dec.length;i++){x=dec[i];
+        h+='<tr><th>'+esc(x.name)+'</th><td>'+(+x.days)+' 天未复习 · <code>'+
+           esc(x.confidence||'—')+'</code></td></tr>';
+      }
+      h+='</table>';
+    }else h='<p class="empty">该课程暂无超期未复习的概念。</p>';
+    E('va-decaying').innerHTML=h;
+    var mem=courseMembership(real),refCourse={};
+    real.nodes.forEach(function(nd){if(nd.ref&&mem[nd.id])refCourse[nd.ref]=mem[nd.id]});
+    var rec=(d.recent||[]).filter(function(r){
+      if(!r.page)return true;
+      var owner=refCourse[String(r.page)];
+      return owner?owner===course:true;
+    });
+    if(rec.length){
+      h='<table>';
+      for(i=0;i<rec.length;i++){x=rec[i];
+        var f=String(x.page||'').split('/').pop().replace(/\.md$/,'');
+        h+='<tr><th>'+esc(String(x.date||'').slice(5))+' '+esc(x.action||'')+'</th><td>'+
+           esc(f)+'</td></tr>';
+      }
+      h+='</table>';
+    }else h='<p class="empty">该课程暂无最近更新记录。</p>';
+    E('va-recent').innerHTML=h;
+    var n=filterByCourse(real,course),hasIn={},islands=0,total=0;
+    n.edges.forEach(function(e){if(e.kind==='derived')hasIn[e.to]=true});
+    n.nodes.forEach(function(nd){if(nd.type==='concept'){total++;if(!hasIn[nd.id])islands++}});
+    E('va-islands').innerHTML=islands?
+      ('<p class="empty">该课程有 '+islands+' 个概念页暂无来源页支撑。</p>'):
+      (total?('暂无。'+total+' 个概念页都由来源页支撑。'):'<p class="empty">该课程还没有概念页。</p>');
+  }
+  function applyPick(){
+    var sel=E('va-pick-sel');
+    if(!sel.options.length)return;
+    var course=sel.options[sel.selectedIndex].getAttribute('data-course')||'';
+    var info='',d=realRaw;
+    if(d&&Array.isArray(d.courses)){
+      d.courses.forEach(function(c){
+        if(c&&c.name===course){
+          var parts=[];
+          if(c.sources!=null)parts.push('来源页 '+(+c.sources));
+          if(c.concepts!=null)parts.push('概念页 '+(+c.concepts));
+          if(c.last_ingest)parts.push('最近导入 '+c.last_ingest);
+          info=parts.join(' · ');
+        }
+      });
+    }
+    E('va-pick-ref').textContent=info?('该课程：'+info):'';
+    var names=courseNames(realRaw),q=E('va-question').textContent,s=E('va-source').textContent,i;
+    if(course){
+      for(i=0;i<names.length;i++){
+        if(names[i]!==course){q=q.split(names[i]).join(course);s=s.split(names[i]).join(course)}
+      }
+    }
+    E('va-question').textContent=q;
+    E('va-source').textContent=s;
+    if(sel.options.length&&course){
+      selCourse=course;
+      if(demoMode){
+        demoMode=false;stop();
+        E('gv-demonote').style.display='none';
+        E('gv-back').style.display='none';
+      }
+      active=filterByCourse(real,selCourse);
+      setup();
+      renderNow(selCourse);
+    }
+  }
+  function buildStages(n){
+    var out=[{date:'起点',label:'开始',note:'还没有任何操作。',nodes:[],edges:[],achieved:{},delta:null}];
+    var an=[],ae=[],ach={},i;
+    for(i=0;i<n.timeline.length;i++){
+      var ev=n.timeline[i]||{},dt=ev.date||'';
+      n.nodes.forEach(function(nd){if(nd.at&&dt&&nd.at<=dt&&an.indexOf(nd)<0)an.push(nd)});
+      n.edges.forEach(function(ed){if(ed.at&&dt&&ed.at<=dt&&ae.indexOf(ed)<0)ae.push(ed)});
+      n.milestones.forEach(function(m){if(m.achieved&&m.at&&dt&&m.at<=dt)ach[m.key]=true});
+      out.push({date:dt||'—',label:ev.label||ev.type||'操作',note:ev.note||'',
+                nodes:an.slice(),edges:ae.slice(),achieved:clone(ach),delta:ev.delta||null});
+    }
+    return out;
+  }
+  function layout(all){
+    var g=[[],[],[],[]],pos={},maxLen=1,i,j,H;
+    all.forEach(function(nd){var L=LAYER[nd.type];if(L==null)L=2;g[L].push(nd)});
+    for(i=0;i<4;i++){if(g[i].length>maxLen)maxLen=g[i].length}
+    H=Math.max(220,maxLen*46+76);
+    for(i=0;i<4;i++){
+      for(j=0;j<g[i].length;j++){
+        pos[g[i][j].id]={x:XPOS[i],y:56+(j+.5)*((H-84)/g[i].length)};
+      }
+    }
+    return {pos:pos,H:H};
+  }
+  function nodeColor(nd,on){
+    if(!on)return {f:'#FFFDF8',s:'#DCD2BC',dash:true};
+    if(nd.type==='concept'){
+      if(nd.confidence==='high')return {f:'#BFE6D4',s:'#2F6B5E'};
+      if(nd.confidence==='medium')return {f:'#F6D89A',s:'#A8752B'};
+      return {f:'#FBEEDB',s:'#A8752B'};
+    }
+    if(nd.type==='preview'||nd.type==='practice'||nd.type==='exam')return {f:'#DCE9F5',s:'#4A7BA0'};
+    return {f:'#BFDCF2',s:'#2C5568'};
+  }
+  function drawGraph(st){
+    var L=layout(active.nodes),p=L.pos,h='',i;
+    var vis={};st.nodes.forEach(function(nd){vis[nd.id]=true});
+    h+='<rect x="24" y="14" width="632" height="'+(L.H-28)+'" rx="16" fill="#FDFBF4" stroke="#EAE0C9" stroke-width="1"/>';
+    for(i=0;i<4;i++)h+='<text x="'+XPOS[i]+'" y="38" font-size="12" fill="#7C8C85" text-anchor="middle">'+LNAME[i]+'</text>';
+    st.edges.forEach(function(ed){
+      var a=p[ed.from],b=p[ed.to];if(!a||!b)return;
+      if(ed.kind==='link'){
+        var cx=(a.x+b.x)/2+58,cy=(a.y+b.y)/2;
+        h+='<path d="M'+a.x+' '+a.y+' Q'+cx+' '+cy+' '+b.x+' '+b.y+'" fill="none" stroke="#3E7C74" stroke-width="1.6" stroke-dasharray="5 3" opacity=".85"/>';
+      }else{
+        h+='<line x1="'+a.x+'" y1="'+a.y+'" x2="'+b.x+'" y2="'+b.y+'" stroke="#A9C0B2" stroke-width="1.3"/>';
+      }
+    });
+    active.nodes.forEach(function(nd){
+      var q=p[nd.id];if(!q)return;
+      var on=!!vis[nd.id],c=nodeColor(nd,on),r=nd.type==='course'?15:(nd.type==='source'?12:11);
+      var dash=c.dash?' stroke-dasharray="3 2"':'';
+      if(nd.type==='preview'||nd.type==='practice'||nd.type==='exam'){
+        h+='<rect x="'+(q.x-r)+'" y="'+(q.y-r)+'" width="'+(r*2)+'" height="'+(r*2)+'" rx="4" fill="'+c.f+'" stroke="'+c.s+'" stroke-width="'+(on?1.4:1)+'"'+dash+'/>';
+      }else{
+        h+='<circle cx="'+q.x+'" cy="'+q.y+'" r="'+r+'" fill="'+c.f+'" stroke="'+c.s+'" stroke-width="'+(on?1.4:1)+'"'+dash+'/>';
+      }
+      h+='<text x="'+(q.x+r+7)+'" y="'+(q.y+4)+'" font-size="12" fill="'+(on?'#2C4442':'#9AA69F')+'">'+esc(nd.label||nd.id)+'</text>';
+    });
+    if(active.nodes.length===0){
+      for(i=0;i<4;i++){
+        h+='<circle cx="'+XPOS[i]+'" cy="'+(L.H/2)+'" r="13" fill="#FFFDF8" stroke="#DCD2BC" stroke-width="1" stroke-dasharray="3 2"/>';
+        h+='<text x="'+XPOS[i]+'" y="'+(L.H/2+34)+'" font-size="11" fill="#9AA69F" text-anchor="middle">待长出</text>';
+      }
+    }
+    var svg=E('gv-graph');
+    svg.setAttribute('viewBox','0 0 680 '+L.H);
+    svg.innerHTML='<title>知识体系生长图</title><desc>四层节点按时间逐步点亮</desc>'+h;
+  }
+  function metrics(st){
+    var c={source:0,concept:0,derived:0,link:0};
+    st.nodes.forEach(function(nd){
+      if(nd.type==='source')c.source++;
+      else if(nd.type==='concept')c.concept++;
+      else if(nd.type==='preview'||nd.type==='practice'||nd.type==='exam')c.derived++;
+    });
+    st.edges.forEach(function(ed){if(ed.kind==='link')c.link++});
+    return c;
+  }
+  // 里程碑首次达成的阶段：找 stages[i].achieved[key] 第一次为真的 i
+  function milestoneStage(key){
+    for(var i=0;i<stages.length;i++){
+      if(stages[i].achieved&&stages[i].achieved[key])return i;
+    }
+    return -1;
+  }
+  function renderBadges(st){
+    var box=E('gv-badges');box.innerHTML='';
+    MS.forEach(function(m){
+      var on=!!st.achieved[m.key],idx=milestoneStage(m.key),ok=idx>=0;
+      var b=document.createElement('button');
+      b.type='button';
+      b.className='badge'+(on?' on':'')+(ok&&idx===cur?' picked':'')+(ok?'':' off');
+      b.setAttribute('data-ms',m.key);
+      b.title=ok?('点此回看「'+m.label+'」刚达成时的图示'):('「'+m.label+'」尚未达成');
+      b.appendChild(document.createTextNode(m.label));
+      if(!ok)b.disabled=true;
+      else b.addEventListener('click',function(){stop();render(idx)});
+      box.appendChild(b);
+    });
+  }
+  function renderNodes(){
+    var h='',groups={};
+    active.nodes.forEach(function(nd){(groups[nd.type]=groups[nd.type]||[]).push(nd)});
+    GRP.forEach(function(g){
+      var list=groups[g.k]||[];if(!list.length)return;
+      h+='<div class="grp">'+esc(g.n)+'</div>';
+      list.forEach(function(nd){
+        var left=demoMode?esc(nd.label||nd.id):('<a href="'+esc(nd.ref||'#')+'" target="_blank" rel="noopener noreferrer" title="在新标签页打开 '+esc(nd.ref||'')+'">'+esc(nd.label||nd.id)+'</a>');
+        h+='<div class="it"><span>'+left+'</span><span>'+esc(nd.at||'')+'</span></div>';
+      });
+    });
+    if(!h)h='<div class="it"><span>暂无节点</span><span></span></div>';
+    E('gv-nodes').innerHTML=h;
+    var c=active.coverage;
+    E('gv-cov').textContent=c?('当前掌握度分布（只统计你自己确认过的值）：low '+(+c.low||0)+' / medium '+(+c.medium||0)+' / high '+(+c.high||0)+' / 未复习 '+(+c.unreviewed||0)):'';
+  }
+  function render(i){
+    cur=i;var st=stages[i],m=metrics(st),d=st.delta,parts=[];
+    E('gv-range').value=i;
+    updateStages(i);
+    E('gv-step').textContent='阶段 '+i+' / '+Math.max(0,stages.length-1);
+    E('gv-date').textContent=st.date;
+    E('gv-title').textContent=st.label;
+    E('gv-note').textContent=st.note||'—';
+    if(d){if(d.sources)parts.push('+'+d.sources+' 来源');if(d.concepts)parts.push('+'+d.concepts+' 概念');if(d.edges)parts.push('+'+d.edges+' 连接');if(d.pages)parts.push('+'+d.pages+' 页面')}
+    E('gv-delta').textContent=parts.join('  ·  ');
+    E('gv-m0').textContent=m.source;E('gv-m1').textContent=m.concept;
+    E('gv-m2').textContent=m.link;E('gv-m3').textContent=m.derived;
+    drawGraph(st);renderBadges(st);
+  }
+  function stop(){if(timer){clearInterval(timer);timer=null}E('gv-play').textContent='播放生长'}
+  function buildStageTrack(){
+    var box=E('gv-stages');box.innerHTML='';
+    stages.forEach(function(st,i){
+      var b=document.createElement('button');
+      b.type='button';b.className='st';
+      b.title='阶段 '+i+' · '+st.date+' · '+st.label;
+      b.setAttribute('aria-label',b.title);
+      var dot=document.createElement('span');dot.className='dot';b.appendChild(dot);
+      var d=document.createElement('span');d.className='d';
+      d.appendChild(document.createTextNode(st.date||'—'));b.appendChild(d);
+      var lb=document.createElement('span');lb.className='lb';
+      lb.appendChild(document.createTextNode(st.label||''));b.appendChild(lb);
+      b.addEventListener('click',function(){stop();render(i)});
+      box.appendChild(b);
+    });
+  }
+  function updateStages(cur){
+    var ts=E('gv-stages').children,i;
+    for(i=0;i<ts.length;i++){
+      ts[i].className='st'+(i===cur?' cur':(i<cur?' done':''));
+    }
+  }
+  function setup(){
+    stages=buildStages(active);
+    var max=Math.max(0,stages.length-1);
+    E('gv-range').max=max;E('gv-range').min=0;
+    buildStageTrack();
+    E('gv-empty').style.display=(demoMode||active.timeline.length)?'none':'block';
+    E('gv-demonote').style.display=demoMode?'block':'none';
+    E('gv-back').style.display=demoMode?'inline-block':'none';
+    E('gv-play').disabled=(max===0);
+    renderNodes();
+    render(max);
+  }
+  function courseMembership(n){
+    var m={},adj={};
+    n.edges.forEach(function(e){if(e.kind==='derived'){(adj[e.from]=adj[e.from]||[]).push(e.to)}});
+    n.nodes.forEach(function(nd){
+      if(nd.type!=='course')return;
+      var seen={},q=[nd.id];
+      seen[nd.id]=true;
+      while(q.length){
+        var x=q.shift();
+        (adj[x]||[]).forEach(function(y){if(!seen[y]){seen[y]=true;q.push(y)}});
+      }
+      for(var k in seen){
+        if(seen.hasOwnProperty(k)&&!m[k])m[k]=nd.label;
+      }
+    });
+    return m;
+  }
+  function filterByCourse(n,course){
+    if(!course||!n||!n.nodes)return n;
+    var mem=courseMembership(n),keep={},nodes=[];
+    n.nodes.forEach(function(nd){
+      if(mem[nd.id]===course){keep[nd.id]=true;nodes.push(nd)}
+    });
+    if(!nodes.length)return n;
+    var edges=n.edges.filter(function(e){return keep[e.from]&&keep[e.to]});
+    var timeline=n.timeline.filter(function(ev){
+      if(!ev.ref)return true;
+      var owner=null;
+      n.nodes.forEach(function(nd){if(nd.ref===ev.ref&&mem[nd.id])owner=mem[nd.id]});
+      return owner===null||owner===course;
+    });
+    return {schema:n.schema,timeline:timeline,nodes:nodes,edges:edges,
+            milestones:n.milestones,coverage:n.coverage};
+  }
+  function useReal(){stop();demoMode=false;active=filterByCourse(real,selCourse);setup()}
+  function useDemo(){stop();demoMode=true;active=demo;setup();render(0)}
+
+  function makeDemo(){
+    var t=[
+      {date:'2026-01-05',type:'init',label:'初始化',note:'填课程名、语言与目标。大脑有了一根主干。',delta:{}},
+      {date:'2026-01-12',type:'ingest',label:'导入第 1 份课件',note:'来源 1 落地，长出概念 A 与概念 B。',delta:{sources:1,concepts:2}},
+      {date:'2026-01-26',type:'ingest',label:'导入第 2 份课件',note:'来源 2 落地，新增概念 C、D。',delta:{sources:1,concepts:2}},
+      {date:'2026-02-09',type:'review',label:'复习 概念 A',note:'学生自己作答并确认后，概念 A 的掌握度才变化。',delta:{}},
+      {date:'2026-02-23',type:'preview',label:'预习 第 1 轮',note:'长出一条预习轨迹，只沉淀学生本人的理解。',delta:{pages:1}},
+      {date:'2026-03-02',type:'practice',label:'实践 第 1 轮',note:'长出一条实践记录；课件外的排查思路仍只留在实践页。',delta:{pages:1}},
+      {date:'2026-03-09',type:'connection',label:'登记跨讲次连接',note:'课件明确写出两讲之间的关联，登记到 connections-log。',delta:{edges:1}},
+      {date:'2026-03-16',type:'exam',label:'出题 第 1 组',note:'按个人薄弱概念生成练习题，不附答案。',delta:{pages:1}}
+    ];
+    var n=[
+      {id:'course',type:'course',label:'课程',at:'2026-01-05',ref:'config.md'},
+      {id:'s1',type:'source',label:'来源 1',at:'2026-01-12',ref:'wiki/sources/'},
+      {id:'s2',type:'source',label:'来源 2',at:'2026-01-26',ref:'wiki/sources/'},
+      {id:'cA',type:'concept',label:'概念 A',at:'2026-01-12',confidence:'high',ref:'wiki/concepts/'},
+      {id:'cB',type:'concept',label:'概念 B',at:'2026-01-12',confidence:'low',ref:'wiki/concepts/'},
+      {id:'cC',type:'concept',label:'概念 C',at:'2026-01-26',confidence:'medium',ref:'wiki/concepts/'},
+      {id:'cD',type:'concept',label:'概念 D',at:'2026-01-26',confidence:'low',ref:'wiki/concepts/'},
+      {id:'p1',type:'preview',label:'预习轨迹 1',at:'2026-02-23',ref:'wiki/preview/'},
+      {id:'p2',type:'practice',label:'实践记录 1',at:'2026-03-02',ref:'wiki/practice/'},
+      {id:'p3',type:'exam',label:'练习题 1',at:'2026-03-16',ref:'wiki/exam-prep/'}
+    ];
+    var e=[
+      {from:'course',to:'s1',at:'2026-01-12',kind:'derived'},
+      {from:'course',to:'s2',at:'2026-01-26',kind:'derived'},
+      {from:'s1',to:'cA',at:'2026-01-12',kind:'derived'},
+      {from:'s1',to:'cB',at:'2026-01-12',kind:'derived'},
+      {from:'s2',to:'cC',at:'2026-01-26',kind:'derived'},
+      {from:'s2',to:'cD',at:'2026-01-26',kind:'derived'},
+      {from:'cA',to:'p1',at:'2026-02-23',kind:'derived'},
+      {from:'cC',to:'p2',at:'2026-03-02',kind:'derived'},
+      {from:'cB',to:'p3',at:'2026-03-16',kind:'derived'},
+      {from:'cA',to:'cC',at:'2026-03-09',kind:'link'}
+    ];
+    var md=['2026-01-05','2026-01-12','2026-01-12','2026-02-09','2026-03-09','2026-02-23','2026-03-02','2026-03-16'];
+    var m=MS.map(function(x,i){return {key:x.key,label:x.label,achieved:true,at:md[i]}});
+    return normalize({schema:'dashboard-data/v2',timeline:t,graph:{nodes:n,edges:e},milestones:m,
+                      coverage:{low:2,medium:1,high:1,unreviewed:0}});
+  }
+
+  real=readReal();demo=makeDemo();realRaw=readRaw();
+  buildPick();
+  E('gv-range').addEventListener('input',function(ev){stop();render(Number(ev.target.value))});
+  E('gv-play').addEventListener('click',function(){
+    if(timer){stop();return}
+    if(cur>=stages.length-1)render(0);
+    E('gv-play').textContent='暂停';
+    timer=setInterval(function(){if(cur>=stages.length-1){stop();return}render(cur+1)},1100);
+  });
+  E('gv-demo').addEventListener('click',useDemo);
+  E('gv-back').addEventListener('click',useReal);
+  useReal();
+
+  /* 侧栏导航联动：默认无高亮；点击后该项变金色，并滚动到与主页对应标题同一水平线 */
+  var navLinks=Array.prototype.slice.call(document.querySelectorAll('#side-nav a'));
+  function setActive(link){navLinks.forEach(function(a){a.classList.toggle('hot',a===link)})}
+  navLinks.forEach(function(a){
+    a.addEventListener('click',function(ev){
+      var t=document.querySelector(a.getAttribute('href'));
+      if(!t)return;
+      ev.preventDefault();
+      setActive(a);
+      /* 目标胶囊标题顶到可视区顶端（留 36px 呼吸空间） */
+      var pill=t.querySelector('.title-pill')||t.querySelector('h2')||t;
+      var top=window.scrollY+pill.getBoundingClientRect().top-36;
+      window.scrollTo({top:Math.max(0,top),behavior:'smooth'});
+    });
+  });
+  /* 回到页首：滚动回顶并清除高亮（恢复默认无高亮状态） */
+  document.getElementById('back-top').addEventListener('click',function(){
+    setActive(null);
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+  /* 滚动跟随：页面滚到某个标题栏顶端时，对应侧栏项点亮为金色 */
+  function spyPill(t){return t.querySelector('.title-pill')||t.querySelector('h2')||t}
+  var spyTick=false;
+  function syncSpy(){
+    spyTick=false;
+    var best=-1;
+    navLinks.forEach(function(a,i){
+      var t=document.querySelector(a.getAttribute('href'));
+      if(t&&spyPill(t).getBoundingClientRect().top<=37)best=i;
+    });
+    setActive(best>=0?navLinks[best]:null);
+  }
+  window.addEventListener('scroll',function(){
+    if(!spyTick){spyTick=true;requestAnimationFrame(syncSpy)}
+  },{passive:true});
+  syncSpy();
+  /* 刷新页面时回到页首，不恢复上次的滚动位置 */
+  if('scrollRestoration' in history)history.scrollRestoration='manual';
+  window.scrollTo(0,0);
+})();
+</script>
+
+
+</body></html>

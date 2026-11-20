@@ -8,12 +8,12 @@
 2. 若 `config.md` 已由学生填好，**只确认、不覆盖**；发现被预填的测试值时，询问是否改为自己的课程。若学生想整包复位，提示说「**清空测试数据**」（`commands/reset.md`），本命令不删除任何文件
 3. 引导回答三个问题，逐项写入 `config.md`（🟢 自由改区）：
    - 课程名 `course_name`
-   - 语言 `language` / 笔记风格 `note_style`
+   - 语言 `language`（中英双语 / 纯中文 / 纯英文）
    - **你这门课想达到什么目标？** `my_goal`（听懂 / 应试 / 做项目 / 写论文）
-4. 询问是否要填 `subject_hint`（学科写作提示，可留空）
-5. 确认 `raw/` 与 `wiki/` 目录完整；目录清单含 `concepts/` `courses/` `sources/` `exam-prep/` `preview/` `practice/`，缺目录则照该处 `_README.md` 约定补建占位（各目录 `_README.md` 属模板层，不写学生内容）
+4. 其余字段不逐项追问，用默认值：`note_style` 费曼式、`review_cycle_days` 30、`exam_prep` / `need_confirm` 均 `true`；学生主动要改时再写。只补问一句「有没有学科写作偏好」，答案是 `subject_hint`，可留空。
+5. 确认 `raw/` 与 `wiki/` 目录完整；目录清单含 `concepts/` `courses/` `sources/` `exam-prep/` `preview/` `practice/`，缺目录则照该处 `_README.md` 约定补建占位（各目录 `_README.md` 属数据层的固定说明，不含学生内容，升级不覆盖）。**同时按 `course_name` 建 `raw/{课程名}/` 空文件夹**（只建目录，不写入任何文件），学生放课件时不用自己新建
 6. 在 `Home.md` 写入课程名与初始面板
-7. **写入 `驾驶舱.html` 的初始数据块**：`config` 取刚填的 `course_name`/`my_goal`/`need_confirm`；`counts` 保持 0；`next_action` 改为「把课件转成 md 放进 raw/，然后说『导入』」（`source: "no_data_after_init"`）；可见区同步改写。**生长数据起点（v2.10）**：`timeline` 追加 `type: init` 事件、`graph` 追加课程主节点、`milestones` 判定「立项」、`coverage` 全部归零；「生长」视图由页面脚本从数据块渲染，不需另写可见区。数据块契约见 `AGENTS.md`「驾驶舱（只读投影）」节，字段一律派生自真相源，不在其中独立录入
+7. **写入 `脑回路生长图.html` 的初始数据块**：`config` 取刚填的 `course_name`/`my_goal`/`need_confirm`；`counts` 保持 0；`next_action` 的 `prompt` 写「把课件转成 md 放进 raw/，然后说『导入』」，`question` 按三步句式给「导入」（`source: "no_data_after_init"`）；可见区同步改写。**生长数据起点**：`timeline` 追加 `type: init` 事件、`graph` 追加课程主节点、`milestones` 判定「立项」、`coverage` 全部归零；生长视图由页面脚本从数据块渲染，不需另写可见区。数据块契约见 `AGENTS.md`「脑回路生长图（只读投影）」节，字段一律派生自真相源，不在其中独立录入
 8. 输出 5 步上手提示，指向 `START-HERE.md`
 
 ## 硬规则

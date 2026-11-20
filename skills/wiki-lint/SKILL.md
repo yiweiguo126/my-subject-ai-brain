@@ -17,9 +17,9 @@ description: 体检。当学生说「体检 / lint / 检查一下」或升级前
 | 4 | 掌握度衰减 | `last_reviewed` 距今 > `review_cycle_days` 且 `confidence: medium` 的页面（列出，不自动降级） |
 | 5 | frontmatter 完整 | `tags` / `courses` / `confidence` / `last_reviewed` / `created_at` 是否齐全 |
 | 6 | **配置合法性** | `config.md` 字段值是否在合法范围；`my_goal` 是否为四选一 |
-| 7 | **底座完整性** | `skills/` 8 个 SKILL.md、`commands/` **12** 个命令文件、`AGENTS.md`、`VERSION` 是否存在且未被篡改 |
+| 7 | **底座完整性** | `skills/` 8 个 SKILL.md、`commands/` **12** 个命令文件、`AGENTS.md`（含「输出风格约束」节）、`docs/风格约束.md`、`VERSION` 是否存在且未被篡改 |
 | 8 | **版本兼容性** | `config.md` 的 `version` 与 `VERSION` 是否一致；概念页 frontmatter 是否符合当前格式 |
-| 9 | **数据层未被污染** | `raw/` 中除 `.manifest.json` 外无 AI 写入痕迹；`config.md` 未被覆盖；`驾驶舱.html` 数据块各字段与 `config.md` + `wiki/` 真相源一致、未被当作独立录入源；内联渲染脚本只操作 DOM/SVG，无联网、无外链、无 `fetch` / `localStorage` / 文件写入；`wiki/connections-log.md` 每条连接都有 `from` / `to` / `source` / `basis` 且无推测补全痕迹（若有漂移或手工录入痕迹，列出差异，不自动改写） |
+| 9 | **数据层未被污染** | `raw/` 中除 `.manifest.json` 外无 AI 写入痕迹；`config.md` 未被覆盖；`脑回路生长图.html` 数据块各字段与 `config.md` + `wiki/` 真相源一致、未被当作独立录入源；内联渲染脚本只操作 DOM/SVG，无联网、无外链、无 `fetch` / `localStorage` / 文件写入；`wiki/connections-log.md` 每条连接都有 `from` / `to` / `source` / `basis` 且无推测补全痕迹（若有漂移或手工录入痕迹，列出差异，不自动改写） |
 | 10 | 术语表 | `wiki/glossary.md` 是否覆盖全部概念页 |
 | 11 | hot 缓存 | `wiki/hot.md` 是否 ≤500 词且与 `index.md` 一致 |
 | 12 | **预习材料边界** | `skills/preview/SKILL.md` 与 `commands/preview.md` 是否含「不生成答案 / 不推测补全 / 不联网 / 保留疑问 / 待用户形成结论后再入库」硬规则；`AGENTS.md` 硬规则第 9 条是否在位 |
@@ -29,7 +29,7 @@ description: 体检。当学生说「体检 / lint / 检查一下」或升级前
 | 16 | **名称口径与命令表** | `AGENTS.md`「术语与命名」节与「命令映射」表是否在位；触发词为 12 个且各文件引用一致；全库除 `docs/FAQ.md`「名称」节反例句与本项的引用外，不得出现**禁用写法**「学科大脑」 |
 | 17 | **材料格式前提** | `raw/` 下除 `.manifest.json` 外是否只存在 `.md`；发现 PDF / PPT / doc 等非 md 文件，或同一内容的原始文件与课件 md 并存，逐项列出并提示按 `docs/材料准备指南.md` 转换或移出，**不自动转换、不移动、不删除** |
 | 18 | **实践页合规** | 实践页是否只记录学生本人的操作 / 现象 / 结论、原话未润色；每条课件外排查思路上方是否**原样**保留标注话术原文；是否未设教师裁定栏、未接入出题 / 复习、未改 `confidence`；学生自述与课件依据是否分栏不混为一类证据 |
-| 19 | **操作指导边界与三不并存** | `AGENTS.md` 硬规则第 11 条在位；`skills/practice/SKILL.md` 与 `commands/practice.md` 的受控例外三项条件与标注话术原文一致；`skills/preview/SKILL.md`、`commands/preview.md` 的三不三行**逐字未变**（不生成答案 / 不推测补全 / 不联网）；两处边界互不覆盖、互不放宽 |
+| 19 | **操作指导边界与三不并存** | `AGENTS.md` 硬规则第 11 条在位；`skills/practice/SKILL.md` 与 `commands/practice.md` 的受控例外三项条件与标注话术原文一致；`skills/preview/SKILL.md`、`commands/preview.md` 的三不原词**逐字未变**（不生成答案 / 不推测补全 / 不联网）；两处边界互不覆盖、互不放宽 |
 
 > 第 14 / 15 / 16 项补的是此前 3 个守护缺口：零学科、导入前确认、名称口径；第 17 项守护「`raw/` 只放 md」这一使用前提；第 18 / 19 项守护实践页合规与「受控例外不破坏预习三不」。第 14–16、18–19 项只检查模板层，第 17 项只检查 `raw/` 的文件扩展名，均不扫描课件原文内容。
 
@@ -47,7 +47,7 @@ description: 体检。当学生说「体检 / lint / 检查一下」或升级前
 ## 判定口径（特别注意）
 
 - 第 4 项只**列出**衰减页面，不得自动改 `confidence` —— 掌握度属于学生
-- 第 7 / 9 项守护「升级只换底座、不动任何人的大脑」；第 9 项对驾驶舱数据块只**列出**与真相源的差异，不自动改写数据块——数据块由「末尾一次性更新」统一写入，体检不代写
+- 第 7 / 9 项守护「升级只换底座、不动任何人的大脑」；第 9 项对脑回路生长图数据块只**列出**与真相源的差异，不自动改写数据块——数据块由「末尾一次性更新」统一写入，体检不代写
 - 第 8 项**版本不一致是预期告警**，不是 🔴：升级按约定跳过 `config.md`。报告须写明「请核对 `CHANGELOG.md`；如给出页面格式迁移说明，说『迁移』」，不得要求学生手改 `config.md`
 - 第 12 / 13 项守护「预习只凭材料、只沉淀学生自己的理解」；发现 AI 代答、推测补全或擅自提升掌握度，按 🔴 底座异常上报
 - 第 14 / 16 项发现规则层被写入学科内容或简称丢掉 **AI**，按 🔴 底座异常上报
